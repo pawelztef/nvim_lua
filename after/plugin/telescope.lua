@@ -22,7 +22,7 @@ require('telescope').setup{
     },
     extensions = {
         fzf = {
-            fuzzy = ture,
+            fuzzy = true,
             override_generic_sorter = true,
             override_file_sorter = true,
         }
@@ -40,6 +40,6 @@ require('telescope').setup{
             },
         },
     },
-    vim.api.nvim_set_hl(0, "TelescopeNormal", {guibg=blue, guifg=blue, ctermbg=blue})
+    -- vim.api.nvim_set_hl(0, "TelescopeNormal", {guibg=blue, guifg=blue, ctermbg=blue})
 }
 require('telescope').load_extension('fzf')

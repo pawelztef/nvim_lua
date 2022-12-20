@@ -1,5 +1,4 @@
 vim.opt.number = true
-vim.opt.syntax = on 
 vim.opt.hlsearch = false 
 vim.opt.wrap = false 
 vim.opt.hidden = true                                      -- required to keep multiple buffers
@@ -32,6 +31,7 @@ vim.opt.ttimeoutlen = 100
 vim.opt.ttimeoutlen = 100
 vim.opt.incsearch = true
 vim.opt.colorcolumn = "3000"
+
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -39,32 +39,5 @@ vim.opt.smartindent = true
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undo-dir"
 vim.opt.undofile = true
-
-
-
-
 vim.g.mapleader = " "
 
-
--- filetype plugin indent on
--- au CursorHold * checktime
--- colorscheme nord 
-
--- autocmd BufRead,BufNewFile *.md setlocal spell
---[[
--- Let's save undo info!
-if !isdirectory($HOME."/.config/nvim")                       
-  call mkdir($HOME.".config/nvim", "", 0770)
-endif
--- lets set undofile
-if !isdirectory($HOME."/.config/nvim/undo-dir") 
-  call mkdir($HOME."/.config/nvim/undo-dir", "", 0700)
-endif
-
-set undodir=~/.nvim/undo-dir
-
-" au BufNewFile,BufRead *.js, *.html, *.css, *.rb
-"     \ set tabstop=2 |
-"     \ set softtabstop=2 |
-"     \ set shiftwidth=2 |
-]]--

@@ -1,4 +1,4 @@
--- vim.cmd [[packadd packer.nvim]]
+--vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(
 function(use)
@@ -48,5 +48,7 @@ function(use)
     use 'tpope/vim-commentary'
     use 'MattesGroeger/vim-bookmarks'
     use 'APZelos/blamer.nvim'
+    use 'nvim-lualine/lualine.nvim'
+    use 'kevinhwang91/rnvimr'
 end)
 
