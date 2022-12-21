@@ -19,7 +19,7 @@ lsp.configure('sumneko_lua', {
     }
 })
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
@@ -47,7 +47,7 @@ lsp.set_preferences({
 }
 )
 lsp.on_attach(function(client, bufnr)
-    local opts = {buffer = bufnr, remap = false}
+    local opts = { buffer = bufnr, remap = false }
 
     if client.name == "eslint" then
         vim.cmd.LspStop('eslint')
@@ -64,6 +64,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
 end)
 
 lsp.setup()
@@ -76,7 +77,10 @@ vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     -- Disable underline, it's very annoying
     underline = false,
     -- Enable virtual text, override spacing to 4
-    virtual_text = {spacing = 4},
+    virtual_text = { spacing = 10 },
     signs = true,
     update_in_insert = false
 })
+require 'lspconfig'.eslint.setup {
+    max_length = 4000
+}

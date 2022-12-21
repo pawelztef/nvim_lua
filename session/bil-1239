@@ -1,0 +1,70 @@
+let SessionLoad = 1
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/projects/core
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+let s:shortmess_save = &shortmess
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +73 webapps/billing/models/offer.py
+badd +246 webapps/billing/subscription_creator.py
+badd +189 webapps/billing/models/subscription.py
+badd +366 webapps/billing/enums.py
+badd +1461 service/run.py
+badd +267 service/billing/payment.py
+badd +483 webapps/billing/serializers/payment.py
+badd +9 webapps/billing/serializers/utils.py
+badd +920 webapps/billing/tests/test_subscription_creator.py
+badd +20 service/purchase/tests/test_subscription.py
+badd +139 webapps/billing/models/product.py
+badd +83 webapps/billing/models/base.py
+badd +1 10split
+badd +136 service/billing/tests/test_payment.py
+badd +1 __Tagbar__.2
+badd +223 webapps/billing/forms.py
+badd +3 webapps/billing/admin/product.py
+badd +1 webapps/billing/static/admin/js/billing.js
+badd +1337 ci_jobs/data/blackignore
+argglobal
+%argdel
+edit webapps/billing/models/subscription.py
+argglobal
+balt webapps/billing/models/offer.py
+setlocal fdm=expr
+setlocal fde=SimpylFold#FoldExpr(v:lnum)
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+let s:l = 189 - ((21 * winheight(0) + 22) / 44)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 189
+normal! 0
+if exists(':tcd') == 2 | tcd ~/projects/core | endif
+tabnext 1
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=28 winwidth=130
+let &shortmess = s:shortmess_save
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

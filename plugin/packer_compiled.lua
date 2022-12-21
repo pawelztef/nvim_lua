@@ -114,10 +114,20 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -139,10 +149,20 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  neogit = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/neogit",
+    url = "https://github.com/TimUntersberger/neogit"
+  },
   ["nord.nvim"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/nord.nvim",
     url = "https://github.com/shaunsingh/nord.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -179,6 +199,11 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/rnvimr",
     url = "https://github.com/kevinhwang91/rnvimr"
   },
+  tagbar = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/tagbar",
+    url = "https://github.com/preservim/tagbar"
+  },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
@@ -213,6 +238,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-jsx-pretty",
     url = "https://github.com/maxmellon/vim-jsx-pretty"
+  },
+  ["vim-startify"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-startify",
+    url = "https://github.com/mhinz/vim-startify"
   }
 }
 

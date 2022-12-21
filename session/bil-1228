@@ -1,0 +1,72 @@
+let SessionLoad = 1
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/projects/core
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+let s:shortmess_save = &shortmess
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +435 webapps/billing/subscription_creator.py
+badd +72 webapps/billing/models/offer.py
+badd +1 11split
+badd +200 webapps/billing/models/subscription.py
+badd +336 webapps/billing/enums.py
+badd +22 webapps/billing/models/product.py
+badd +50 webapps/billing/models/base.py
+badd +74 webapps/billing/admin/offer.py
+badd +614 webapps/billing/forms.py
+badd +40 webapps/billing/migrations/0050_billingproductoffer_payment_period_and_more.py
+badd +533 ~/opt/anaconda3/envs/3.10/lib/python3.10/site-packages/django/forms/models.py
+badd +64 lib/enums.py
+badd +321 ~/opt/anaconda3/envs/3.10/lib/python3.10/site-packages/dateutil/relativedelta.py
+badd +547 webapps/billing/tests/admin/test_offer.py
+badd +253 webapps/billing/tests/admin/test_product.py
+badd +182 webapps/billing/tests/models/test_product_offer.py
+badd +606 webapps/billing/tests/admin/test_subscription.py
+badd +139 webapps/billing/admin/subscription.py
+badd +1 webapps/billing/static/admin/js/billing.js
+badd +1338 ci_jobs/data/blackignore
+argglobal
+%argdel
+edit ci_jobs/data/blackignore
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 1338 - ((24 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1338
+normal! 0
+if exists(':tcd') == 2 | tcd ~/projects/core | endif
+tabnext 1
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=28 winwidth=130
+let &shortmess = s:shortmess_save
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

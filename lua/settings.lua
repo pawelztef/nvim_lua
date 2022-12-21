@@ -39,5 +39,6 @@ vim.opt.smartindent = true
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undo-dir"
 vim.opt.undofile = true
+vim.opt.synmaxcol=0
 vim.g.mapleader = " "
 

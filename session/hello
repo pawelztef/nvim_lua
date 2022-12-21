@@ -1,0 +1,72 @@
+let SessionLoad = 1
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/projects/hellosmile/hellosmile-site/frontend
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+let s:shortmess_save = &shortmess
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +1 components/HomePage/Header/Header.js
+badd +56 pages/formularz-zakupowy.js
+badd +33 pages/skan.js
+badd +87 pages/promocja.js
+badd +1 components/PromotionPage/Section1/Section1.js
+badd +5 components/PromotionPage/Header/Header.js
+badd +18 components/PromotionPage/Header/Header.styles.js
+badd +3 pages/blog/\[blogPost].js
+badd +15 components/HomePage/Header/Header.styles.js
+badd +13 components/Scan/ScanHeader/ScanHeader.js
+badd +15 components/HomePage/Section1/Section1.js
+badd +9 components/PromotionPage/Section/Section.js
+badd +141 components/Clinics/Clinics.styles.js
+badd +81 components/PromotionPage/Section/Section.styles.js
+badd +1 components/ContactPage/Contact/Contact.js
+badd +26 pages/kontakt.js
+badd +13 components/PromotionPage/Contact/Contact.js
+badd +9 components/PromotionPage/Section2/Section2.js
+badd +67 next.config.js
+badd +6 components/HomePage/Header/PromoHeader.js
+argglobal
+%argdel
+edit components/HomePage/Header/PromoHeader.js
+argglobal
+balt components/HomePage/Header/Header.js
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 6 - ((5 * winheight(0) + 21) / 42)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 6
+normal! 013|
+lcd ~/projects/hellosmile/hellosmile-site/frontend
+tabnext 1
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=27 winwidth=113
+let &shortmess = s:shortmess_save
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

@@ -43,6 +43,7 @@ function(use)
             {'rafamadriz/friendly-snippets'},
         }
     }
+    use 'jose-elias-alvarez/null-ls.nvim'
     use 'Pocco81/auto-save.nvim'
     use 'easymotion/vim-easymotion'
     use 'tpope/vim-commentary'
@@ -50,5 +51,15 @@ function(use)
     use 'APZelos/blamer.nvim'
     use 'nvim-lualine/lualine.nvim'
     use 'kevinhwang91/rnvimr'
+    use {
+        'TimUntersberger/neogit',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim',
+        },
+    }
+    use 'preservim/tagbar'
+    use 'mhinz/vim-startify'
+    use 'lewis6991/gitsigns.nvim'
 end)
 
