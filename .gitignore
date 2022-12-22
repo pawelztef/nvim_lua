@@ -1,2 +1,2 @@
-./undo-dir/
-./session/
+/undo-dir/*
+/session/*
