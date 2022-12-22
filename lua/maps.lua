@@ -42,3 +42,5 @@ keymap("n", "ca", "<cmd>CopyAbsPath<CR>", opts)
 keymap("n", "cf", "<cmd>CopyFileName<CR>", opts)
 keymap("n", "cd", "<cmd>CopyDirPath<CR>", opts)
 keymap("n", "<leader>f", "<cmd>Format<CR>", opts)
+keymap("n", "<leader>nt", "<cmd>set relativenumber!<CR>", opts)
+

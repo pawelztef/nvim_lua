@@ -61,5 +61,7 @@ function(use)
     use 'preservim/tagbar'
     use 'mhinz/vim-startify'
     use 'lewis6991/gitsigns.nvim'
+    use 'machakann/vim-sandwich'
+    use 'mg979/vim-visual-multi'
 end)
 
