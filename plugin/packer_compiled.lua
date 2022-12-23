@@ -159,6 +159,11 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["minimal-tabline.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/minimal-tabline.nvim",
+    url = "https://github.com/koenverburg/minimal-tabline.nvim"
+  },
   neogit = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/neogit",

@@ -42,3 +42,4 @@ vim.opt.undofile = true
 vim.opt.synmaxcol = 0
 vim.g.mapleader = " "
 vim.wo.relativenumber = true
+vim.opt.guitablabel = "%t"

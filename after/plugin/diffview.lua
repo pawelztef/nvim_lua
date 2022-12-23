@@ -1,4 +1,4 @@
-vim.api.nvim_set_keymap("n", "<leader>d", "<cmd>DiffviewFileHistory %<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>d", "<cmd>DiffviewFileHistory %<CR>", { silent = true })
 local actions = require("diffview.actions")
 
 require("diffview").setup({
@@ -22,7 +22,8 @@ require("diffview").setup({
     },
     win_config = {                      -- See ':h diffview-config-win_config'
       position = "bottom",
-      width = 7,
+      -- width = math.max(60, vim.fn.winwidth(0) / 5),
+      height = 10,
     },
   },
   file_history_panel = {
@@ -39,7 +40,7 @@ require("diffview").setup({
   },
     win_config = {    -- See ':h diffview-config-win_config'
       position = "bottom",
-      height = 7,
+      height = 10,
     },
   },
   commit_log_panel = {

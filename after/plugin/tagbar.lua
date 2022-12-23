@@ -1,6 +1,5 @@
 local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap("n",  "<F5>", "<Nope>", opts)
-vim.api.nvim_set_keymap("n",  "<F5>", ":TagbarToggle<CR>", opts)
+vim.api.nvim_set_keymap("n",  "<leader>a", ":TagbarToggle<CR>", opts)
 
 vim.g.bookmark_display_annotation = 1
 vim.g.tagbar_sort = 0

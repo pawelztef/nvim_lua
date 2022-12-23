@@ -65,4 +65,6 @@ return require('packer').startup(
         use 'beauwilliams/focus.nvim'
         use 'lewis6991/gitsigns.nvim'
         use 'anuvyklack/help-vsplit.nvim'
+        use 'koenverburg/minimal-tabline.nvim'
+
     end)
