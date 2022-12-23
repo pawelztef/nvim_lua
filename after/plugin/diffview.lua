@@ -1,5 +1,4 @@
-vim.api.nvim_set_keymap("n", "<F2>", "<cmd>DiffviewFileHistory %<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "q", "<cmd>:tabclose<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>d", "<cmd>DiffviewFileHistory %<CR>", { silent = true })
 local actions = require("diffview.actions")
 
 require("diffview").setup({
@@ -8,12 +7,12 @@ require("diffview").setup({
   git_cmd = { "git" },      -- The git executable followed by default args.
   use_icons = false,         -- Requires nvim-web-devicons
   icons = {                 -- Only applies when use_icons is true.
-    folder_closed = "?",
-    folder_open = "?",
+    folder_closed = "",
+    folder_open = "",
   },
   signs = {
-    fold_closed = "?",
-    fold_open = "?",
+    fold_closed = "",
+    fold_open = "",
   },
   file_panel = {
     listing_style = "tree",             -- One of 'list' or 'tree'
