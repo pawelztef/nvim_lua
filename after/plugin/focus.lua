@@ -5,7 +5,6 @@ require('focus').setup(
       number = false,
       singcolumn = false,
       absolutenumber_unfocussed = true,
-      excluded_buftypes = {"nowrite"}
   }
 )
 vim.api.nvim_set_keymap('n', '<leader>h', ':FocusSplitLeft<CR>', { silent = true })
