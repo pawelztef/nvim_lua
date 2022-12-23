@@ -119,6 +119,11 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/diffview.nvim",
     url = "https://github.com/sindrets/diffview.nvim"
   },
+  ["focus.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/focus.nvim",
+    url = "https://github.com/beauwilliams/focus.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -128,6 +133,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["help-vsplit.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/help-vsplit.nvim",
+    url = "https://github.com/anuvyklack/help-vsplit.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,

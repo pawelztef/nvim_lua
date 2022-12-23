@@ -60,8 +60,11 @@ function(use)
     }
     use 'preservim/tagbar'
     use 'mhinz/vim-startify'
-    use 'lewis6991/gitsigns.nvim'
+    -- use 'lewis6991/gitsigns.nvim'
     use 'machakann/vim-sandwich'
     use 'mg979/vim-visual-multi'
+    use 'beauwilliams/focus.nvim'
+    use 'lewis6991/gitsigns.nvim'
+    use 'anuvyklack/help-vsplit.nvim'
 end)
 
