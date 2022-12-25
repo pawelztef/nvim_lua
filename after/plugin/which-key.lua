@@ -125,6 +125,15 @@ local mappings = {
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
+    d = {
+        name = "DiffView",
+        o = { "<cmd>DiffviewOpen master<cr>", "Open (master)" },
+        O = { "<cmd>DiffviewOpen HEAD~1<cr>", "Open (HEAD~1)" },
+        d = { "<cmd>DiffviewFileHistory %<cr>", "File history" },
+        q = { "<cmd>DiffviewClose<cr>", "Close" },
+        f = { "<cmd>DiffviewFocusFiles<cr>", "Focuse files" },
+        t = { "<cmd>DiffviewToggleFiles<cr>", "Toggle files" },
+    }
 }
 
 local vopts = {

@@ -5,6 +5,7 @@ vim.g.mapleader = " "
 
 keymap("n", "<A-z>", ":qa!<CR>", opts) --closing
 keymap("n", "<leader>z", ":q!<CR>", opts) --closing
+-- keymap("n", "<leader>q", ":tabclose<CR>", opts) --closing
 keymap("n", "<leader>j", ":vsp<CR>", opts) --vertical split
 keymap("n", "<leader>k", ":sp<CR>", opts) --horizontal split
 keymap("n", "oo", "o<Esc>k", opts) --mapping for opening new line without entering into insert mode
