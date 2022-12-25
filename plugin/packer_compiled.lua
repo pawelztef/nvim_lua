@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["Onedarker.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/Onedarker.nvim",
+    url = "https://github.com/lunarvim/Onedarker.nvim"
+  },
   ["auto-save.nvim"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
@@ -159,15 +164,15 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
-  ["minimal-tabline.nvim"] = {
-    loaded = true,
-    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/minimal-tabline.nvim",
-    url = "https://github.com/koenverburg/minimal-tabline.nvim"
-  },
   neogit = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/neogit",
     url = "https://github.com/TimUntersberger/neogit"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nord.nvim"] = {
     loaded = true,

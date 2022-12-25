@@ -1,13 +1,3 @@
-require('minimal-tabline').setup({
-  enable = true,
-  file_name = true,
-  tab_index = false,
-  pane_count = false,
-  modified_sign = true,
-  hide_on_single_tab = true,
-  no_name = '[No Name]'
-})
-
 require('lualine').setup {
     options = {
         icons_enabled = false,
@@ -44,14 +34,15 @@ require('lualine').setup {
         lualine_y = {},
         lualine_z = {}
     },
-    tabline = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {}
-    },
+    tabline = {},
+    -- tabline = {
+    --     lualine_a = {'filename'},
+    --     lualine_b = {},
+    --     lualine_c = {},
+    --     lualine_x = {},
+    --     lualine_y = {},
+    --     lualine_z = {'tabs'}
+    -- },
     winbar = {
         lualine_a = {},
         lualine_b = {},
