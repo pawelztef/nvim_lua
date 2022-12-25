@@ -3,7 +3,7 @@ require('gitsigns').setup {
     add          = { hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'    },
     change       = { hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
     delete       = { hl = 'GitSignsDelete', text = '│', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
-    topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
+    topdelete    = { hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn' },
     changedelete = { hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
     untracked    = { hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'    },
   },
@@ -49,26 +49,26 @@ require('gitsigns').setup {
     end
 
     -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
+    -- map('n', ']c', function()
+    --   if vim.wo.diff then return ']c' end
+    --   vim.schedule(function() gs.next_hunk() end)
+    --   return '<Ignore>'
+    -- end, {expr=true})
 
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
+    -- map('n', '[c', function()
+    --   if vim.wo.diff then return '[c' end
+    --   vim.schedule(function() gs.prev_hunk() end)
+    --   return '<Ignore>'
+    -- end, {expr=true})
 
     -- Actions
-    map({'n', 'v'}, '<leader>gA', ':Gitsigns stage_hunk<CR>')
-    map({'n', 'v'}, '<leader>gr', ':Gitsigns reset_hunk<CR>')
+    map({'n', 'v'}, '<leader>gh', ':Gitsigns stage_hunk<CR>')
+    map({'n', 'v'}, '<leader>gH', ':Gitsigns reset_hunk<CR>')
     map('n', '<leader>ga', gs.stage_buffer)
-    map('n', '<leader>gU', gs.undo_stage_hunk)
     map('n', '<leader>gr', gs.reset_buffer)
+    map('n', '<leader>gU', gs.undo_stage_hunk)
     map('n', '<leader>gp', gs.preview_hunk)
-    map('n', '<leader>gB', function() gs.blame_line{full=true} end)
+    -- map('n', '<leader>gB', function() gs.blame_line{full=true} end)
     map('n', '<leader>gb', gs.toggle_current_line_blame)
     map('n', '<leader>gd', gs.diffthis)
     map('n', '<leader>gD', function() gs.diffthis('~') end)

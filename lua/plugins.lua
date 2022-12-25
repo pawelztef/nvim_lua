@@ -48,7 +48,7 @@ return require('packer').startup(
         use 'easymotion/vim-easymotion'
         use 'tpope/vim-commentary'
         use 'MattesGroeger/vim-bookmarks'
-        use 'APZelos/blamer.nvim'
+        -- use 'APZelos/blamer.nvim'
         use 'nvim-lualine/lualine.nvim'
         use 'kevinhwang91/rnvimr'
         use {
@@ -67,4 +67,5 @@ return require('packer').startup(
         use 'anuvyklack/help-vsplit.nvim'
         use "EdenEast/nightfox.nvim"
         use "lunarvim/Onedarker.nvim"
+        use "folke/which-key.nvim"
     end)
