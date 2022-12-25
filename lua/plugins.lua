@@ -68,4 +68,5 @@ return require('packer').startup(
         use "EdenEast/nightfox.nvim"
         use "lunarvim/Onedarker.nvim"
         use "folke/which-key.nvim"
+        use "ahmedkhalf/project.nvim"
     end)
