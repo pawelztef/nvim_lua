@@ -64,17 +64,16 @@ require('gitsigns').setup {
     -- Actions
     map({'n', 'v'}, '<leader>gh', ':Gitsigns stage_hunk<CR>')
     map({'n', 'v'}, '<leader>gH', ':Gitsigns reset_hunk<CR>')
-    map('n', '<leader>ga', gs.stage_buffer)
-    map('n', '<leader>gr', gs.reset_buffer)
     map('n', '<leader>gU', gs.undo_stage_hunk)
     map('n', '<leader>gp', gs.preview_hunk)
+    map('n', '<leader>ga', gs.stage_buffer)
+    map('n', '<leader>gA', gs.reset_buffer)
     -- map('n', '<leader>gB', function() gs.blame_line{full=true} end)
     map('n', '<leader>gb', gs.toggle_current_line_blame)
     map('n', '<leader>gd', gs.diffthis)
-    map('n', '<leader>gD', function() gs.diffthis('~') end)
-    map('n', '<leader>gd', gs.toggle_deleted)
-
+    -- map('n', '<leader>gD', function() gs.diffthis('~') end)
+    map('n', '<leader>gD', gs.toggle_deleted)
     -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+    -- map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }

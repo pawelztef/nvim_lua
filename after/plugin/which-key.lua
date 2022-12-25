@@ -79,12 +79,11 @@ local opts = {
 }
 
 local mappings = {
-    ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
     ["b"] = {
         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
         "Buffers",
     },
-    ["z"] = { "<cmd>q!<CR>", "Quit all" },
+    ["z"] = { "<cmd>q!<CR>", "Quit" },
     ["f"] = { "<cmd>Format<CR>", "Format" },
     ["p"] = { "<cmd>Telescope projects<cr>", "Projects" },
 
@@ -102,22 +101,18 @@ local mappings = {
         g = { "<cmd>Neogit<CR>", "Neogit" },
         h = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
         H = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+        U = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+        p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preiew Hunk" },
         j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
         k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
         l = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Blame" },
-        p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preiew Hunk" },
-        R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        u = {
-            "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-            "Undo Stage Hunk",
-        },
-        o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-        d = {
-            "<cmd>Gitsigns diffthis HEAD<cr>",
-            "Diff",
-        },
+        a = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" },
+        A = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+        -- o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+        -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+        -- c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+        d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff HEAD" },
+        D = { "lua require 'gitsigns'.toggle_deleted()<cr>", "Diff" },
     },
     t = {
         name = "Search",
