@@ -50,7 +50,29 @@ require("diffview").setup({
     DiffviewOpen = {},
     DiffviewFileHistory = {},
   },
-  hooks = {},         -- See ':h diffview-config-hooks'
+  hooks = {
+      -- diff_buf_read = function(bufnr)
+      --     print('hello 1')
+      -- end,
+      view_opened = function(view)
+          print('hello 2')
+          vim.cmd("FocusDisable")
+      end,
+      view_closed = function(view)
+          print('hello 3')
+          vim.cmd("FocusEnable")
+      end,
+      -- view_enter = function(view)
+      --     print('hello 4')
+      -- end,
+      -- view_leave = function(view)
+      --     print('hello 4')
+      -- end,
+      -- diff_buf_win_enter = function(bufnr, winid)
+      --     print('hello 5')
+      -- end,
+  },
+
   keymaps = {
     disable_defaults = false, -- Disable the default keymaps
     view = {

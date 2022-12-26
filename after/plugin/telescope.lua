@@ -1,6 +1,7 @@
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
+require('telescope').load_extension('projects')
 
 vim.keymap.set('n', '<M-0>', builtin.find_files, {})
 vim.keymap.set('n', '<M-8>', builtin.live_grep, {})
@@ -12,8 +13,7 @@ vim.keymap.set('n', '<leader>tr', builtin.registers, {})
 vim.keymap.set('n', '<leader>tb', builtin.git_branches, {})
 vim.keymap.set('n', '<leader>tq', builtin.quickfix, {})
 
-
-require('telescope').setup{
+require('telescope').setup {
     pickers = {
         buffers = {
             ignore_current_buffer = true,
@@ -25,9 +25,8 @@ require('telescope').setup{
         fzy_native = {
             override_generic_sorter = false,
             override_file_sorter = true,
-        }
-
-
+        },
+        projects = {}
 
     },
     defaults = {
