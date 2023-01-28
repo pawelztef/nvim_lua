@@ -1,4 +1,4 @@
-local status_ok, which_key = pcall(require, "which-key")
+-- local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
     return
 end
@@ -6,9 +6,9 @@ end
 local setup = {
     plugins = {
         marks = true, -- shows a list of your marks on ' and `
-        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
-            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+            enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 20, -- how many suggestions should be shown in the list?
         },
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
@@ -17,10 +17,10 @@ local setup = {
             operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
             motions = false, -- adds help for motions
             text_objects = false, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
-            g = true, -- bindings for prefixed with g
+            windows = false, -- default bindings on <c-w>
+            nav = false, -- misc bindings to work with windows
+            z = false, -- bindings for folds, spelling and others prefixed with z
+            g = false, -- bindings for prefixed with g
         },
     },
     -- add operators that will trigger motion and text object completion
@@ -79,10 +79,10 @@ local opts = {
 }
 
 local mappings = {
-    ["b"] = {
-        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-        "Buffers",
-    },
+    -- ["b"] = {
+    --     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    --     "Buffers",
+    -- },
     ["z"] = { "<cmd>q!<CR>", "Quit" },
     ["f"] = { "<cmd>Format<CR>", "Format" },
     ["p"] = { "<cmd>Telescope projects<cr>", "Projects" },
@@ -120,8 +120,8 @@ local mappings = {
         c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
         h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
         M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-        r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-        R = { "<cmd>Telescope registers<cr>", "Registers" },
+        R = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+        r = { "<cmd>Telescope registers<cr>", "Registers" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
@@ -148,6 +148,6 @@ local vmappings = {
     ["/"] = { "<ESC><CMD>lua require(\"Comment.api\").toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
 }
 
-which_key.setup(setup)
-which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
+-- which_key.setup(setup)
+-- which_key.register(mappings, opts)
+-- which_key.register(vmappings, vopts)

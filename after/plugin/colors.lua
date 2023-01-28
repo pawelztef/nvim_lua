@@ -1,7 +1,9 @@
 function Color(color)
-    color = color or 'nordfox'
-    vim.cmd.colorscheme(color )
+    color = color or 'nord'
+    vim.cmd.colorscheme(color)
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+    vim.api.nvim_set_hl(0, "MsgArea", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none" })
     vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none", fg = "none" })
     vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "none" })
@@ -9,8 +11,10 @@ function Color(color)
     vim.api.nvim_set_hl(0, "DiffAdd", { bg = "none", fg = "green" })
     vim.api.nvim_set_hl(0, "DiffDelete", { bg = "none", fg = "red" })
     vim.api.nvim_set_hl(0, "DiffChange", { bg = "none", fg = "orange" })
-    vim.api.nvim_set_hl(0, "DiffText", { bg = "none", fg = "yellow"})
+    vim.api.nvim_set_hl(0, "DiffText", { bg = "none", fg = "yellow" })
     vim.api.nvim_set_hl(0, "VertSplit", { bg = "none", fg = "#121212" })
+    vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#3B4252", fg = "none" })
+    vim.api.nvim_set_hl(0, "Search", { bg = "none", fg = "red" })
 
 end
 
@@ -25,9 +29,11 @@ vim.g.nord_bold = true
 
 vim.opt.fillchars = { eob = ' ' } -- overriding fillchars with empty space
 
+vim.api.nvim_set_hl(0, "Red", { bg = "none", fg = "red" })
+
 local function color_tags()
-    vim.fn.matchadd('red', 'breakpoint()')
-    vim.fn.matchadd('red', '@pytest.mark.skip()')
+    vim.fn.matchadd('Red', 'breakpoint()')
+    vim.fn.matchadd('Red', '@pytest.mark.skip()')
     vim.fn.matchadd('yellow', 'NOTE')
     vim.fn.matchadd('yellow', 'TODO')
     vim.fn.matchadd('yellow', 'ISSUE')
@@ -40,6 +46,17 @@ vim.api.nvim_create_autocmd(
     { callback = color_tags }
 )
 
+vim.api.nvim_create_autocmd({ "WinEnter", "BufRead" }, {
+    pattern = { "breakpoint()", "WARNING" },
+    callback = function()
+        vim.api.nvim_set_hl(0, "Normal", { bg = 'none', fg = 'red' })
+    end
+})
+
 require('nord').set()
+
+vim.g.onedark_color_overrides = {
+    background = { gui = "#2F343F", cterm = "235", cterm16 = "0" },
+}
 
 Color()

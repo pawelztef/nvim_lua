@@ -77,3 +77,22 @@ require('gitsigns').setup {
     -- map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
+-- g = {
+--     name = "Git",
+--     g = { "<cmd>Neogit<CR>", "Neogit" },
+--     h = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+--     H = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+--     U = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
+--     p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preiew Hunk" },
+--     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+--     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+--     l = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Blame" },
+--     a = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" },
+--     A = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+--     -- o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+--     -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+--     -- c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+--     d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff HEAD" },
+--     D = { "lua require 'gitsigns'.toggle_deleted()<cr>", "Diff" },
+-- },
+

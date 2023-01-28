@@ -21,9 +21,9 @@ vim.g.startify_bookmarks = {
 }
 
 vim.g.startify_lists = {
-           { type = 'sessions',  header = {'SESSIONS'} },
-           { type = 'files',     header = {'FILES'} },
-           { type = 'bookmarks', header = {'BOOKMARKS'} },
+           { type = 'sessions',  header = {'    SESSIONS'} },
+           { type = 'files',     header = {'    FILES'} },
+           { type = 'bookmarks', header = {'    BOOKMARKS'} },
 }
 vim.g.startify_custom_header = {}
 vim.g.startify_custom_header_quotes = {

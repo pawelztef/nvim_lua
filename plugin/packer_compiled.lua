@@ -89,6 +89,16 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
     url = "https://github.com/Pocco81/auto-save.nvim"
   },
+  ["bclose.vim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/bclose.vim",
+    url = "https://github.com/rbgrouleff/bclose.vim"
+  },
+  black = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/black",
+    url = "https://github.com/psf/black"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -119,6 +129,11 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/diffview.nvim",
     url = "https://github.com/sindrets/diffview.nvim"
   },
+  ["emmet-vim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/emmet-vim",
+    url = "https://github.com/mattn/emmet-vim"
+  },
   ["focus.nvim"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/focus.nvim",
@@ -143,6 +158,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
+  },
+  ["kanagawa.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
+    url = "https://github.com/rebelot/kanagawa.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -179,11 +199,6 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/nord.nvim",
     url = "https://github.com/shaunsingh/nord.nvim"
   },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
-  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -194,10 +209,20 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-tabline"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/nvim-tabline",
+    url = "https://github.com/seblj/nvim-tabline"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["onedark.vim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/onedark.vim",
+    url = "https://github.com/joshdick/onedark.vim"
   },
   ["onenord.nvim"] = {
     loaded = true,
@@ -219,10 +244,20 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
-  rnvimr = {
+  ["python-imports.vim"] = {
     loaded = true,
-    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/rnvimr",
-    url = "https://github.com/kevinhwang91/rnvimr"
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/python-imports.vim",
+    url = "https://github.com/mgedmin/python-imports.vim"
+  },
+  ["ranger.vim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/ranger.vim",
+    url = "https://github.com/francoiscabrol/ranger.vim"
+  },
+  ["sourcerer.vim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/sourcerer.vim",
+    url = "https://github.com/xero/sourcerer.vim"
   },
   tagbar = {
     loaded = true,
@@ -239,6 +274,11 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["toggle-lsp-diagnostics.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/toggle-lsp-diagnostics.nvim",
+    url = "https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim"
+  },
   ["vim-bookmarks"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-bookmarks",
@@ -253,6 +293,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-easymotion",
     url = "https://github.com/easymotion/vim-easymotion"
+  },
+  ["vim-isort"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-isort",
+    url = "https://github.com/fisadev/vim-isort"
   },
   ["vim-js"] = {
     loaded = true,
@@ -278,11 +323,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
     url = "https://github.com/mg979/vim-visual-multi"
-  },
-  ["which-key.nvim"] = {
-    loaded = true,
-    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/which-key.nvim",
-    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
