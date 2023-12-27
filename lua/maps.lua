@@ -18,25 +18,34 @@ keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
 --clipboard
 keymap("x", "<leader>p", "\"_dP", opts)
 --quickfix locationlist navigation
-keymap("n", "<C-k>", "<cmd>cnext<CR>zz", opts)
-keymap("n", "<C-j>", "<cmd>cprev<CR>zz", opts)
-keymap("n", "<A-k>", "<cmd>lnext<CR>zz", opts)
-keymap("n", "<A-j>", "<cmd>lprev<CR>zz", opts)
+keymap("n", "qn", "<cmd>cnext<CR>zz", opts)
+keymap("n", "qp", "<cmd>cprev<CR>zz", opts)
+keymap("n", "ln", "<cmd>lnext<CR>zz", opts)
+keymap("n", "lp", "<cmd>lprev<CR>zz", opts)
+keymap("n", "^]", "<cmd>tabclose<CR>", opts)
 
 vim.api.nvim_create_user_command("CopyRelPath", function()
-    vim.api.nvim_call_function("setreg", { "+", vim.fn.fnamemodify(vim.fn.expand("%"), ":.") })
+  path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
+  vim.api.nvim_call_function("setreg", { "+", path })
+  print(path)
 end, {}
 )
 vim.api.nvim_create_user_command("CopyAbsPath", function()
-    vim.api.nvim_call_function("setreg", { "+", vim.fn.fnamemodify(vim.fn.expand("%"), ":p") })
+  path = vim.fn.fnamemodify(vim.fn.expand("%"), ":p")
+  vim.api.nvim_call_function("setreg", { "+", path })
+  print(path)
 end, {}
 )
 vim.api.nvim_create_user_command("CopyFileName", function()
-    vim.api.nvim_call_function("setreg", { "+", vim.fn.fnamemodify(vim.fn.expand("%:p"), ":t") })
+  path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":t")
+  vim.api.nvim_call_function("setreg", { "+", path })
+  print(path)
 end, {}
 )
 vim.api.nvim_create_user_command("CopyDirPath", function()
-    vim.api.nvim_call_function("setreg", { "+", vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.:h") })
+  path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.:h")
+  vim.api.nvim_call_function("setreg", { "+", path })
+  print(path)
 end, {}
 )
 keymap("n", "cp", "<cmd>CopyRelPath<CR>", opts)
@@ -44,5 +53,41 @@ keymap("n", "ca", "<cmd>CopyAbsPath<CR>", opts)
 keymap("n", "cf", "<cmd>CopyFileName<CR>", opts)
 keymap("n", "cd", "<cmd>CopyDirPath<CR>", opts)
 keymap("n", "bda", "<cmd>%bd|e#|bd#<CR>", opts)
+keymap("n", "bd", "<cmd>bd<CR>", opts)
 keymap("n", "<leader>f", "<cmd>Format<CR>", opts)
 keymap("n", "<leader>nt", "<cmd>set relativenumber!<CR>", opts)
+
+local function IsortAndBlack()
+  vim.cmd('Isort')
+  vim.cmd('Black')
+end
+
+vim.keymap.set("n", "<A-0>", IsortAndBlack)
+
+-- clean quickfix
+local function ClearQuickfixList()
+  vim.cmd('copen')
+  vim.cmd('call setqflist([])')
+  vim.cmd('quit')
+end
+
+vim.keymap.set("n", "<C-d>", ClearQuickfixList)
+
+-- toggle quickfix
+local function toggle_qf()
+  local qf_exists = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+    end
+  end
+  if qf_exists == true then
+    vim.cmd "cclose"
+    return
+  end
+  if not vim.tbl_isempty(vim.fn.getqflist()) then
+    vim.cmd "copen"
+  end
+end
+
+vim.keymap.set("n", "<leader>b", toggle_qf)

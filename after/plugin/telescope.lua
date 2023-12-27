@@ -1,48 +1,105 @@
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
-require('telescope').load_extension('projects')
+require('telescope').load_extension('project')
 
 vim.keymap.set('n', '<leader>0', builtin.find_files, {})
-vim.keymap.set('n', '<leader>8', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>9', builtin.buffers, {})
-vim.keymap.set('n', '<leader>p', "<cmd>Telescope projects<cr>", {})
+vim.keymap.set('n', '<leader>8', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>7', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>6', "<cmd>Telescope diagnostics<cr>", {})
+vim.keymap.set('n', '<leader>5', builtin.git_branches, {})
+-- search in open buffers
+vim.keymap.set(
+  'n',
+  '<leader>o',
+  '<cmd>lua require("telescope.builtin").live_grep({ prompt_title = "Find in open buffers", grep_open_files = true})<cr>'
+  ,
+  {}
+)
+-- search in current file
+vim.keymap.set(
+  'n',
+  '<leader>i',
+  '<cmd>lua require("telescope.builtin").grep_string({ prompt_title = "Find in open file", search_dirs = {vim.fn.expand("%:p")}})<cr>'
+  ,
+  {}
+)
+vim.keymap.set(
+  'n',
+  '<Leader>p',
+  "<cmd>lua require'telescope'.load_extension('project').project{ display_type='full' }<cr>"
+  ,
+  {}
+)
+vim.keymap.set(
+  'n',
+  '<leader>m',
+  "<cmd>lua require'telescope'.load_extension('vim_bookmarks').all()<cr>",
+  {}
+)
+
+vim.keymap.set('n', '<leader>tr', builtin.registers, {})
 vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
-vim.keymap.set('n', '<leader>tm', builtin.marks, {})
-vim.keymap.set('n', '<leader>tr', builtin.registers, {})
 vim.keymap.set('n', '<leader>tb', builtin.git_branches, {})
 vim.keymap.set('n', '<leader>tq', builtin.quickfix, {})
 
 require('telescope').setup {
-    pickers = {
-        buffers = {
-            ignore_current_buffer = true,
-            sort_lastused = true,
-        },
-        git_branches = {
-            sort_lastused = true,
-        }
+  pickers = {
+    buffers = {
+      ignore_current_buffer = true,
+      sort_lastused = true,
     },
-    extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-        },
+    git_branches = {
+      ignore_current_buffer = true,
+    }
+  },
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = false,
+      override_file_sorter = true,
     },
-    defaults = {
-        layout_strategy = 'vertical',
-        mappings = {
-            i = {
-                ['<C-[>'] = actions.close,
-                ['<C-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-                ['<C-s>'] = actions.smart_send_to_loclist + actions.open_loclist,
-                ['<C-y>'] = function(prompt_bufnr)
-                    action_layout.cycle_layout_next(prompt_bufnr)
-                end,
-            },
-        },
+    project = {
+      base_dirs = {
+        { path = '~/projects', max_depth = 1 },
+        { path = '~/projects/core' },
+        { path = '~/.config/nvim' },
+        { path = '~/projects/tutorials', max_depth = 3 },
+      },
+      sync_with_nvim_tree = true,
+      display_type = 'full',
     },
+  },
+  defaults = {
+    layout_strategy = 'vertical',
+    sorting_strategy = 'ascending',
+    prompt_position = 'top',
+    layout_config = {
+      height = 0.70,
+      width = 0.75,
+      -- preview_height = 0.60,
+      prompt_position = 'top',
+    },
+    mappings = {
+      i = {
+        ['<C-[>'] = actions.close,
+        ['<C-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+        ['<C-s>'] = actions.smart_send_to_loclist + actions.open_loclist,
+        ['<C-y>'] = function(prompt_bufnr)
+          action_layout.cycle_layout_next(prompt_bufnr)
+        end,
+      },
+    },
+  },
+}
+local bookmark_actions = require('telescope').extensions.vim_bookmarks.actions
+require('telescope').extensions.vim_bookmarks.all {
+  attach_mappings = function(_, map)
+    map('i', '<M-d>', bookmark_actions.delete_selected_or_at_cursor)
+
+    return true
+  end
 }
 -- nnoremap <Leader>f :lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({}))<cr>
 -- vim.keymap.set('n', '<Leader>f',  "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ winblend = 10 }))<cr>", {})

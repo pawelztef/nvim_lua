@@ -1,3 +1,2 @@
-vim.g.vim_isort_config_overrides = { include_trailing_comma = 1, multi_line_output = 3, line_length = 100 }
-vim.g.vim_isort_map = '<C-i>'
-
+vim.g.isort_vim_options = '--multi-line 3 --trailing-comma --force-grid-wrap 0 --use-parentheses --ensure-newline-before-comments --line-length 100'
+vim.api.nvim_set_keymap("n", "<A-i>", "<cmd>Isort<CR>", {})

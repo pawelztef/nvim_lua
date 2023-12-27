@@ -1,4 +1,5 @@
-vim.api.nvim_set_keymap("n", "<F3>", "<cmd>Neogit<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>Neogit<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<M-c>", "<cmd>Neogit commit<CR>", { silent = true })
 
 local neogit = require("neogit")
 neogit.setup {
@@ -23,12 +24,7 @@ neogit.setup {
         hunk = { "", "" },
     },
     integrations = {
-        'TimUntersberger/neogit',
-        requires = { 
-            'nvim-lua/plenary.nvim',
-            'sindrets/diffview.nvim',
-        },
-        diffview = true,
+        diffview = true
     },
     sections = {
         untracked = {
@@ -44,10 +40,12 @@ neogit.setup {
             folded = true
         },
         unpulled = {
-            folded = true
+            folded = true,
+            hidden = true
         },
         unmerged = {
-            folded = false
+            folded = false,
+            hidden = false
         },
         recent = {
             folded = true

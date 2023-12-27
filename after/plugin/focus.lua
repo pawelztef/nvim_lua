@@ -1,10 +1,12 @@
 require('focus').setup(
   {
+    ui = {
       winhighlight = false,
       cursorline = false,
       number = false,
       singcolumn = false,
       absolutenumber_unfocussed = true,
+    }
   }
 )
 vim.api.nvim_set_keymap('n', '<leader>h', ':FocusSplitLeft<CR>', { silent = true })
@@ -13,6 +15,35 @@ vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', { silent = true }
 vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>2', ':FocusToggle<CR>', { silent = true })
 
+local ignore_filetypes = { 'neo-tree', 'toggleterm', 'packer', 'NvimTree', 'no name', 'qf' }
+local ignore_buftypes = { 'nofile', 'prompt', 'popup', 'quickfix', 'terminal', 'help', 'nowrite', 'readonly', 'packer' }
+
+local augroup = vim.api.nvim_create_augroup('FocusDisable', { clear = true })
+
+vim.api.nvim_create_autocmd('WinEnter', {
+  group = augroup,
+  callback = function(_)
+    if vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
+    then
+      vim.b.focus_disable = true
+    else
+      vim.b.focus_disable = false
+    end
+  end,
+  desc = 'Disable focus autoresize for BufType',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup,
+  callback = function(_)
+    if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+      vim.b.focus_disable = true
+    else
+      vim.b.focus_disable = false
+    end
+  end,
+  desc = 'Disable focus autoresize for FileType',
+})
 
 -- COMMANDS
 --
@@ -28,4 +59,3 @@ vim.api.nvim_set_keymap('n', '<leader>2', ':FocusToggle<CR>', { silent = true })
 -- :FocusEqualise         Temporarily equalises the splits so they are ll of similar width/height
 -- :FocusMaximise         Temporarily maximises the focussed window
 -- :FocusMaxOrEqual       Toggles Between having the splits equalised or the focussed window maximiseda
-

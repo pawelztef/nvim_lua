@@ -1,4 +1,3 @@
-vim.api.nvim_set_keymap("n", "<Leader>d", "<cmd>DiffviewFileHistory %<CR>", { silent = true })
 local actions = require("diffview.actions")
 
 require("diffview").setup({
@@ -55,11 +54,11 @@ require("diffview").setup({
       --     print('hello 1')
       -- end,
       view_opened = function(view)
-          print('hello 2')
+          -- print('hello 2')
           vim.cmd("FocusDisable")
       end,
       view_closed = function(view)
-          print('hello 3')
+          -- print('hello 3')
           vim.cmd("FocusEnable")
       end,
       -- view_enter = function(view)
@@ -82,9 +81,10 @@ require("diffview").setup({
       ["<s-tab>"]    = actions.select_prev_entry, -- Open the diff for the previous file
       ["gf"]         = actions.goto_file,         -- Open the file in a new split in the previous tabpage
       ["<C-w><C-f>"] = actions.goto_file_split,   -- Open the file in a new split
-      ["<C-w>gf"]    = actions.goto_file_tab,     -- Open the file in a new tabpage
+      ["<C-w>gf"]    = actions.goto_file_tab,
       ["<leader>e"]  = actions.focus_files,       -- Bring focus to the files panel
       ["<leader>b"]  = actions.toggle_files,      -- Toggle the files panel.
+      ["q"]          = actions.close,             -- Close the files panel.
     },
     file_panel = {
       ["j"]             = actions.next_entry,         -- Bring the cursor to the next file entry
@@ -142,6 +142,10 @@ require("diffview").setup({
     },
   },
 })
+
+vim.api.nvim_set_keymap("n", "<leader>v", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>V", "<cmd>DiffviewFileHistory%<cr>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
 
 -- d = {
 --     name = "DiffView",

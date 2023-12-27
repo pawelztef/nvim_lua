@@ -7,23 +7,21 @@ vim.g.startify_change_to_vcs_root = 1
 vim.g.startify_fortune_use_unicode = 1
 vim.g.startify_session_persistence = 1
 vim.g.startify_enable_special = 0
-vim.g.startify_files_number = 7
-vim.g.startify_padding_left = 3
+vim.g.startify_files_number = 15 
+vim.g.startify_padding_left = 10
 vim.g.startify_session_number = 10
 vim.g.startify_session_sort = 1
 vim.g.startify_session_dir = '~/.config/nvim/session'
 
 vim.g.startify_bookmarks = {
-    { y = '~/.config/nvim/init.vim' },
     { z = '~/.zshrc' },
     { s = '~/.config/nvim/snips/python.snippets' },
-    { t = '~/.config/nvim/todos.todo' },
 }
 
 vim.g.startify_lists = {
-           { type = 'sessions',  header = {'    SESSIONS'} },
-           { type = 'files',     header = {'    FILES'} },
-           { type = 'bookmarks', header = {'    BOOKMARKS'} },
+           { type = 'sessions',  header = {'         SESSIONS'} },
+           { type = 'files',     header = {'         FILES'} },
+           { type = 'bookmarks', header = {'         BOOKMARKS'} },
 }
 vim.g.startify_custom_header = {}
 vim.g.startify_custom_header_quotes = {

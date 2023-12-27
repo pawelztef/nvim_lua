@@ -15,7 +15,32 @@ function Color(color)
     vim.api.nvim_set_hl(0, "VertSplit", { bg = "none", fg = "#121212" })
     vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#3B4252", fg = "none" })
     vim.api.nvim_set_hl(0, "Search", { bg = "none", fg = "red" })
-
+    vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "#686868" })
+    vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none", fg = "#8a8a8a" })
+    vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = "none", fg = "#686868" })
+    vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none", fg = "#686868" })
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "green" })
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none", fg = "red" })
+    vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "orange" })
+    vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { bg = "none", fg = "gray" })
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { bg = "none", fg = "gray" })
+    vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { bg = "none", fg = "gray" })
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { bg = "none", fg = "red" })
+    vim.api.nvim_set_hl(0, "DiagnosticSignError", { bg = "none", fg = "red" })
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { bg = "none", fg = "orange" })
+    vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { bg = "none", fg = "orange" })
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { bg = "none", fg = "gray" })
+    vim.api.nvim_set_hl(0, "DiagnosticSignHint", { bg = "none", fg = "gray" })
+    vim.api.nvim_set_hl(0, "Pmenu", { bg = "#1d2633", fg = "white" })
+    vim.api.nvim_set_hl(0, "PmenuSel", { bg = "gray", fg = "white" })
+    vim.api.nvim_set_hl(0, "AerialNormal", { bg = "none", fg = "red" })
+    vim.api.nvim_set_hl(0, "AerialVariable", { bg = "none", fg = "#374457" })
+    vim.api.nvim_set_hl(0, "AerialClass", { bg = "none", fg = "#60a1e3" })
+    vim.api.nvim_set_hl(0, "AerialClassIcon", { bg = "none", fg = "#60a1e3" })
+    vim.api.nvim_set_hl(0, "AerialVariableIcon", { bg = "none", fg = "#374457" })
+    vim.api.nvim_set_hl(0, "AerialLine", { bg = "#1d242e", fg = "none" })
+    vim.api.nvim_set_hl(0, "AerialLineNC", { bg = "#1d242e", fg = "none" })
+    vim.api.nvim_set_hl(0, "Cursorline", { bg = "none", fg = "red" })
 end
 
 vim.g.nord_contrast = false
@@ -46,7 +71,7 @@ vim.api.nvim_create_autocmd(
     { callback = color_tags }
 )
 
-vim.api.nvim_create_autocmd({ "WinEnter", "BufRead" }, {
+vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = { "breakpoint()", "WARNING" },
     callback = function()
         vim.api.nvim_set_hl(0, "Normal", { bg = 'none', fg = 'red' })

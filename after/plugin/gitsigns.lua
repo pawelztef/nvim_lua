@@ -23,7 +23,7 @@ require('gitsigns').setup {
     delay = 100,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter = '<author> • <author_time:%Y-%m-%d> • <summary>',
+  current_line_blame_formatter = '      <author> • <author_time:%Y-%m-%d> • <summary> • <abbrev_sha>',
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -62,37 +62,17 @@ require('gitsigns').setup {
     -- end, {expr=true})
 
     -- Actions
-    map({'n', 'v'}, '<leader>gh', ':Gitsigns stage_hunk<CR>')
-    map({'n', 'v'}, '<leader>gH', ':Gitsigns reset_hunk<CR>')
-    map('n', '<leader>gU', gs.undo_stage_hunk)
-    map('n', '<leader>gp', gs.preview_hunk)
-    map('n', '<leader>ga', gs.stage_buffer)
-    map('n', '<leader>gA', gs.reset_buffer)
+    map({'n', 'v'}, '<M-h>', ':Gitsigns stage_hunk<CR>')
+    map({'n', 'v'}, '<M-v>', ':Gitsigns reset_hunk<CR>')
+    map('n', '<M-u>', gs.undo_stage_hunk)
+    -- map('n', '<M-p>', gs.preview_hunk)
+    map('n', '<M-a>', gs.stage_buffer)
+    map('n', '<M-r>', gs.reset_buffer_index)
     -- map('n', '<leader>gB', function() gs.blame_line{full=true} end)
-    map('n', '<leader>gb', gs.toggle_current_line_blame)
-    map('n', '<leader>gd', gs.diffthis)
+    map('n', '<M-b>', ':Gitsigns toggle_current_line_blame<CR>')
+    map('n', '<M-d>', ':Gitsigns diffthis @^<CR>')
     -- map('n', '<leader>gD', function() gs.diffthis('~') end)
-    map('n', '<leader>gD', gs.toggle_deleted)
-    -- Text object
+    map('n', '<M-x>', gs.toggle_deleted)
     -- map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
--- g = {
---     name = "Git",
---     g = { "<cmd>Neogit<CR>", "Neogit" },
---     h = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
---     H = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
---     U = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
---     p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preiew Hunk" },
---     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
---     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
---     l = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Blame" },
---     a = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" },
---     A = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
---     -- o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
---     -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
---     -- c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
---     d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff HEAD" },
---     D = { "lua require 'gitsigns'.toggle_deleted()<cr>", "Diff" },
--- },
-
