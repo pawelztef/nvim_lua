@@ -6,8 +6,6 @@ function Color(color)
     vim.api.nvim_set_hl(0, "MsgArea", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "none" })
     vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none", fg = "none" })
-    vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "none" })
-    vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = "none", fg = "none" })
     vim.api.nvim_set_hl(0, "DiffAdd", { bg = "none", fg = "green" })
     vim.api.nvim_set_hl(0, "DiffDelete", { bg = "none", fg = "red" })
     vim.api.nvim_set_hl(0, "DiffChange", { bg = "none", fg = "orange" })
@@ -15,10 +13,11 @@ function Color(color)
     vim.api.nvim_set_hl(0, "VertSplit", { bg = "none", fg = "#121212" })
     vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#3B4252", fg = "none" })
     vim.api.nvim_set_hl(0, "Search", { bg = "none", fg = "red" })
-    vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "#686868" })
-    vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none", fg = "#8a8a8a" })
-    vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = "none", fg = "#686868" })
-    vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none", fg = "#686868" })
+    vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none", fg = "#668099" })
+    vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { bg = "none", fg = "#668099" })
+    vim.api.nvim_set_hl(0, "TelescopeResultsBorder", { bg = "none", fg = "#668099" })
+    vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = "none", fg = "#668099" })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#668099" })
     vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "none", fg = "green" })
     vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "none", fg = "red" })
     vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "none", fg = "orange" })
@@ -41,6 +40,8 @@ function Color(color)
     vim.api.nvim_set_hl(0, "AerialLine", { bg = "#1d242e", fg = "none" })
     vim.api.nvim_set_hl(0, "AerialLineNC", { bg = "#1d242e", fg = "none" })
     vim.api.nvim_set_hl(0, "Cursorline", { bg = "none", fg = "red" })
+    vim.api.nvim_set_hl(0, "BookmarkSign", { bg = "none", fg = "red" })
+    vim.api.nvim_set_hl(0, "BookmarkAnnotationSign", { bg = "none", fg = "red" })
 end
 
 vim.g.nord_contrast = false
@@ -83,5 +84,6 @@ require('nord').set()
 vim.g.onedark_color_overrides = {
     background = { gui = "#2F343F", cterm = "235", cterm16 = "0" },
 }
+
 
 Color()

@@ -76,16 +76,13 @@ autocmd('BufEnter', {
 augroup('setIndent', { clear = true })
 autocmd('Filetype', {
   group = 'setIndent',
-  pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript',
-    'yaml', 'lua'
-  },
+  pattern = { 'xml', 'html', 'xhtml', 'css', 'scss', 'javascript', 'typescript', 'yaml', 'lua' },
   command = 'setlocal shiftwidth=2 tabstop=2'
 })
 -- Ejs highlighting fix
 autocmd('BufRead', {
   pattern = '*.ejs',
   command = 'set filetype=html'
-
 })
 autocmd('BufNewFile', {
   pattern = '*.ejs',

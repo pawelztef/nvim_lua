@@ -49,3 +49,5 @@ vim.g.loaded_perl_provider = 0
 -- vim.opt.spelllang = "en_us"
 -- vim.opt.spell = true
 -- vim.opt.spelloptions = "camel"
+-- Set includeexpr
+vim.g.vim_npr_file_names = { "", ".js", "/index.js" }

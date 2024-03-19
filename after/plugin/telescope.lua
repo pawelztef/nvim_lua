@@ -28,7 +28,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<Leader>p',
-  "<cmd>lua require'telescope'.load_extension('project').project{ display_type='full' }<cr>"
+  "<cmd>lua require'telescope'.load_extension('project').project{}<cr>"
   ,
   {}
 )
@@ -68,7 +68,8 @@ require('telescope').setup {
         { path = '~/projects/tutorials', max_depth = 3 },
       },
       sync_with_nvim_tree = true,
-      display_type = 'full',
+      display_type = 'minimal',
+      order_by = 'recent',
     },
   },
   defaults = {
@@ -78,7 +79,7 @@ require('telescope').setup {
     layout_config = {
       height = 0.70,
       width = 0.75,
-      -- preview_height = 0.60,
+      preview_height = 0.60,
       prompt_position = 'top',
     },
     mappings = {

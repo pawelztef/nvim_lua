@@ -37,6 +37,7 @@ return require('packer').startup(
         { 'hrsh7th/nvim-cmp' },
         { 'hrsh7th/cmp-buffer' },
         { 'hrsh7th/cmp-path' },
+        { 'hrsh7th/cmp-cmdline' },
         { 'saadparwaiz1/cmp_luasnip' },
         { 'hrsh7th/cmp-nvim-lsp' },
         { 'hrsh7th/cmp-nvim-lua' },
@@ -94,4 +95,14 @@ return require('packer').startup(
     use 'stevearc/aerial.nvim'
     -- use 'preservim/tagbar'
     use 'f-person/git-blame.nvim'
+    use 'sam4llis/nvim-lua-gf'
+    use({
+      "jackMort/ChatGPT.nvim",
+      requires = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim"
+      }
+    })
+    use 'ray-x/cmp-treesitter'
   end)
