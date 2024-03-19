@@ -1,11 +1,11 @@
 local actions = require("diffview.actions")
 
 require("diffview").setup({
-  diff_binaries = false,    -- Show diffs for binaries
+  diff_binaries = false,   -- Show diffs for binaries
   enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
-  git_cmd = { "git" },      -- The git executable followed by default args.
-  use_icons = false,         -- Requires nvim-web-devicons
-  icons = {                 -- Only applies when use_icons is true.
+  git_cmd = { "git" },     -- The git executable followed by default args.
+  use_icons = false,       -- Requires nvim-web-devicons
+  icons = {                -- Only applies when use_icons is true.
     folder_closed = "",
     folder_open = "",
   },
@@ -14,62 +14,79 @@ require("diffview").setup({
     fold_open = "",
   },
   file_panel = {
-    listing_style = "tree",             -- One of 'list' or 'tree'
-    tree_options = {                    -- Only applies when listing_style is 'tree'
-      flatten_dirs = true,              -- Flatten dirs that only contain one single dir
-      folder_statuses = "only_folded",  -- One of 'never', 'only_folded' or 'always'.
+    listing_style = "tree",            -- One of 'list' or 'tree'
+    tree_options = {                   -- Only applies when listing_style is 'tree'
+      flatten_dirs = true,             -- Flatten dirs that only contain one single dir
+      folder_statuses = "only_folded", -- One of 'never', 'only_folded' or 'always'.
     },
-    win_config = {                      -- See ':h diffview-config-win_config'
-      position = "bottom",
+    -- win_config = {                     -- See ':h diffview-config-win_config'
+      -- position = "bottom",
       -- width = math.max(60, vim.fn.winwidth(0) / 5),
-      height = 10,
-    },
+      -- height = 10,
+    -- },
+    win_config = function()
+      local c = { type = "float" }
+      local editor_width = vim.o.columns
+      local editor_height = vim.o.lines
+      c.width = math.min(700, math.floor(editor_width * 0.85))
+      c.height = math.min(10, editor_height)
+      c.col = math.floor(editor_width * 0.5 - c.width * 0.5)
+      c.row = math.floor(editor_height * 0.9 - c.height * 0.5)
+      return c
+    end
   },
   file_history_panel = {
-      log_options = {   -- See ':h diffview-config-log_options'
+    log_options = { -- See ':h diffview-config-log_options'
       git = {
-          single_file = {
-              diff_merges = "combined",
-          },
-          multi_file = {
-              diff_merges = "first-parent",
-          },
+        single_file = {
+          diff_merges = "combined",
+        },
+        multi_file = {
+          diff_merges = "first-parent",
+        },
       },
 
-  },
-    win_config = {    -- See ':h diffview-config-win_config'
-      position = "bottom",
-      height = 10,
     },
+    -- See ':h diffview-config-win_config'
+    win_config = function()
+      local c = { type = "float" }
+      local editor_width = vim.o.columns
+      local editor_height = vim.o.lines
+      c.width = math.min(700, math.floor(editor_width * 0.85))
+      c.height = math.min(10, editor_height)
+      c.col = math.floor(editor_width * 0.5 - c.width * 0.5)
+      c.row = math.floor(editor_height * 0.9 - c.height * 0.5)
+      return c
+    end
   },
   commit_log_panel = {
-    win_config = {},  -- See ':h diffview-config-win_config'
+    win_config = {}, -- See ':h diffview-config-win_config'
   },
-  default_args = {    -- Default args prepended to the arg-list for the listed commands
+  default_args = {   -- Default args prepended to the arg-list for the listed commands
     DiffviewOpen = {},
     DiffviewFileHistory = {},
   },
   hooks = {
-      -- diff_buf_read = function(bufnr)
-      --     print('hello 1')
-      -- end,
-      view_opened = function(view)
-          -- print('hello 2')
-          vim.cmd("FocusDisable")
-      end,
-      view_closed = function(view)
-          -- print('hello 3')
-          vim.cmd("FocusEnable")
-      end,
-      -- view_enter = function(view)
-      --     print('hello 4')
-      -- end,
-      -- view_leave = function(view)
-      --     print('hello 4')
-      -- end,
-      -- diff_buf_win_enter = function(bufnr, winid)
-      --     print('hello 5')
-      -- end,
+    -- diff_buf_read = function(bufnr)
+    --     print('hello 1')
+    -- end,
+    view_opened = function(view)
+      -- print('hello 2')
+      vim.cmd("FocusDisable")
+    end,
+    view_closed = function(view)
+      -- print('hello 3')
+      vim.cmd("FocusEnable")
+    end,
+    -- view_enter = function(view)
+    --     print('hello 4')
+    -- end,
+    -- view_leave = function(view)
+    --     print('hello 4')
+    -- end,
+    -- diff_buf_win_enter = function(bufnr, winid)
+    --     print('hello 5')
+    -- end,
   },
 
   keymaps = {
@@ -84,14 +101,14 @@ require("diffview").setup({
       ["<C-w>gf"]    = actions.goto_file_tab,
       ["<leader>e"]  = actions.focus_files,       -- Bring focus to the files panel
       ["<leader>b"]  = actions.toggle_files,      -- Toggle the files panel.
-      ["q"]          = actions.close,             -- Close the files panel.
+      ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
     },
     file_panel = {
-      ["j"]             = actions.next_entry,         -- Bring the cursor to the next file entry
+      ["j"]             = actions.next_entry,   -- Bring the cursor to the next file entry
       ["<down>"]        = actions.next_entry,
-      ["k"]             = actions.prev_entry,         -- Bring the cursor to the previous file entry.
+      ["k"]             = actions.prev_entry,   -- Bring the cursor to the previous file entry.
       ["<up>"]          = actions.prev_entry,
-      ["<cr>"]          = actions.select_entry,       -- Open the diff for the selected entry.
+      ["<cr>"]          = actions.select_entry, -- Open the diff for the selected entry.
       ["o"]             = actions.select_entry,
       ["<2-LeftMouse>"] = actions.select_entry,
       ["-"]             = actions.toggle_stage_entry, -- Stage / unstage the selected entry.
@@ -107,10 +124,11 @@ require("diffview").setup({
       ["gf"]            = actions.goto_file,
       ["<C-w><C-f>"]    = actions.goto_file_split,
       ["<C-w>gf"]       = actions.goto_file_tab,
-      ["i"]             = actions.listing_style,        -- Toggle between 'list' and 'tree' views
-      ["f"]             = actions.toggle_flatten_dirs,  -- Flatten empty subdirectories in tree listing style.
+      ["i"]             = actions.listing_style,       -- Toggle between 'list' and 'tree' views
+      ["f"]             = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
       ["<leader>e"]     = actions.focus_files,
       ["<leader>b"]     = actions.toggle_files,
+      ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
     },
     file_history_panel = {
       ["g!"]            = actions.options,          -- Open the option panel
@@ -135,6 +153,7 @@ require("diffview").setup({
       ["<C-w>gf"]       = actions.goto_file_tab,
       ["<leader>e"]     = actions.focus_files,
       ["<leader>b"]     = actions.toggle_files,
+      ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
     },
     option_panel = {
       ["<tab>"] = actions.select_entry,

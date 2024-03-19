@@ -119,7 +119,12 @@ cmp.setup({
 
 -- cmdline setup.
 cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
+  -- mapping = cmp.mapping.preset.cmdline(),
+  mapping = {
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['k'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+    ['j'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+  },
   sources = { { name = 'buffer' } }
 })
 
