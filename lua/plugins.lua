@@ -5,7 +5,7 @@ return require('packer').startup(
     use 'wbthomason/packer.nvim'
     use {
       'nvim-telescope/telescope.nvim',
-      tag = '0.1.0',
+      -- tag = '0.1.3',
       requires = { {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-project.nvim',
@@ -17,6 +17,7 @@ return require('packer').startup(
     }
     use {
       'nvim-treesitter/nvim-treesitter',
+      tag = 'v0.9.1',
       run = ':TSUpdate'
     }
     use 'shaunsingh/nord.nvim'
@@ -62,6 +63,7 @@ return require('packer').startup(
     }
     use {
       'TimUntersberger/neogit',
+      tag = 'v1.0.0',
       requires = {
         'nvim-lua/plenary.nvim',
         'sindrets/diffview.nvim',
@@ -82,7 +84,7 @@ return require('packer').startup(
     use 'rebelot/kanagawa.nvim'
     use 'seblj/nvim-tabline'
     use 'mgedmin/python-imports.vim'
-    use 'psf/black'
+    use 'averms/black-nvim'
     use 'mattn/emmet-vim'
     use 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
     use 'akinsho/toggleterm.nvim'

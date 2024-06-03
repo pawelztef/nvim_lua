@@ -15,8 +15,9 @@ vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', { silent = true }
 vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>2', ':FocusToggle<CR>', { silent = true })
 
-local ignore_filetypes = { 'neo-tree', 'toggleterm', 'packer', 'NvimTree', 'no name', 'qf' }
-local ignore_buftypes = { 'nofile', 'prompt', 'popup', 'quickfix', 'terminal', 'help', 'nowrite', 'readonly', 'packer' }
+local ignore_filetypes = { 'neo-tree', 'toggleterm', 'packer', 'NvimTree', 'no name', 'qf', 'undotree_2' }
+-- local ignore_filename = { 'neo-tree', 'toggleterm', 'packer', 'NvimTree', 'no name', 'qf', 'undotree_2' }
+local ignore_buftypes = { 'nofile', 'prompt', 'popup', 'quickfix', 'terminal', 'help', 'nowrite', 'readonly', 'packer', 'undotree_2' }
 
 local augroup = vim.api.nvim_create_augroup('FocusDisable', { clear = true })
 
@@ -44,6 +45,22 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
   desc = 'Disable focus autoresize for FileType',
 })
+
+-- vim.api.nvim_create_autocmd({'BufEnter', 'BufReadPost', 'WinEnter'}, {
+--   group = augroup,
+--   callback = function(_)
+--     print('one')
+--     if vim.tbl_contains(ignore_filename, vim.fn.expand('%:t'))
+--     then
+--       print('two')
+--       vim.b.focus_disable = true
+--     else
+--       vim.b.focus_disable = false
+--     end
+--   end,
+--   desc = 'Disable focus autoresize for Filename',
+-- })
+
 
 -- COMMANDS
 --

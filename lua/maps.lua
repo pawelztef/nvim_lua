@@ -3,15 +3,17 @@ local keymap = vim.api.nvim_set_keymap
 
 vim.g.mapleader = " "
 
-keymap("n", "<A-z>", ":qa!<CR>", opts) --closing
-keymap("n", "<leader>z", ":q!<CR>", opts) --closing
+keymap("n", "<A-z>", ":qa!<CR>", opts)     --closing
+keymap("n", "<leader>z", ":q!<CR>", opts)  --closing
 -- keymap("n", "<leader>q", ":tabclose<CR>", opts) --closing
 keymap("n", "<leader>j", ":vsp<CR>", opts) --vertical split
-keymap("n", "<leader>k", ":sp<CR>", opts) --horizontal split
-keymap("n", "oo", "o<Esc>k", opts) --mapping for opening new line without entering into insert mode
-keymap("n", "OO", "O<Esc>j", opts) --mapping for opening new line without entering into insert mode
+keymap("n", "<leader>k", ":sp<CR>", opts)  --horizontal split
+keymap("n", "oo", "o<Esc>k", opts)         --mapping for opening new line without entering into insert mode
+keymap("n", "OO", "O<Esc>j", opts)         --mapping for opening new line without entering into insert mode
 keymap("n", "<leader><tab>", "<C-W>w", opts)
 keymap("n", "<leader><tab>r", "<C-W>R", opts)
+keymap("n", "gf", "<C-W>gf", opts)
+keymap("v", "gf", "<C-W>gf", opts)
 --move text upa and down
 keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
 keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
@@ -57,12 +59,12 @@ keymap("n", "bd", "<cmd>bd<CR>", opts)
 keymap("n", "<leader>f", "<cmd>Format<CR>", opts)
 keymap("n", "<leader>nt", "<cmd>set relativenumber!<CR>", opts)
 
-local function IsortAndBlack()
-  vim.cmd('Isort')
-  vim.cmd('Black')
-end
-
-vim.keymap.set("n", "<A-0>", IsortAndBlack)
+-- python formatting
+-- local function IsortAndBlack()
+  -- vim.cmd('Black')
+  -- vim.cmd('Isort')
+-- end
+-- vim.keymap.set("n", "<A-0>", IsortAndBlack)
 
 -- clean quickfix
 local function ClearQuickfixList()

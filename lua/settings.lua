@@ -23,9 +23,11 @@ vim.opt.splitbelow = true -- horizontal split
 vim.opt.splitright = true -- vertical split
 vim.opt.clipboard = 'unnamed'
 vim.opt.timeout = true
-vim.opt.timeoutlen = 180
+-- vim.opt.timeoutlen = 180
+vim.opt.timeoutlen = 300
 vim.opt.ttimeout = true
-vim.opt.ttimeoutlen = 180
+-- vim.opt.ttimeoutlen = 180
+vim.opt.ttimeoutlen = 300
 vim.opt.incsearch = true
 vim.opt.colorcolumn = "3000"
 
@@ -43,7 +45,7 @@ vim.opt.undofile = true
 vim.opt.synmaxcol = 0
 vim.g.mapleader = " "
 vim.wo.relativenumber = true
-vim.opt.guitablabel = "%t"
+-- vim.opt.guitablabel = "%t"
 vim.opt.cursorline = false
 vim.g.loaded_perl_provider = 0
 -- vim.opt.spelllang = "en_us"
@@ -51,3 +53,4 @@ vim.g.loaded_perl_provider = 0
 -- vim.opt.spelloptions = "camel"
 -- Set includeexpr
 vim.g.vim_npr_file_names = { "", ".js", "/index.js" }
+

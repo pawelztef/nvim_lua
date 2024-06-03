@@ -2,7 +2,7 @@ local actions = require("diffview.actions")
 
 require("diffview").setup({
   diff_binaries = false,   -- Show diffs for binaries
-  enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
+  enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
   git_cmd = { "git" },     -- The git executable followed by default args.
   use_icons = false,       -- Requires nvim-web-devicons
   icons = {                -- Only applies when use_icons is true.
@@ -29,7 +29,7 @@ require("diffview").setup({
       local editor_width = vim.o.columns
       local editor_height = vim.o.lines
       c.width = math.min(700, math.floor(editor_width * 0.85))
-      c.height = math.min(10, editor_height)
+      c.height = math.min(15, editor_height)
       c.col = math.floor(editor_width * 0.5 - c.width * 0.5)
       c.row = math.floor(editor_height * 0.9 - c.height * 0.5)
       return c
@@ -53,7 +53,7 @@ require("diffview").setup({
       local editor_width = vim.o.columns
       local editor_height = vim.o.lines
       c.width = math.min(700, math.floor(editor_width * 0.85))
-      c.height = math.min(10, editor_height)
+      c.height = math.min(15, editor_height)
       c.col = math.floor(editor_width * 0.5 - c.width * 0.5)
       c.row = math.floor(editor_height * 0.9 - c.height * 0.5)
       return c
@@ -163,7 +163,7 @@ require("diffview").setup({
 })
 
 vim.api.nvim_set_keymap("n", "<leader>v", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>V", "<cmd>DiffviewFileHistory%<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>vf", "<cmd>DiffviewFileHistory%<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
 
 -- d = {

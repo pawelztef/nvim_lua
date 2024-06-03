@@ -137,3 +137,18 @@ augroup FileTypeQF
   autocmd FileType qf lua if vim.fn.getwininfo(vim.fn.win_getid())[1].loclist ~= 1 then vim.cmd('wincmd J') vim.cmd('resize 10') end
 augroup END
 ]]
+
+
+-- Open last commited files
+function OpenLastCommittedFiles()
+  local files = vim.fn.systemlist('git diff-tree --no-commit-id --name-only -r HEAD')
+  for _, file in ipairs(files) do
+    vim.cmd('edit ' .. file)
+  end
+  vim.cmd('echo "Last commited files added to buffer"')
+  vim.fn.timer_start(900, function()
+    print(' ')
+  end)
+end
+
+vim.api.nvim_set_keymap('n', '<leader>4', ':lua OpenLastCommittedFiles()<CR>', { noremap = true, silent = true })

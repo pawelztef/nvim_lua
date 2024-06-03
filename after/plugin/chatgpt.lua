@@ -146,7 +146,8 @@ require("chatgpt").setup(
       },
     },
     openai_params = {
-      model = "gpt-3.5-turbo",
+      model = "gpt-4o",
+      -- model = "gpt-3.5-turbo",
       frequency_penalty = 0,
       presence_penalty = 0,
       max_tokens = 800,
@@ -155,7 +156,8 @@ require("chatgpt").setup(
       n = 1,
     },
     openai_edit_params = {
-      model = "gpt-3.5-turbo",
+      model = "gpt-4o",
+      -- model = "gpt-3.5-turbo",
       frequency_penalty = 0,
       presence_penalty = 0,
       temperature = 0,
