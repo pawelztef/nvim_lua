@@ -3,7 +3,6 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
 require('lspconfig.ui.windows').default_options.border = 'single'
-
 lsp.ensure_installed({
   'tsserver',
   'eslint',
@@ -148,8 +147,6 @@ cmp.setup.cmdline(':', {
 
 
 lsp.set_preferences({
-  virtual_text = false,
-  underline = false,
   suggest_lsp_servers = false,
   sign_icons = {
     error = '*',
@@ -157,13 +154,12 @@ lsp.set_preferences({
     hint = '*',
     info = '*'
   }
-}
-)
+})
 lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   if client.name == "eslint" then
-    vim.cmd.LspStop("eslint")
+    vim.cmd.LspStop('eslint')
     return
   end
 
@@ -186,9 +182,15 @@ end)
 
 lsp.setup()
 
+vim.fn.sign_define("DiagnosticSignError", {text = "*", texthl = "DiagnosticSignError"})
+vim.fn.sign_define("DiagnosticSignWarn", {text = "*", texthl = "DiagnosticSignWarn"})
+vim.fn.sign_define("DiagnosticSignInfo", {text = "*", texthl = "DiagnosticSignInfo"})
+vim.fn.sign_define("DiagnosticSignHint", {text = "*", texthl = "DiagnosticSignHint"})
+
 vim.diagnostic.config({
   virtual_text = false,
   underline = false,
+  severity_sort = true,
   float = {
     source = "always",
     border = "rounded",
@@ -202,15 +204,14 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
       underline = false,
       -- virtual_text = { spacing = 15 },
       virtual_text = false,
+      severity_sort = true,
       signs = true,
       update_in_insert = false,
       float = { border = "rounded" },
     })
 
 require 'lspconfig'.eslint.setup {
-  virtual_text = false,
-  underline = false,
-  max_length = 4000,
+  max_length = 4000
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -253,7 +254,7 @@ require('lspconfig').pylsp.setup({
     vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-    vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float(nil, {border="rounded", focus=false})<CR>', opts)
+    vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float(nil, {border="single", focus=false})<CR>', opts)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
     vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
@@ -288,7 +289,7 @@ require('lspconfig').tsserver.setup({
     vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-    vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float(nil, {border="rounded", focus=false})<CR>', opts)
+    vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float(nil, {border="single", focus=false})<CR>', opts)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
     vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)

@@ -39,6 +39,7 @@ vim.keymap.set(
   {}
 )
 
+vim.keymap.set('n', '<leader>tt', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>tr', builtin.registers, {})
 vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
