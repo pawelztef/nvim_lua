@@ -30,9 +30,6 @@ lsp.configure('lua_ls', {
 })
 
 
-
-
-
 local cmp = require('cmp')
 local cmp_types = require("cmp.types")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -155,37 +152,39 @@ lsp.set_preferences({
     info = '*'
   }
 })
-lsp.on_attach(function(client, bufnr)
-  local opts = { buffer = bufnr, remap = false }
+lsp.on_attach(
+  function(client, bufnr)
+    local opts = { buffer = bufnr, remap = false }
 
-  if client.name == "eslint" then
-    vim.cmd.LspStop('eslint')
-    return
+    if client.name == "eslint" then
+      vim.cmd.LspStop('eslint')
+      return
+    end
+
+    vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float({border="rounded"})<CR>', opts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<M-f>', function() vim.lsp.buf.format { async = true } end, opts)
+    vim.keymap.set("i", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+    vim.keymap.set("s", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+    vim.keymap.set("i", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+    vim.keymap.set("s", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
   end
-
-  vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-  vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float({border="rounded"})<CR>', opts)
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-  vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-  vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<M-f>', function() vim.lsp.buf.format { async = true } end, opts)
-  vim.keymap.set("i", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
-  vim.keymap.set("s", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
-  vim.keymap.set("i", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
-  vim.keymap.set("s", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
-end)
+)
 
 lsp.setup()
 
-vim.fn.sign_define("DiagnosticSignError", {text = "*", texthl = "DiagnosticSignError"})
-vim.fn.sign_define("DiagnosticSignWarn", {text = "*", texthl = "DiagnosticSignWarn"})
-vim.fn.sign_define("DiagnosticSignInfo", {text = "*", texthl = "DiagnosticSignInfo"})
-vim.fn.sign_define("DiagnosticSignHint", {text = "*", texthl = "DiagnosticSignHint"})
+vim.fn.sign_define("DiagnosticSignError", { text = "*", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "*", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "*", texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "*", texthl = "DiagnosticSignHint" })
 
 vim.diagnostic.config({
   virtual_text = false,
@@ -304,4 +303,38 @@ require('lspconfig').tsserver.setup({
     vim.keymap.set("i", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
     vim.keymap.set("s", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
   end,
+})
+
+require('lspconfig').pyright.setup({
+  on_attach = function(client, bufnr)
+    local opts = { buffer = bufnr, remap = false }
+    vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float(nil, {border="single", focus=false})<CR>', opts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<M-f>', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+    vim.keymap.set("i", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+    vim.keymap.set("s", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+    vim.keymap.set("i", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+    vim.keymap.set("s", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+  end,
+  settings = {
+    pyright = { autoImportCompletion = true, },
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = 'openFilesOnly',
+        useLibraryCodeForTypes = true,
+        typeCheckingMode = 'off',
+      },
+    },
+  }
 })

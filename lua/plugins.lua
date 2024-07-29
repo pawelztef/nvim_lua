@@ -33,7 +33,6 @@ return require('packer').startup(
         { 'neovim/nvim-lspconfig' },
         { 'williamboman/mason.nvim' },
         { 'williamboman/mason-lspconfig.nvim' },
-
         -- Autocompletion
         { 'hrsh7th/nvim-cmp' },
         { 'hrsh7th/cmp-buffer' },
@@ -73,7 +72,10 @@ return require('packer').startup(
     use 'machakann/vim-sandwich'
     use 'mg979/vim-visual-multi'
     use 'beauwilliams/focus.nvim'
-    use 'lewis6991/gitsigns.nvim'
+    use {
+      'lewis6991/gitsigns.nvim',
+      tag = 'v0.8.1'
+    }
     use 'anuvyklack/help-vsplit.nvim'
     use 'EdenEast/nightfox.nvim'
     use 'lunarvim/Onedarker.nvim'
@@ -107,4 +109,6 @@ return require('packer').startup(
       }
     })
     use 'ray-x/cmp-treesitter'
+    use 'farmergreg/vim-lastplace'
+    use 'folke/zen-mode.nvim'
   end)

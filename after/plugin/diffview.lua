@@ -162,8 +162,9 @@ require("diffview").setup({
   },
 })
 
-vim.api.nvim_set_keymap("n", "<leader>v", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vf", "<cmd>DiffviewFileHistory%<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>v", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>vf", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>vv", "<cmd>DiffviewFileHistory<cr>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
 
 -- d = {

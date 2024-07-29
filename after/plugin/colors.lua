@@ -107,30 +107,6 @@ vim.g.nord_bold = true
 
 vim.opt.fillchars = { eob = ' ' } -- overriding fillchars with empty space
 
-vim.api.nvim_set_hl(0, "Red", { bg = "none", fg = "red" })
-
-local function color_tags()
-  vim.fn.matchadd('Red', 'breakpoint()')
-  vim.fn.matchadd('Red', '@pytest.mark.skip()')
-  vim.fn.matchadd('yellow', 'NOTE')
-  vim.fn.matchadd('yellow', 'TODO')
-  vim.fn.matchadd('yellow', 'ISSUE')
-  vim.fn.matchadd('red', 'WARNING')
-  vim.fn.matchadd('red', 'Warning')
-end
-
-vim.api.nvim_create_autocmd(
-  { "WinEnter", "BufRead" },
-  { callback = color_tags }
-)
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = { "breakpoint()", "WARNING" },
-  callback = function()
-    vim.api.nvim_set_hl(0, "Normal", { bg = 'none', fg = 'red' })
-  end
-})
-
 require('nord').set()
 
 vim.g.onedark_color_overrides = {
@@ -142,5 +118,35 @@ Color()
 
 local function setup()
   Color()
+  vim.api.nvim_set_hl(0, "Red", { bg = "none", fg = "red" })
+  vim.api.nvim_set_hl(0, "Yellow", { bg = "none", fg = "yellow" })
+  vim.api.nvim_set_hl(0, "Orange", { bg = "none", fg = "orange" })
+  vim.api.nvim_set_hl(0, "NordRed", { bg = "none", fg = "#b18baa" })
+  vim.api.nvim_set_hl(0, "NordYellow", { bg = "none", fg = "#EBCB8B" })
+  vim.api.nvim_set_hl(0, "NordOrange", { bg = "none", fg = "#D08770" })
+  vim.api.nvim_set_hl(0, "SaturatedRed", { bg = "none", fg = "#FF5F5F" })
+  vim.api.nvim_set_hl(0, "SaturatedYellow", { bg = "none", fg = "#FFD700" })
+  vim.api.nvim_set_hl(0, "SaturatedOrange", { bg = "none", fg = "#FF8C00" })
+
+  local function color_tags()
+    vim.fn.matchadd('Red', 'breakpoint()')
+    vim.fn.matchadd('SaturatedYellow', '\\ NOTE\\.*')
+    vim.fn.matchadd('SaturatedYellow', '\\ TODO\\.*')
+    vim.fn.matchadd('SaturatedYellow', '\\ ISSUE\\.*')
+    vim.fn.matchadd('SaturatedRed', '\\ WARNING\\.*')
+    vim.fn.matchadd('SaturatedOrange', '\\ MARK\\.*')
+    vim.fn.matchadd('NordRed', '@classmethod')
+    vim.fn.matchadd('NordRed', '@pytest.mark.*')
+  end
+  vim.api.nvim_create_autocmd(
+    { "WinEnter", "BufRead" },
+    { callback = color_tags }
+  )
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*", -- Apply to all colorschemes
+    callback = function()
+      vim.api.nvim_set_hl(0, "Normal", { bg = 'none', fg = 'red' })
+    end
+  })
 end
 vim.defer_fn(setup, 0)

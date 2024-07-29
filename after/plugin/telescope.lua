@@ -9,6 +9,7 @@ vim.keymap.set('n', '<leader>8', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>7', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>6', "<cmd>Telescope diagnostics<cr>", {})
 vim.keymap.set('n', '<leader>5', builtin.git_branches, {})
+vim.keymap.set('n', '<leader>4', builtin.git_status, {})
 -- search in open buffers
 vim.keymap.set(
   'n',
@@ -44,7 +45,7 @@ vim.keymap.set('n', '<leader>tr', builtin.registers, {})
 vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
 vim.keymap.set('n', '<leader>tb', builtin.git_branches, {})
-vim.keymap.set('n', '<leader>tq', builtin.quickfix, {})
+vim.keymap.set('n', '<leader>b', builtin.quickfix, {})
 
 require('telescope').setup {
   pickers = {
@@ -85,13 +86,20 @@ require('telescope').setup {
     },
     mappings = {
       i = {
+        ['<C-d>'] = actions.delete_buffer,
         ['<C-[>'] = actions.close,
         ['<C-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.smart_send_to_loclist + actions.open_loclist,
-        ['<C-y>'] = function(prompt_bufnr)
+        ['<C-l>'] = function(prompt_bufnr)
           action_layout.cycle_layout_next(prompt_bufnr)
         end,
       },
+      n = {
+        ['<C-d>'] = actions.delete_buffer,
+        ['<C-l>'] = function(prompt_bufnr)
+          action_layout.cycle_layout_next(prompt_bufnr)
+        end,
+      }
     },
   },
 }

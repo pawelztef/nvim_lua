@@ -349,6 +349,11 @@ _G.packer_plugins = {
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-jsx-pretty",
     url = "https://github.com/maxmellon/vim-jsx-pretty"
   },
+  ["vim-lastplace"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-lastplace",
+    url = "https://github.com/farmergreg/vim-lastplace"
+  },
   ["vim-sandwich"] = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-sandwich",
@@ -363,6 +368,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
     url = "https://github.com/mg979/vim-visual-multi"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/Users/pawelztef/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
