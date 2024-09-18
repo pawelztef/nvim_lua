@@ -129,14 +129,17 @@ local function setup()
   vim.api.nvim_set_hl(0, "SaturatedOrange", { bg = "none", fg = "#FF8C00" })
 
   local function color_tags()
-    vim.fn.matchadd('Red', 'breakpoint()')
+    vim.fn.matchadd('Red', 'breakpoint[^%)]*)')
     vim.fn.matchadd('SaturatedYellow', '\\ NOTE\\.*')
     vim.fn.matchadd('SaturatedYellow', '\\ TODO\\.*')
     vim.fn.matchadd('SaturatedYellow', '\\ ISSUE\\.*')
     vim.fn.matchadd('SaturatedRed', '\\ WARNING\\.*')
     vim.fn.matchadd('SaturatedOrange', '\\ MARK\\.*')
     vim.fn.matchadd('NordRed', '@classmethod')
-    vim.fn.matchadd('NordRed', '@pytest.mark.*')
+    vim.fn.matchadd('NordRed', '@pytest[^%(]*')
+    vim.fn.matchadd('NordRed', '@mock[^%(]*')
+    vim.fn.matchadd('NordRed', '@patch[^%(]*')
+    vim.fn.matchadd('NordRed', '@parameterized[^%(]*')
   end
   vim.api.nvim_create_autocmd(
     { "WinEnter", "BufRead" },

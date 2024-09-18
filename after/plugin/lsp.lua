@@ -65,10 +65,10 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     end,
     { "i", "s" }
   ),
-  ['<C-CR>'] = cmp.mapping(
-    cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-    { 'i', 'c' }
-  ),
+  -- ['<C-CR>'] = cmp.mapping(
+  --   cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+  --   { 'i', 'c' }
+  -- ),
   ['<C-k>'] = cmp.mapping(
     cmp.mapping.select_prev_item(cmp_select),
     { 'i', 'c' }
@@ -76,7 +76,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-j>'] = cmp.mapping(
     cmp.mapping.select_next_item(cmp_select),
     { 'i', 'c' }
-  )
+  ),
+  ['<CR>'] = cmp.mapping.confirm({ select = true }), 
+
 })
 
 
@@ -116,23 +118,23 @@ cmp.setup({
 })
 
 -- cmdline setup.
-cmp.setup.cmdline('/', {
-  -- mapping = cmp.mapping.preset.cmdline(),
-  mapping = {
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['k'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
-    ['j'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-  },
-  sources = { { name = 'buffer' } }
-})
+-- cmp.setup.cmdline('/', {
+--   -- mapping = cmp.mapping.preset.cmdline(),
+--   mapping = {
+--     ['<C-CR>'] = cmp.mapping.confirm({ select = true }),
+--     ['k'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+--     ['j'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+--   },
+--   sources = { { name = 'buffer' } }
+-- })
 
 -- cmdline setup.
 cmp.setup.cmdline(':', {
   -- mapping = cmp.mapping.preset.cmdline(),
   mapping = {
     -- generates unnecesary confirm strokes
-    -- ['<CR>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }), { 'i', 'c' }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-CR>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }), { 'i', 'c' }),
+    -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
     ['k'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
     ['j'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
   },

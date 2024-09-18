@@ -4,7 +4,7 @@ require('focus').setup(
       winhighlight = false,
       cursorline = false,
       number = false,
-      singcolumn = false,
+      singcolumn = true,
       absolutenumber_unfocussed = true,
     }
   }

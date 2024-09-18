@@ -64,7 +64,7 @@ require('telescope').setup {
     },
     project = {
       base_dirs = {
-        { path = '~/projects', max_depth = 1 },
+        { path = '~/projects',           max_depth = 1 },
         { path = '~/projects/core' },
         { path = '~/.config/nvim' },
         { path = '~/projects/tutorials', max_depth = 3 },
@@ -79,24 +79,29 @@ require('telescope').setup {
     sorting_strategy = 'ascending',
     prompt_position = 'top',
     layout_config = {
-      height = 0.70,
+      height = 0.80,
       width = 0.75,
-      preview_height = 0.60,
-      prompt_position = 'top',
+      vertical = {
+        preview_height = 0.65,
+        prompt_position = 'top',
+      },
+      horizontal = {
+        preview_width = 0.62,
+      }
     },
     mappings = {
       i = {
-        ['<C-d>'] = actions.delete_buffer,
+        ['<M-d>'] = actions.delete_buffer,
         ['<C-[>'] = actions.close,
         ['<C-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.smart_send_to_loclist + actions.open_loclist,
-        ['<C-l>'] = function(prompt_bufnr)
+        ['<C-y>'] = function(prompt_bufnr)
           action_layout.cycle_layout_next(prompt_bufnr)
         end,
       },
       n = {
-        ['<C-d>'] = actions.delete_buffer,
-        ['<C-l>'] = function(prompt_bufnr)
+        ['<M-d>'] = actions.delete_buffer,
+        ['<C-y>'] = function(prompt_bufnr)
           action_layout.cycle_layout_next(prompt_bufnr)
         end,
       }
