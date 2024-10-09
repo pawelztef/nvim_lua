@@ -59,11 +59,11 @@ keymap("n", "bd", "<cmd>bd<CR>", opts)
 keymap("n", "<leader>f", "<cmd>Format<CR>", opts)
 keymap("n", "<leader>nt", "<cmd>set relativenumber!<CR>", opts)
 
--- python formatting
 -- local function IsortAndBlack()
   -- vim.cmd('Black')
   -- vim.cmd('Isort')
 -- end
+
 -- vim.keymap.set("n", "<A-0>", IsortAndBlack)
 
 -- clean quickfix

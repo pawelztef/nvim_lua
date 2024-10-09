@@ -4,7 +4,7 @@ lsp.preset('recommended')
 
 require('lspconfig.ui.windows').default_options.border = 'single'
 lsp.ensure_installed({
-  'tsserver',
+  'ts_ls',
   'eslint',
   'lua_ls',
   'bashls',
@@ -283,7 +283,7 @@ require('lspconfig').pylsp.setup({
   capabilities = capabilities,
 })
 
-require('lspconfig').tsserver.setup({
+require('lspconfig').ts_ls.setup({
   virtual_text = false,
   on_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }

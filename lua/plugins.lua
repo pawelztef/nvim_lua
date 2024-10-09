@@ -45,7 +45,7 @@ return require('packer').startup(
         -- Snippets
         { 'L3MON4D3/LuaSnip' },
         { 'rafamadriz/friendly-snippets' },
-      }
+      },
     }
     -- use 'jose-elias-alvarez/null-ls.nvim'
     use 'easymotion/vim-easymotion'
@@ -105,6 +105,7 @@ return require('packer').startup(
       requires = {
         "MunifTanjim/nui.nvim",
         "nvim-lua/plenary.nvim",
+        "folke/trouble.nvim",
         "nvim-telescope/telescope.nvim"
       }
     })
