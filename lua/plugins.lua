@@ -1,34 +1,42 @@
---vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-return require('packer').startup(
-  function(use)
-    use 'wbthomason/packer.nvim'
-    use {
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+return require('lazy').setup({
+  spec = {
+    {
       'nvim-telescope/telescope.nvim',
-      -- tag = '0.1.3',
-      requires = { {
+      dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-project.nvim',
-      } }
-    }
-    use {
+      }
+    },
+    {
       'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'make'
-    }
-    use {
+      build = 'make'
+    },
+    {
       'nvim-treesitter/nvim-treesitter',
-      tag = 'v0.9.1',
-      run = ':TSUpdate'
-    }
-    use 'shaunsingh/nord.nvim'
-    use 'xero/sourcerer.vim'
-    use {
+      version = 'v0.9.1',
+      build = ':TSUpdate'
+    },
+    'shaunsingh/nord.nvim',
+    'xero/sourcerer.vim',
+    {
       'maxmellon/vim-jsx-pretty',
-      requires = { { 'yuezk/vim-js' } }
-    }
-    use {
+      dependencies = { { 'yuezk/vim-js' } }
+    },
+    {
       'VonHeikemen/lsp-zero.nvim',
-      requires = {
+      branch = 'v2.x',
+      dependencies = {
         -- LSP Support
         { 'neovim/nvim-lspconfig' },
         { 'williamboman/mason.nvim' },
@@ -41,75 +49,111 @@ return require('packer').startup(
         { 'saadparwaiz1/cmp_luasnip' },
         { 'hrsh7th/cmp-nvim-lsp' },
         { 'hrsh7th/cmp-nvim-lua' },
-
         -- Snippets
         { 'L3MON4D3/LuaSnip' },
         { 'rafamadriz/friendly-snippets' },
       },
-    }
-    -- use 'jose-elias-alvarez/null-ls.nvim'
-    use 'easymotion/vim-easymotion'
-    use 'tpope/vim-commentary'
-    use 'MattesGroeger/vim-bookmarks'
-    -- use 'APZelos/blamer.nvim'
-    use 'nvim-lualine/lualine.nvim'
-    -- use 'kevinhwang91/rnvimr'
-    use {
+    },
+    'easymotion/vim-easymotion',
+    'tpope/vim-commentary',
+    'MattesGroeger/vim-bookmarks',
+    'nvim-lualine/lualine.nvim',
+    {
       'francoiscabrol/ranger.vim',
-      requires = {
+      dependencies = {
         'rbgrouleff/bclose.vim',
       }
-    }
-    use {
+    },
+    {
       'TimUntersberger/neogit',
-      tag = 'v1.0.0',
-      requires = {
+      version = 'v1.0.0',
+      dependencies = {
         'nvim-lua/plenary.nvim',
         'sindrets/diffview.nvim',
       },
-    }
-    use 'mhinz/vim-startify'
-    use 'machakann/vim-sandwich'
-    use 'mg979/vim-visual-multi'
-    use 'beauwilliams/focus.nvim'
-    use {
+    },
+    'mhinz/vim-startify',
+    'machakann/vim-sandwich',
+    'mg979/vim-visual-multi',
+    'beauwilliams/focus.nvim',
+    {
       'lewis6991/gitsigns.nvim',
-      tag = 'v0.8.1'
-    }
-    use 'anuvyklack/help-vsplit.nvim'
-    use 'EdenEast/nightfox.nvim'
-    use 'lunarvim/Onedarker.nvim'
-    use 'lewis6991/impatient.nvim'
-    -- use 'fisadev/vim-isort'
-    use 'brentyi/isort.vim'
-    use 'joshdick/onedark.vim'
-    use 'rebelot/kanagawa.nvim'
-    use 'seblj/nvim-tabline'
-    use 'mgedmin/python-imports.vim'
-    use 'averms/black-nvim'
-    use 'mattn/emmet-vim'
-    use 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
-    use 'akinsho/toggleterm.nvim'
-    use 'tom-anders/telescope-vim-bookmarks.nvim'
-    use 'ludovicchabant/vim-gutentags'
-    use({
+      version = 'v0.8.1'
+    },
+    'anuvyklack/help-vsplit.nvim',
+    'EdenEast/nightfox.nvim',
+    'lunarvim/Onedarker.nvim',
+    'lewis6991/impatient.nvim',
+    'brentyi/isort.vim',
+    'joshdick/onedark.vim',
+    'rebelot/kanagawa.nvim',
+    'seblj/nvim-tabline',
+    'mgedmin/python-imports.vim',
+    'averms/black-nvim',
+    'mattn/emmet-vim',
+    'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
+    'akinsho/toggleterm.nvim',
+    'tom-anders/telescope-vim-bookmarks.nvim',
+    'ludovicchabant/vim-gutentags',
+    {
       "jose-elias-alvarez/null-ls.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
-    })
-    use 'stevearc/aerial.nvim'
-    -- use 'preservim/tagbar'
-    use 'f-person/git-blame.nvim'
-    use 'sam4llis/nvim-lua-gf'
-    use({
+      dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    'stevearc/aerial.nvim',
+    'f-person/git-blame.nvim',
+    'sam4llis/nvim-lua-gf',
+    {
       "jackMort/ChatGPT.nvim",
-      requires = {
+      dependencies = {
         "MunifTanjim/nui.nvim",
         "nvim-lua/plenary.nvim",
         "folke/trouble.nvim",
         "nvim-telescope/telescope.nvim"
       }
-    })
-    use 'ray-x/cmp-treesitter'
-    use 'farmergreg/vim-lastplace'
-    use 'folke/zen-mode.nvim'
-  end)
+    },
+    'ray-x/cmp-treesitter',
+    'farmergreg/vim-lastplace',
+    'folke/zen-mode.nvim',
+    {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
+    },
+  },
+  install = { colorscheme = { "nord" } },
+  ui = {
+    size = { width = 0.6, height = 0.6 },
+    wrap = true,
+    border = "single",
+    -- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
+    backdrop = 60,
+    title = nil,
+    title_pos = "center",
+    pills = true,
+    icons = {
+      cmd = "  ",
+      config = " ",
+      event = "  ",
+      favorite = "  ",
+      ft = "  ",
+      init = "  ",
+      import = "  ",
+      keys = "  ",
+      lazy = "  ",
+      loaded = " ",
+      not_loaded = " ",
+      plugin = "  ",
+      runtime = "  ",
+      require = "  ",
+      source = " ",
+      start = " ",
+      task = " ",
+      list = {
+        "●",
+        "➜",
+        "★",
+        "‒",
+      },
+    },
+  },
+})

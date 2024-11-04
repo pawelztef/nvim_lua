@@ -16,8 +16,8 @@ require("chatgpt").setup(
     chat = {
       welcome_message = '',
       loading_text = "Loading, please wait ...",
-      question_sign = "?",
-      answer_sign = "",
+      question_sign = "▪ ",
+      answer_sign = "▫ ",
       border_left_sign = "|",
       border_right_sign = "|",
       max_line_length = 80,
