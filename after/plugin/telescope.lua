@@ -72,6 +72,7 @@ require('telescope').setup {
       sync_with_nvim_tree = true,
       display_type = 'minimal',
       order_by = 'recent',
+      hide_workspace = true,
     },
   },
   defaults = {

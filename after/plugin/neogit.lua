@@ -17,6 +17,10 @@ neogit.setup {
   popup = {
     kind = "split",
   },
+  commit_view = {
+    kind = "tab",
+    verify_commit = vim.fn.executable("gpg") == 1,
+  },
   kind = "tab",
   signs = {
     section = { ">", "v" },
