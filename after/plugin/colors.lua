@@ -94,6 +94,44 @@ function Color(color)
   vim.api.nvim_set_hl(0, "NeogitDiffContextHighlight", { bg = "none", fg = "none" })
   vim.api.nvim_set_hl(0, "NeogitDiffContext", { bg = "none", fg = "none" })
   vim.api.nvim_set_hl(0, "NeogitCursorLine", { bg = "none", fg = "none" })
+
+  vim.api.nvim_set_hl(0, "NotifyERRORBorder", { fg = "#5A1F1F" }) -- Darker red
+  vim.api.nvim_set_hl(0, "NotifyWARNBorder", { fg = "#5A391D" })  -- Darker orange
+  vim.api.nvim_set_hl(0, "NotifyINFOBorder", { fg = "#3F5742" })  -- Darker green
+  vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", { fg = "#6B6B6B" }) -- Darker gray
+  vim.api.nvim_set_hl(0, "NotifyTRACEBorder", { fg = "#3F2542" }) -- Darker purple
+  vim.api.nvim_set_hl(0, "NotifyERRORIcon", { fg = "#C70057" })   -- Darker pink
+  vim.api.nvim_set_hl(0, "NotifyWARNIcon", { fg = "#C77000" })    -- Darker orange
+  vim.api.nvim_set_hl(0, "NotifyINFOIcon", { fg = "#89DF58" })    -- Darker green
+  vim.api.nvim_set_hl(0, "NotifyDEBUGIcon", { fg = "#6B6B6B" })   -- Darker gray
+  vim.api.nvim_set_hl(0, "NotifyTRACEIcon", { fg = "#B474DF" })   -- Darker purple
+  vim.api.nvim_set_hl(0, "NotifyERRORTitle", { fg = "#C70057" })  -- Darker pink
+  vim.api.nvim_set_hl(0, "NotifyWARNTitle", { fg = "#C77000" })   -- Darker orange
+  vim.api.nvim_set_hl(0, "NotifyINFOTitle", { fg = "#89DF58" })   -- Darker green
+  vim.api.nvim_set_hl(0, "NotifyDEBUGTitle", { fg = "#6B6B6B" })  -- Darker gray
+  vim.api.nvim_set_hl(0, "NotifyTRACETitle", { fg = "#B474DF" })  -- Darker purple
+  -- Linking highlights to 'Normal'
+  vim.api.nvim_set_hl(0, "NotifyERRORBody", { link = "Comment" })
+  vim.api.nvim_set_hl(0, "NotifyWARNBody", { link = "Comment" })
+  vim.api.nvim_set_hl(0, "NotifyINFOBody", { link = "Comment" })
+  vim.api.nvim_set_hl(0, "NotifyDEBUGBody", { link = "Comment" })
+  vim.api.nvim_set_hl(0, "NotifyTRACEBody", { link = "Comment" })
+
+  vim.api.nvim_set_hl(0, "NoiceLspHoverBorder", { fg = "#668099" })
+  vim.api.nvim_set_hl(0, "NoiceLspSignatureHelpBorder", { fg = "#668099" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlineIconSearch", { fg = "#668099" })
+  -- If you want to apply the same color to other Noice borders, you can do so like this:
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = "#668099" })
+  vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { fg = "#668099" })
+  vim.api.nvim_set_hl(0, "NoicePopupmenuBorder", { fg = "#668099" })
+
+  vim.api.nvim_set_hl(0, "ChatGPTSelectedMessage", { bg = "none" })
+  vim.api.nvim_set_hl(0, "ChatGPTQuestion", { link = "@property" })
+  vim.api.nvim_set_hl(0, "ChatGPTPopupText", { link = "@property" })
+  vim.api.nvim_set_hl(0, "@spell.markdown", { fg = "#B0C4DE" })
+  vim.api.nvim_set_hl(0, "@text.literal.block.markdown", { fg = "#B0C4DE" })
+  vim.api.nvim_set_hl(0, "@none.markdown", { fg = "#B0C4DE" })
+  vim.api.nvim_set_hl(0, "@punctuation.delimiter.markdown", { fg = "#B0C4DE" })
 end
 
 vim.g.nord_contrast = false

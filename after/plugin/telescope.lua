@@ -29,7 +29,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<Leader>p',
-  "<cmd>lua require'telescope'.load_extension('project').project{}<cr>"
+  "<cmd>lua require'telescope'.load_extension('project').project{ layout_config = { height = 0.3, width = 0.4 } }<cr>"
   ,
   {}
 )
@@ -46,6 +46,8 @@ vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
 vim.keymap.set('n', '<leader>tb', builtin.git_branches, {})
 vim.keymap.set('n', '<leader>b', builtin.quickfix, {})
+
+local project_actions = require("telescope._extensions.project.actions")
 
 require('telescope').setup {
   pickers = {
@@ -92,16 +94,17 @@ require('telescope').setup {
     },
     mappings = {
       i = {
-        ['<M-d>'] = actions.delete_buffer,
+        ['<C-d>'] = actions.delete_buffer,
         ['<C-[>'] = actions.close,
         ['<C-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.smart_send_to_loclist + actions.open_loclist,
         ['<C-y>'] = function(prompt_bufnr)
           action_layout.cycle_layout_next(prompt_bufnr)
         end,
+        ['<C-a>'] = project_actions.add_project,
       },
       n = {
-        ['<M-d>'] = actions.delete_buffer,
+        ['<C-d>'] = actions.delete_buffer,
         ['<C-y>'] = function(prompt_bufnr)
           action_layout.cycle_layout_next(prompt_bufnr)
         end,
@@ -113,7 +116,6 @@ local bookmark_actions = require('telescope').extensions.vim_bookmarks.actions
 require('telescope').extensions.vim_bookmarks.all {
   attach_mappings = function(_, map)
     map('i', '<M-d>', bookmark_actions.delete_selected_or_at_cursor)
-
     return true
   end
 }

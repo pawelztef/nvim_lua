@@ -18,7 +18,7 @@ end
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'auto',
+    theme = 'iceberg',
     component_separators = { left = '', right = ' ' },
     -- section_separators = { left = '▊▋▌▍▎', right = '▎▍▌▋▊' },
     section_separators = { left = '▊▋▌▍▎', right = '▎▍▌▋▊' },

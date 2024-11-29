@@ -119,6 +119,49 @@ return require('lazy').setup({
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
     },
+    -- {
+    --   "yetone/avante.nvim",
+    --   event = "VeryLazy",
+    --   lazy = false,
+    --   version = false, -- set this if you want to always pull the latest change
+    --   opts = {
+    --     provider = "openai",
+    --     openai = {
+    --       endpoint = "https://api.openai.com/v1",
+    --       model = "gpt-4o", -- The model name to use with this provider
+    --       api_key_name = "OPENAI_API_KEY",
+
+    --     },
+    --   },
+    --   build = "make",
+    --   dependencies = {
+    --     "nvim-treesitter/nvim-treesitter",
+    --     "stevearc/dressing.nvim",
+    --     "nvim-lua/plenary.nvim",
+    --     "MunifTanjim/nui.nvim",
+    --   },
+    -- }
+    {
+      "robitx/gp.nvim",
+      config = function()
+        local conf = {
+          -- For customization, refer to Install > Configuration in the Documentation/Readme
+        }
+        require("gp").setup(conf)
+
+        -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+      end,
+    },
+    "joshuavial/aider.nvim",
+    -- lazy.nvim
+    {
+      "folke/noice.nvim",
+      event = "VeryLazy",
+      dependencies = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+      }
+    }
   },
   install = { colorscheme = { "nord" } },
   ui = {

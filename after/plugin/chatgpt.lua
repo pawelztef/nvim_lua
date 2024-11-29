@@ -63,8 +63,8 @@ require("chatgpt").setup(
     popup_layout = {
       default = "center",
       center = {
-        width = "80%",
-        height = "75%",
+        width = "75%",
+        height = "65%",
       },
       right = {
         width = "30%",
@@ -105,7 +105,7 @@ require("chatgpt").setup(
       },
     },
     popup_input = {
-      prompt = " ",
+      prompt = "act as senior software enginier and give short and concises answers without summary",
       border = {
         highlight = "FloatBorder",
         style = "single",
@@ -122,7 +122,7 @@ require("chatgpt").setup(
       max_visible_lines = 20,
     },
     settings_window = {
-      setting_sign = " ⛯ ",
+      setting_sign = "▪ ",
       border = {
         style = "single",
         text = {
@@ -134,7 +134,7 @@ require("chatgpt").setup(
       },
     },
     help_window = {
-      setting_sign = " ⛯ ",
+      setting_sign = "▪ ",
       border = {
         style = "single",
         text = {
