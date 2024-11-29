@@ -119,6 +119,7 @@ return require('lazy').setup({
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
     },
+    'nvim-treesitter/playground',
   },
   install = { colorscheme = { "nord" } },
   ui = {
