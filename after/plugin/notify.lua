@@ -36,6 +36,10 @@ local function padded_renderer(bufnr, notif, highlights, config)
     table.insert(lines, "  " .. line .. "  ")
   end
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+  for i, _ in ipairs(lines) do
+    vim.api.nvim_buf_add_highlight(bufnr, -1, highlights.body, i - 1, 0, -1)
+  end
+
   vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
     hl_group = highlights.icon,
     end_col = icon_length + 1,

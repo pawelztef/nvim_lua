@@ -119,6 +119,7 @@ return require('lazy').setup({
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
     },
+    'nvim-treesitter/playground',
     -- {
     --   "yetone/avante.nvim",
     --   event = "VeryLazy",
