@@ -59,7 +59,7 @@ end
 
 notify.setup({
   background_colour = "#000000",
-  fps = 30,
+  fps = 120,
   icons = {
     DEBUG = "",
     ERROR = "",
@@ -76,6 +76,6 @@ notify.setup({
     notification = "%T",
     notification_history = "%FT%T"
   },
-  timeout = 500,
+  timeout = 300,
   top_down = true
 })
