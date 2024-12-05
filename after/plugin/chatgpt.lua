@@ -67,7 +67,7 @@ require("chatgpt").setup(
         height = "65%",
       },
       right = {
-        width = "20%",
+        width = "40%",
         width_settings_open = "50%",
       },
     },

@@ -31,7 +31,6 @@ autocmd({ 'InsertLeave', 'TextChanged' }, {
   callback = function()
     if vim.bo.modifiable then
       vim.cmd('silent! update')
-      print('FileSaved')
       vim.fn.timer_start(900, function()
         print(' ')
       end)

@@ -22,7 +22,7 @@ local function padded_renderer(bufnr, notif, highlights, config)
   if type(title) == "string" and #title > 0 then
     prefix = string.format("%s |", title)
   else
-    prefix = string.format("%s |", title)
+    prefix = string.format("")
   end
   notif.message[1] = string.format("%s %s", prefix, notif.message[1])
 
@@ -59,7 +59,7 @@ end
 
 notify.setup({
   background_colour = "#000000",
-  fps = 10,
+  fps = 30,
   icons = {
     DEBUG = "",
     ERROR = "",
@@ -76,6 +76,6 @@ notify.setup({
     notification = "%T",
     notification_history = "%FT%T"
   },
-  timeout = 5000,
+  timeout = 500,
   top_down = true
 })

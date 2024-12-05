@@ -120,7 +120,6 @@ function Color(color)
   vim.api.nvim_set_hl(0, "NoiceLspHoverBorder", { fg = "#668099" })
   vim.api.nvim_set_hl(0, "NoiceLspSignatureHelpBorder", { fg = "#668099" })
   vim.api.nvim_set_hl(0, "NoiceCmdlineIconSearch", { fg = "#668099" })
-  -- If you want to apply the same color to other Noice borders, you can do so like this:
   vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorder", { fg = "#668099" })
   vim.api.nvim_set_hl(0, "NoiceCmdlinePopupBorderSearch", { fg = "#668099" })
   vim.api.nvim_set_hl(0, "NoicePopupmenuBorder", { fg = "#668099" })
