@@ -1,3 +1,5 @@
+local notify = require('notify')
+
 local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
 
@@ -30,27 +32,45 @@ vim.api.nvim_create_user_command("CopyRelPath", function()
   path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
   vim.api.nvim_call_function("setreg", { "+", path })
   print(path)
+  notify(path, "info", { title = "Copied relative path" })
 end, {}
 )
+
+vim.api.nvim_create_user_command("CopyRelPathForImport", function()
+  -- Get the relative path of the current file
+  local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
+  -- Replace directory separators with dots and remove the file extension
+  local modified_path = path:gsub("/", "."):gsub("%.[^%.]+$", "")
+  -- Copy the modified path to the clipboard
+  vim.api.nvim_call_function("setreg", { "+", modified_path })
+  -- Print and notify the user of the copied path
+  print(modified_path)
+  vim.notify(modified_path, "info", { title = "Copied for imports" })
+end, {})
+
 vim.api.nvim_create_user_command("CopyAbsPath", function()
   path = vim.fn.fnamemodify(vim.fn.expand("%"), ":p")
   vim.api.nvim_call_function("setreg", { "+", path })
   print(path)
+  notify(path, "info", { title = "Copied absolute path" })
 end, {}
 )
 vim.api.nvim_create_user_command("CopyFileName", function()
   path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":t")
   vim.api.nvim_call_function("setreg", { "+", path })
   print(path)
+  notify(path, "info", { title = "Copied file name" })
 end, {}
 )
 vim.api.nvim_create_user_command("CopyDirPath", function()
   path = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.:h")
   vim.api.nvim_call_function("setreg", { "+", path })
   print(path)
+  notify(path, "info", { title = "Copied dir path" })
 end, {}
 )
-keymap("n", "cp", "<cmd>CopyRelPath<CR>", opts)
+-- keymap("n", "cp", "<cmd>CopyRelPath<CR>", opts)
+keymap("n", "cp", "<cmd>CopyRelPathForImport<CR>", opts)
 keymap("n", "ca", "<cmd>CopyAbsPath<CR>", opts)
 keymap("n", "cf", "<cmd>CopyFileName<CR>", opts)
 keymap("n", "cd", "<cmd>CopyDirPath<CR>", opts)
@@ -60,8 +80,8 @@ keymap("n", "<leader>f", "<cmd>Format<CR>", opts)
 keymap("n", "<leader>nt", "<cmd>set relativenumber!<CR>", opts)
 
 -- local function IsortAndBlack()
-  -- vim.cmd('Black')
-  -- vim.cmd('Isort')
+-- vim.cmd('Black')
+-- vim.cmd('Isort')
 -- end
 
 -- vim.keymap.set("n", "<A-0>", IsortAndBlack)
@@ -93,3 +113,10 @@ local function toggle_qf()
 end
 
 vim.keymap.set("n", "<leader>b", toggle_qf)
+-- Map Ctrl+[ to Escape in normal mode
+-- vim.keymap.set('n', '<C-[>', '<Esc>', { noremap = true, silent = true })
+-- -- Map Ctrl+[ to Escape in insert mode
+-- vim.keymap.set('i', '<C-[>', '<Esc>', { noremap = true, silent = true })
+-- -- Map Ctrl+[ to Escape in visual mode
+-- vim.keymap.set('v', '<C-[>', '<Esc>', { noremap = true, silent = true })
+

@@ -1,5 +1,5 @@
 require('settings')
-require('maps')
 require('utils')
 require('statusline')
 require('plugins')
+require('maps')

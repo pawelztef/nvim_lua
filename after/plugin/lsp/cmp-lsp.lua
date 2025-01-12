@@ -4,7 +4,7 @@ local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup({
   sources = {
-    {name = 'nvim_lsp'},
+    { name = 'nvim_lsp' },
   },
   snippet = {
     expand = function(args)
@@ -51,18 +51,9 @@ cmp.setup({
       end,
       { "i", "s" }
     ),
-    -- ['<C-CR>'] = cmp.mapping(
-    --   cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-    --   { 'i', 'c' }
-    -- ),
-    ['<C-k>'] = cmp.mapping(
-      cmp.mapping.select_prev_item(cmp_select),
-      { 'i', 'c' }
-    ),
-    ['<C-j>'] = cmp.mapping(
-      cmp.mapping.select_next_item(cmp_select),
-      { 'i', 'c' }
-    ),
+    -- ['<C-CR>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }), { 'i', 'c' }),
+    ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i', 'c' }),
+    ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i', 'c' }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
 })
@@ -99,18 +90,9 @@ require('cmp').setup({
       end,
       { "i", "s" }
     ),
-    -- ['<C-CR>'] = cmp.mapping(
-    --   cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-    --   { 'i', 'c' }
-    -- ),
-    ['<C-k>'] = cmp.mapping(
-      cmp.mapping.select_prev_item(cmp_select),
-      { 'i', 'c' }
-    ),
-    ['<C-j>'] = cmp.mapping(
-      cmp.mapping.select_next_item(cmp_select),
-      { 'i', 'c' }
-    ),
+    -- ['<C-CR>'] = cmp.mapping(cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }), { 'i', 'c' }),
+    ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i', 'c' }),
+    ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i', 'c' }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = {
@@ -142,7 +124,9 @@ cmp.setup.cmdline('/', {
     ['<C-CR>'] = cmp.mapping.confirm({ select = true }),
     ['k'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
     ['j'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
-   },
+    -- ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i', 'c' }),
+    -- ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i', 'c' }),
+  },
   sources = { { name = 'buffer' } }
 })
 
@@ -161,5 +145,3 @@ cmp.setup.cmdline(':', {
     { { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } } }
   )
 })
-
-
