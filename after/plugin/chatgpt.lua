@@ -2,14 +2,14 @@ require("chatgpt").setup(
   {
     yank_register = "+",
     edit_with_instructions = {
-      diff = false,
+      diff = true,
       keymaps = {
         close = "<C-c>",
         accept = "<C-y>",
         toggle_diff = "<C-d>",
         toggle_settings = "<C-o>",
         toggle_help = "<C-h>",
-        cycle_windows = "<C-Tab>",
+        cycle_windows = "<Tab>",
         use_output_as_input = "<C-i>",
       },
     },
@@ -42,7 +42,7 @@ require("chatgpt").setup(
         scroll_up = "<C-k>",
         scroll_down = "<C-j>",
         new_session = "<C-n>",
-        cycle_windows = "<C-Tab>",
+        cycle_windows = "<Tab>",
         cycle_modes = "<C-f>",
         next_message = "<C-J>",
         prev_message = "<C-K>",
@@ -105,7 +105,9 @@ require("chatgpt").setup(
       },
     },
     popup_input = {
-      prompt = "act as senior software enginier and give short and concises answers without summary",
+      question_sign = "▪ ",
+      answer_sign = "▫ ",
+      -- prompt = "act as senior software enginier and give short and concises answers without summary",
       border = {
         highlight = "FloatBorder",
         style = "single",
@@ -156,8 +158,8 @@ require("chatgpt").setup(
       n = 1,
     },
     openai_edit_params = {
-      model = "gpt-4o",
-      -- model = "gpt-3.5-turbo",
+      -- model = "gpt-4o",
+      model = "gpt-3.5-turbo",
       frequency_penalty = 0,
       presence_penalty = 0,
       temperature = 0,
@@ -175,3 +177,5 @@ require("chatgpt").setup(
   }
 )
 vim.api.nvim_set_keymap("n", "<C-c>", "<cmd>ChatGPT<CR>", {})
+vim.api.nvim_set_keymap('n', '<C-`>', '<cmd>ChatGPTEditWithInstructions<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-`>', '<cmd>ChatGPTEditWithInstructions<CR>', { noremap = true, silent = true })

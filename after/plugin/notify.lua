@@ -69,13 +69,15 @@ notify.setup({
   },
   level = 2,
   minimum_width = 40,
-  max_width = 60,
+  max_width = 120,
   render = padded_renderer,
-  stages = "fade_in_slide_out",
+  stages = "slide",
   time_formats = {
     notification = "%T",
     notification_history = "%FT%T"
   },
-  timeout = 300,
-  top_down = true
+  timeout = 3000,
+  top_down = false,
+  on_open = function(win)
+  end,
 })
