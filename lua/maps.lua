@@ -76,14 +76,7 @@ keymap("n", "bd", "<cmd>bd<CR>", opts)
 keymap("n", "<leader>f", "<cmd>Format<CR>", opts)
 keymap("n", "<leader>nt", "<cmd>set relativenumber!<CR>", opts)
 
-local function ClearQuickfixList()
-  vim.fn.setqflist({})
-  notify("Custom Mapping", "info", { title = "Quickfix list cleared" })
-end
 
-vim.keymap.set("n", "<C-d>", ClearQuickfixList, opts)
-
--- toggle quickfix
 local function toggle_qf()
   local qf_exists = false
   for _, win in pairs(vim.fn.getwininfo()) do
@@ -101,8 +94,14 @@ local function toggle_qf()
   end
   notify("Custom Mapping", "info", { title = "Quickfix list is empty" })
 end
+vim.keymap.set("n", "<leader>bb", toggle_qf)
 
-vim.keymap.set("n", "<C-b>", toggle_qf)
+local function ClearQuickfixList()
+  vim.fn.setqflist({})
+  toggle_qf()
+  notify("Custom Mapping", "info", { title = "Quickfix list cleared" })
+end
+vim.keymap.set("n", "<leader>bd", ClearQuickfixList, opts)
 
 -- Map Ctrl+[ to Escape in normal mode
 -- vim.keymap.set('n', '<C-[>', '<Esc>', { noremap = true, silent = true })
