@@ -55,6 +55,7 @@ return require('lazy').setup({
         { 'rafamadriz/friendly-snippets' },
       },
     },
+    "lukas-reineke/lsp-format.nvim",
     {
       "pmizio/typescript-tools.nvim",
       dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },

@@ -3,6 +3,11 @@ vim.g.gitblame_date_format = '%d/%m/%y'
 vim.g.gitblame_message_template = '<author> • <date> • <summary>'
 local git_blame = require('gitblame')
 
+local custom_nord= require'lualine.themes.nord'
+
+-- Change the background of lualine_c section for normal mode
+custom_nord.normal.a.bg = "#96CBFE"
+
 local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   return function(str)
     local win_width = vim.fn.winwidth(0)
@@ -18,7 +23,7 @@ end
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'nord',
+    theme = custom_nord,
     component_separators = { left = '', right = ' ' },
     -- section_separators = { left = '▊▋▌▍▎', right = '▎▍▌▋▊' },
     section_separators = { left = '▊▋▌▍▎', right = '▎▍▌▋▊' },

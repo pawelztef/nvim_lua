@@ -60,6 +60,13 @@ require('telescope').setup {
     }
   },
   extensions = {
+    vim_bookmarks = {
+      show_line = true,  -- Show the line number in the results
+      tail_path = false,
+      shorten_path = true,
+      only_annotated = false,  -- Only show annotated bookmarks
+      prompt_title = 'Bookmarks',
+    },
     fzy_native = {
       override_generic_sorter = false,
       override_file_sorter = true,
@@ -98,7 +105,7 @@ require('telescope').setup {
         ['<C-[>'] = actions.close,
         ['<C-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.smart_send_to_loclist + actions.open_loclist,
-        ['<C-y>'] = function(prompt_bufnr)
+        ['<C-f>'] = function(prompt_bufnr)
           action_layout.cycle_layout_next(prompt_bufnr)
         end,
         ['<C-a>'] = project_actions.add_project,
@@ -115,7 +122,7 @@ require('telescope').setup {
 local bookmark_actions = require('telescope').extensions.vim_bookmarks.actions
 require('telescope').extensions.vim_bookmarks.all {
   attach_mappings = function(_, map)
-    map('i', '<M-d>', bookmark_actions.delete_selected_or_at_cursor)
+    map('i', '<C-d>', bookmark_actions.delete_selected_or_at_cursor)
     return true
   end
 }
