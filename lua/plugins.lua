@@ -22,6 +22,7 @@ return require('lazy').setup({
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make'
     },
+    "lpoto/telescope-docker.nvim",
     {
       'nvim-treesitter/nvim-treesitter',
       -- version = 'v0.9.1',
