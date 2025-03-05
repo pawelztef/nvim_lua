@@ -1,9 +1,9 @@
 vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
 vim.g.gitblame_date_format = '%d/%m/%y'
-vim.g.gitblame_message_template = '<author> • <date> • <summary>'
+vim.g.gitblame_message_template = '<author> • <date> • <sha>'
 local git_blame = require('gitblame')
 
-local custom_nord= require'lualine.themes.nord'
+local custom_nord = require 'lualine.themes.nord'
 
 -- Change the background of lualine_c section for normal mode
 custom_nord.normal.a.bg = "#96CBFE"
@@ -31,6 +31,7 @@ require('lualine').setup {
       statusline = {},
       winbar = {},
     },
+    disabled_buftypes = {},
     ignore_focus = {},
     always_divide_middle = true,
     globalstatus = false,
@@ -52,7 +53,7 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { { 'filename', path = 0 } },
     lualine_c = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available, fmt = trunc(150, 18, 90, false) } },
-    lualine_x = { 'diff', 'diagnostics' },
+    lualine_x = { { require("noice").api.statusline.mode.get, cond = require("noice").api.statusline.mode.has, color = { fg = "#D08770" } }, 'diff', 'diagnostics' },
     lualine_y = { 'branch' },
     lualine_z = { 'location' }
   },

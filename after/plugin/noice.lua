@@ -11,6 +11,26 @@ require("noice").setup({
       ["vim.lsp.handlers.show_diagnostics"] = false,
     },
   },
+  routes = {
+    -- {
+    --   view = "notify",
+    --   filter = { event = "msg_showmode" },
+    -- },
+    {
+      view = "notify",
+      filter = {
+        event = "msg_show",
+        kind = "echo",
+      },
+    },
+    {
+      view = "notify",
+      filter = {
+        event = "msg_show",
+        kind = "echocmd",
+      },
+    },
+  },
   -- you can enable a preset for easier configuration
   presets = {
     bottom_search = false,        -- use a classic bottom cmdline for search
@@ -54,28 +74,28 @@ require("noice").setup({
   }
 })
 
-vim.api.nvim_create_autocmd("RecordingEnter", {
-  callback = function()
-    local msg = string.format("Register:  %s", vim.fn.reg_recording())
-    _MACRO_RECORDING_STATUS = true
-    vim.notify(msg, vim.log.levels.INFO, {
-      title = "Macro Recording",
-      keep = function() return _MACRO_RECORDING_STATUS end,
-    })
-  end,
-  group = vim.api.nvim_create_augroup("NoiceMacroNotfication", {clear = true})
-})
-
-vim.api.nvim_create_autocmd("RecordingLeave", {
-  callback = function()
-    _MACRO_RECORDING_STATUS = false
-    vim.notify("Success!", vim.log.levels.INFO, {
-      title = "Macro Recording End",
-      timeout = 2000,
-    })
-  end,
-  group = vim.api.nvim_create_augroup("NoiceMacroNotficationDismiss", {clear = true})
-})
+-- OLD NOICE HACK
+-- vim.api.nvim_create_autocmd("RecordingEnter", {
+--   callback = function()
+--     local msg = string.format("Register:  %s", vim.fn.reg_recording())
+--     _MACRO_RECORDING_STATUS = true
+--     vim.notify(msg, vim.log.levels.INFO, {
+--       title = "Macro Recording",
+--       keep = function() return _MACRO_RECORDING_STATUS end,
+--     })
+--   end,
+--   group = vim.api.nvim_create_augroup("NoiceMacroNotfication", { clear = true })
+-- })
+-- vim.api.nvim_create_autocmd("RecordingLeave", {
+--   callback = function()
+--     _MACRO_RECORDING_STATUS = false
+--     vim.notify("Success!", vim.log.levels.INFO, {
+--       title = "Macro Recording End",
+--       timeout = 2000,
+--     })
+--   end,
+--   group = vim.api.nvim_create_augroup("NoiceMacroNotficationDismiss", { clear = true })
+-- })
 
 vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
   if not require("noice.lsp").scroll(4) then
@@ -88,4 +108,3 @@ vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
     return "<c-b>"
   end
 end, { silent = true, expr = true })
-

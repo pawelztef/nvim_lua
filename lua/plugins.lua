@@ -247,7 +247,7 @@ return require('lazy').setup({
         end,
       },
     },
-    "rcarriga/nvim-notify", -- optional
+    "rcarriga/nvim-notify",
   },
   install = { colorscheme = { "nord" } },
   ui = {
