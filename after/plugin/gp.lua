@@ -31,7 +31,7 @@ local conf = {
       chat = true,
       command = false,
       -- string with model name or table with model name and parameters
-      model = { model = "gpt-4o-mini", temperature = 1.1, top_p = 1 },
+      model = { model = "gpt-4o-mini", temperature = 0, top_p = 1 },
       -- system prompt (use this to specify the persona/role of the AI)
       system_prompt = require("gp.defaults").chat_system_prompt,
     },
@@ -74,6 +74,7 @@ local conf = {
   chat_free_cursor = false,
   -- use prompt buftype for chats (:h prompt-buffer)
   chat_prompt_buf_type = false,
+
 
   -- how to display GpChatToggle or GpContext
   ---@type "popup" | "split" | "vsplit" | "tabnew"

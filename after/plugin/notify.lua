@@ -35,7 +35,7 @@ local function padded_renderer(bufnr, notif, highlights, config)
   for _, line in ipairs(notif.message) do
     table.insert(lines, "  " .. line .. "  ")
   end
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+ vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
   for i, _ in ipairs(lines) do
     vim.api.nvim_buf_add_highlight(bufnr, -1, highlights.body, i - 1, 0, -1)
   end

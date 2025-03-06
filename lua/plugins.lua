@@ -149,39 +149,39 @@ return require('lazy').setup({
       "kiyoon/python-import.nvim",
       build = "pipx install . --force",
       keys = {
-        {
-          "<space>u",
-          function()
-            require("python_import.api").add_import_current_word_and_notify()
-            vim.cmd("Isort")
-          end,
-          mode = { "i", "n" },
-          silent = true,
-          desc = "Add python import",
-          ft = "python",
-        },
         -- {
-        --   "<space>u",
+        --   "<space>in",
         --   function()
-        --     require("python_import.api").add_import_current_selection_and_notify()
+        --     require("python_import.api").add_import_current_word_and_notify()
         --     vim.cmd("Isort")
         --   end,
-        --   mode = "x",
+        --   mode = { "i", "n" },
         --   silent = true,
         --   desc = "Add python import",
         --   ft = "python",
         -- },
-        -- {
-        --   "<space>u",
-        --   function()
-        --     require("python_import.api").add_import_current_word_and_move_cursor()
-        --     vim.cmd("Isort")
-        --   end,
-        --   mode = "n",
-        --   silent = true,
-        --   desc = "Add python import and move cursor",
-        --   ft = "python",
-        -- },
+        {
+          "<space>in",
+          function()
+            require("python_import.api").add_import_current_selection_and_notify()
+            vim.cmd("Isort")
+          end,
+          mode = "x",
+          silent = true,
+          desc = "Add python import",
+          ft = "python",
+        },
+        {
+          "<space>in",
+          function()
+            require("python_import.api").add_import_current_word_and_move_cursor()
+            vim.cmd("Isort")
+          end,
+          mode = "n",
+          silent = true,
+          desc = "Add python import and move cursor",
+          ft = "python",
+        },
         -- {
         --   "<space>i",
         --   function()
@@ -213,25 +213,21 @@ return require('lazy').setup({
         -- If you want to change it to `import my_custom_logger`, ``, `logger = my_custom_logger.get_logger()`,
         -- you can set `statement_after_imports = {logger = {"import my_custom_logger", "", "logger = my_custom_logger.get_logger()"}}` here.
         extend_lookup_table = {
-          ---@type string[]
           import = {
             -- "tqdm",
           },
 
-          ---@type table<string, string>
           import_as = {
             -- These are the default values. Here for demonstration.
             -- np = "numpy",
             -- pd = "pandas",
           },
 
-          ---@type table<string, string>
           import_from = {
             -- tqdm = nil,
             -- tqdm = "tqdm",
           },
 
-          ---@type table<string, string[]>
           statement_after_imports = {
             -- logger = { "import my_custom_logger", "", "logger = my_custom_logger.get_logger()" },
           },
@@ -240,7 +236,6 @@ return require('lazy').setup({
         ---Return nil to indicate no match is found and continue with the default lookup
         ---Return a table to stop the lookup and use the returned table as the result
         ---Return an empty table to stop the lookup. This is useful when you want to add to wherever you need to.
-        ---@type fun(winnr: integer, word: string, ts_node: TSNode?): string[]?
         custom_function = function(winnr, word, ts_node)
           -- if vim.endswith(word, "_DIR") then
           --   return { "from my_module import " .. word }
@@ -249,6 +244,7 @@ return require('lazy').setup({
       },
     },
     "rcarriga/nvim-notify",
+    -- lazy.nvim
   },
   install = { colorscheme = { "nord" } },
   ui = {
