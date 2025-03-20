@@ -96,9 +96,8 @@ require("diffview").setup({
       -- tabpage is a Diffview.
       ["<tab>"]      = actions.select_next_entry, -- Open the diff for the next file
       ["<s-tab>"]    = actions.select_prev_entry, -- Open the diff for the previous file
-      ["gf"]         = actions.goto_file_tab,         -- Open the file in a new split in the previous tabpage
+      ["gf"]         = actions.goto_file_tab,     -- Open the file in a new split in the previous tabpage
       ["<C-w><C-f>"] = actions.goto_file_split,   -- Open the file in a new split
-      ["<C-w>gf"]    = actions.goto_file_tab,
       ["<leader>e"]  = actions.focus_files,       -- Bring focus to the files panel
       ["<leader>b"]  = actions.toggle_files,      -- Toggle the files panel.
       ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
@@ -162,10 +161,10 @@ require("diffview").setup({
   },
 })
 
-vim.api.nvim_set_keymap("n", "<leader>v", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vf", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vv", "<cmd>DiffviewFileHistory<cr>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true }) -- current changes
+vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true }) -- file history
+vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>DiffviewFileHistory<cr>", { noremap = true, silent = true }) -- all history
+vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
 
 -- d = {
 --     name = "DiffView",
