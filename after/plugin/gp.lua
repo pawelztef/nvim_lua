@@ -45,7 +45,7 @@ local conf = {
   -- first string has to be static, second string can contain template {{agent}}
   -- just a static string is legacy and the [{{agent}}] element is added automatically
   -- if you really want just a static string, make it a table with one element { ":" }
-  chat_assistant_prefix = { "▪ ", },
+  chat_assistant_prefix = { "▪ ", " [{{agent}}]"},
   -- chat_assistant_prefix = { ">:", "[{{agent}}]" },
   -- The banner shown at the top of each chat file.
   chat_template = require("gp.defaults").short_chat_template,
@@ -61,10 +61,10 @@ local conf = {
   chat_conceal_model_params = true,
   -- local shortcuts bound to the chat buffer
   -- (be careful to choose something which will work across specified modes)
-  chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g><C-g>" },
-  chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>d" },
-  chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>s" },
-  chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<C-g>c" },
+  chat_shortcut_respond = { modes = { "n", "i", "v", "x" }, shortcut = "<A-CR>" },
+  chat_shortcut_delete = { modes = { "n", "i", "v", "x" }, shortcut = "<A-c>d" },
+  chat_shortcut_stop = { modes = { "n", "i", "v", "x" }, shortcut = "<A-c>s" },
+  chat_shortcut_new = { modes = { "n", "i", "v", "x" }, shortcut = "<A-c>c" },
   -- default search term when using :GpChatFinder
   chat_finder_pattern = "topic ",
   chat_finder_mappings = {
@@ -75,7 +75,6 @@ local conf = {
   -- use prompt buftype for chats (:h prompt-buffer)
   chat_prompt_buf_type = false,
 
-
   -- how to display GpChatToggle or GpContext
   ---@type "popup" | "split" | "vsplit" | "tabnew"
   toggle_target = "vsplit",
@@ -84,10 +83,10 @@ local conf = {
   ---@type "single" | "double" | "rounded" | "solid" | "shadow" | "none"
   style_chat_finder_border = "single",
   -- margins are number of characters or lines
-  style_chat_finder_margin_bottom = 8,
-  style_chat_finder_margin_left = 1,
-  style_chat_finder_margin_right = 2,
-  style_chat_finder_margin_top = 2,
+  style_chat_finder_margin_bottom = 10,
+  style_chat_finder_margin_left = 40,
+  style_chat_finder_margin_right = 40,
+  style_chat_finder_margin_top = 10,
   -- how wide should the preview be, number between 0.0 and 1.0
   style_chat_finder_preview_ratio = 0.5,
 
@@ -113,7 +112,9 @@ local conf = {
 
   -- templates
   template_selection = "I have the following from {{filename}}:"
-      .. "\n\n```{{filetype}}\n{{selection}}\n```\n\n{{command}}",
+      .. "\n\n```{{filetype}}\n{{selection}}\n```\n\n{{command}}"
+      ..
+      "\n\nRespond exclusively with the snippet that should replace the selection above without any language marking just simply code",
   template_rewrite = "I have the following from {{filename}}:"
       .. "\n\n```{{filetype}}\n{{selection}}\n```\n\n{{command}}"
       ..
@@ -220,3 +221,79 @@ local conf = {
 }
 
 require("gp").setup(conf)
+local function keymapOptions(desc)
+    return {
+        noremap = true,
+        silent = true,
+        nowait = true,
+        desc = "GPT prompt " .. desc,
+    }
+end
+
+-- Chat commands
+-- vim.keymap.set({"n", "i"}, "<A-c>c", "<cmd>GChatNew vsplit<cr>", keymapOptions("New Chat"))
+-- vim.keymap.set({"n", "i"}, "<A-c>", "<cmd>GChatToggle<cr>", keymapOptions("Toggle Chat"))
+-- vim.keymap.set({"n", "i"}, "<A-c>f", "<cmd>GChatFinder<cr>", keymapOptions("Chat Finder"))
+
+-- vim.keymap.set("v", "<C-g>c", ":<C-u>'<,'>GpChatNew<cr>", keymapOptions("Visual Chat New"))
+-- vim.keymap.set("v", "<C-g>p", ":<C-u>'<,'>GpChatPaste<cr>", keymapOptions("Visual Chat Paste"))
+-- vim.keymap.set("v", "<C-g>t", ":<C-u>'<,'>GpChatToggle<cr>", keymapOptions("Visual Toggle Chat"))
+
+-- vim.keymap.set({ "n", "i" }, "<C-g><C-x>", "<cmd>GpChatNew split<cr>", keymapOptions("New Chat split"))
+-- vim.keymap.set({ "n", "i" }, "<C-g><C-v>", "<cmd>GpChatNew vsplit<cr>", keymapOptions("New Chat vsplit"))
+-- vim.keymap.set({ "n", "i" }, "<C-g><C-t>", "<cmd>GpChatNew tabnew<cr>", keymapOptions("New Chat tabnew"))
+
+-- vim.keymap.set("v", "<C-g><C-x>", ":<C-u>'<,'>GpChatNew split<cr>", keymapOptions("Visual Chat New split"))
+-- vim.keymap.set("v", "<C-g><C-v>", ":<C-u>'<,'>GpChatNew vsplit<cr>", keymapOptions("Visual Chat New vsplit"))
+-- vim.keymap.set("v", "<C-g><C-t>", ":<C-u>'<,'>GpChatNew tabnew<cr>", keymapOptions("Visual Chat New tabnew"))
+
+-- -- Prompt commands
+vim.keymap.set({"n", "i"}, "<A-c>", "<cmd>%GAppend<cr>", keymapOptions("Append (after)"))
+-- vim.keymap.set({"n", "i"}, "<C-g>b", "<cmd>GpPrepend<cr>", keymapOptions("Prepend (before)"))
+vim.keymap.set({"n", "i"}, "<A-c>r", "<cmd>GRewrite<cr>", keymapOptions("Inline Rewrite"))
+vim.keymap.set("v", "<A-c>r", ":<C-u>'<,'>GRewrite<cr>", keymapOptions("Visual Rewrite"))
+vim.keymap.set("v", "<A-c>", ":<C-u>'<,'>GAppend<cr>", keymapOptions("Visual Append (after)"))
+-- vim.keymap.set("v", "<C-g>b", ":<C-u>'<,'>GpPrepend<cr>", keymapOptions("Visual Prepend (before)"))
+vim.keymap.set("v", "<A-c>i", ":<C-u>'<,'>GImplement<cr>", keymapOptions("Implement selection"))
+
+-- vim.keymap.set({"n", "i"}, "<C-g>gp", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
+-- vim.keymap.set({"n", "i"}, "<C-g>ge", "<cmd>GpEnew<cr>", keymapOptions("GpEnew"))
+-- vim.keymap.set({"n", "i"}, "<C-g>gn", "<cmd>GpNew<cr>", keymapOptions("GpNew"))
+-- vim.keymap.set({"n", "i"}, "<C-g>gv", "<cmd>GpVnew<cr>", keymapOptions("GpVnew"))
+-- vim.keymap.set({"n", "i"}, "<C-g>gt", "<cmd>GpTabnew<cr>", keymapOptions("GpTabnew"))
+
+-- vim.keymap.set("v", "<C-g>gp", ":<C-u>'<,'>GpPopup<cr>", keymapOptions("Visual Popup"))
+-- vim.keymap.set("v", "<C-g>ge", ":<C-u>'<,'>GpEnew<cr>", keymapOptions("Visual GpEnew"))
+-- vim.keymap.set("v", "<C-g>gn", ":<C-u>'<,'>GpNew<cr>", keymapOptions("Visual GpNew"))
+-- vim.keymap.set("v", "<C-g>gv", ":<C-u>'<,'>GpVnew<cr>", keymapOptions("Visual GpVnew"))
+-- vim.keymap.set("v", "<C-g>gt", ":<C-u>'<,'>GpTabnew<cr>", keymapOptions("Visual GpTabnew"))
+
+vim.keymap.set({"n", "i"}, "<A-c>x", "<cmd>GContext<cr>", keymapOptions("Toggle Context"))
+vim.keymap.set("v", "<A-c>x", ":<C-u>'<,'>GContext<cr>", keymapOptions("Visual Toggle Context"))
+
+vim.keymap.set({"n", "i", "v", "x"}, "<A-c>s", "<cmd>GpStop<cr>", keymapOptions("Stop"))
+-- vim.keymap.set({"n", "i", "v", "x"}, "<C-g>n", "<cmd>GpNextAgent<cr>", keymapOptions("Next Agent"))
+
+-- -- optional Whisper commands with prefix <C-g>w
+-- vim.keymap.set({"n", "i"}, "<C-g>ww", "<cmd>GpWhisper<cr>", keymapOptions("Whisper"))
+-- vim.keymap.set("v", "<C-g>ww", ":<C-u>'<,'>GpWhisper<cr>", keymapOptions("Visual Whisper"))
+
+-- vim.keymap.set({"n", "i"}, "<C-g>wr", "<cmd>GpWhisperRewrite<cr>", keymapOptions("Whisper Inline Rewrite"))
+-- vim.keymap.set({"n", "i"}, "<C-g>wa", "<cmd>GpWhisperAppend<cr>", keymapOptions("Whisper Append (after)"))
+-- vim.keymap.set({"n", "i"}, "<C-g>wb", "<cmd>GpWhisperPrepend<cr>", keymapOptions("Whisper Prepend (before) "))
+
+vim.keymap.set("v", "<A-c>w", ":<C-u>'<,'>GpWhisperRewrite<cr>", keymapOptions("Visual Whisper Rewrite"))
+-- vim.keymap.set("v", "<A-c>wa", ":<C-u>'<,'>GpWhisperAppend<cr>", keymapOptions("Visual Whisper Append (after)"))
+-- vim.keymap.set("v", "<C-g>wb", ":<C-u>'<,'>GpWhisperPrepend<cr>", keymapOptions("Visual Whisper Prepend (before)"))
+
+-- vim.keymap.set({"n", "i"}, "<C-g>wp", "<cmd>GpWhisperPopup<cr>", keymapOptions("Whisper Popup"))
+-- vim.keymap.set({"n", "i"}, "<C-g>we", "<cmd>GpWhisperEnew<cr>", keymapOptions("Whisper Enew"))
+-- vim.keymap.set({"n", "i"}, "<C-g>wn", "<cmd>GpWhisperNew<cr>", keymapOptions("Whisper New"))
+-- vim.keymap.set({"n", "i"}, "<C-g>wv", "<cmd>GpWhisperVnew<cr>", keymapOptions("Whisper Vnew"))
+-- vim.keymap.set({"n", "i"}, "<C-g>wt", "<cmd>GpWhisperTabnew<cr>", keymapOptions("Whisper Tabnew"))
+
+-- vim.keymap.set("v", "<C-g>wp", ":<C-u>'<,'>GpWhisperPopup<cr>", keymapOptions("Visual Whisper Popup"))
+-- vim.keymap.set("v", "<C-g>we", ":<C-u>'<,'>GpWhisperEnew<cr>", keymapOptions("Visual Whisper Enew"))
+-- vim.keymap.set("v", "<C-g>wn", ":<C-u>'<,'>GpWhisperNew<cr>", keymapOptions("Visual Whisper New"))
+-- vim.keymap.set("v", "<C-g>wv", ":<C-u>'<,'>GpWhisperVnew<cr>", keymapOptions("Visual Whisper Vnew"))
+-- vim.keymap.set("v", "<C-g>wt", ":<C-u>'<,'>GpWhisperTabnew<cr>", keymapOptions("Visual Whisper Tabnew"))

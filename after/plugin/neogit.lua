@@ -1,5 +1,5 @@
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>Neogit<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<M-c>", "<cmd>Neogit commit<CR>", { silent = true })
+-- vim.api.nvim_set_keymap("n", "<M-c>", "<cmd>Neogit commit<CR>", { silent = true })
 
 local neogit = require("neogit")
 neogit.setup {
@@ -111,7 +111,8 @@ neogit.setup {
       ["A"] = "CherryPickPopup",
       ["B"] = "BisectPopup",
       ["b"] = "BranchPopup",
-      ["c"] = "CommitPopup",
+      -- ["c"] = "CommitPopup",
+      ["c"] = false, 
       ["d"] = "DiffPopup",
       ["f"] = "FetchPopup",
       ["i"] = "IgnorePopup",

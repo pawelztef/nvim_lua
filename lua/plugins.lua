@@ -161,18 +161,18 @@ return require('lazy').setup({
         --   ft = "python",
         -- },
         {
-          "<space>in",
+          "<space>I",
           function()
             require("python_import.api").add_import_current_selection_and_notify()
             vim.cmd("Isort")
           end,
-          mode = "x",
+          mode = { "i", "n" },
           silent = true,
           desc = "Add python import",
           ft = "python",
         },
         {
-          "<space>in",
+          "<space>IN",
           function()
             require("python_import.api").add_import_current_word_and_move_cursor()
             vim.cmd("Isort")
@@ -244,7 +244,6 @@ return require('lazy').setup({
       },
     },
     "rcarriga/nvim-notify",
-    -- lazy.nvim
   },
   install = { colorscheme = { "nord" } },
   ui = {
