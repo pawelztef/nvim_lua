@@ -2,6 +2,7 @@ local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local action_layout = require('telescope.actions.layout')
 require('telescope').load_extension('project')
+require('telescope').load_extension('frecency')
 
 vim.keymap.set('n', '<leader>0', builtin.find_files, {})
 vim.keymap.set('n', '<leader>9', builtin.buffers, {})
@@ -14,7 +15,7 @@ vim.keymap.set('n', '<leader>4', builtin.git_status, {})
 vim.keymap.set(
   'n',
   '<leader>o',
-  '<cmd>lua require("telescope.builtin").live_grep({ prompt_title = "Find in open buffers", grep_open_files = true})<cr>'
+  '<cmd>lua require("telescope.builtin").live_grep({ prompt_title = "Find in open buffers", grep_open_files = true, additional_args = function(opts) return {"-i"} end })<cr>'
   ,
   {}
 )
@@ -37,6 +38,13 @@ vim.keymap.set(
   'n',
   '<leader>m',
   "<cmd>lua require'telescope'.load_extension('vim_bookmarks').all()<cr>",
+  {}
+)
+-- recent files
+vim.keymap.set(
+  'n',
+  '<leader>-',
+  "<cmd>lua require'telescope'.load_extension('frecency').frecency()<cr>",
   {}
 )
 
@@ -83,6 +91,14 @@ require('telescope').setup {
       order_by = 'recent',
       hide_workspace = true,
     },
+    frecency = {
+      auto_validate = true,
+      ignore_patterns = { "*/.git", "*/.git/*", "*/.DS_Store" },
+      disable_devicons = true,
+      hide_current_buffer = true,
+      default_workspace = "CWD",
+	    path_display = { "shorten" },
+    }
   },
   defaults = {
     layout_strategy = 'vertical',
