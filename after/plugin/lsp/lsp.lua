@@ -14,7 +14,7 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    local opts = {buffer = event.buf}
+    local opts = { buffer = event.buf }
     vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
@@ -25,9 +25,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<M-f>', function()
-      vim.lsp.buf.format { async = true }
-    end, opts)
+    -- vim.keymap.set('n', '<M-f>', function()
+    --   vim.lsp.buf.format { async = true }
+    -- end, opts)
     vim.keymap.set("i", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
     vim.keymap.set("s", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
     vim.keymap.set("i", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
@@ -48,16 +48,16 @@ vim.diagnostic.config({
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      underline = false,
-      -- virtual_text = { spacing = 15 },
-      virtual_text = false,
-      severity_sort = true,
-      signs = true,
-      update_in_insert = false,
-      float = { border = "rounded" },
+  underline = false,
+  -- virtual_text = { spacing = 15 },
+  virtual_text = false,
+  severity_sort = true,
+  signs = true,
+  update_in_insert = false,
+  float = { border = "rounded" },
 })
 
-require 'lspconfig'.eslint.setup {
+require('lspconfig').eslint.setup {
   max_length = 4000
 }
 vim.fn.sign_define("DiagnosticSignError", { text = "▪", texthl = "DiagnosticSignError" })
