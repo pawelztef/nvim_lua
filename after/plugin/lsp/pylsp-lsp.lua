@@ -4,7 +4,10 @@ require('lspconfig').pylsp.setup({
   settings = {
     pylsp = {
       plugins = {
-        pycodestyle = { maxLineLength = 120 },
+        pycodestyle = { enabled = false },
+        pyright = { enabled = false },
+        pylsp = { enabled = false },
+        black = { enabled = true },  -- Enable Black formatter
       },
     },
   },

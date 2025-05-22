@@ -1,11 +1,11 @@
 local actions = require("diffview.actions")
 
 require("diffview").setup({
-  diff_binaries = false,   -- Show diffs for binaries
+  diff_binaries = false,    -- Show diffs for binaries
   enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
-  git_cmd = { "git" },     -- The git executable followed by default args.
-  use_icons = false,       -- Requires nvim-web-devicons
-  icons = {                -- Only applies when use_icons is true.
+  git_cmd = { "git" },      -- The git executable followed by default args.
+  use_icons = false,        -- Requires nvim-web-devicons
+  icons = {                 -- Only applies when use_icons is true.
     folder_closed = "",
     folder_open = "",
   },
@@ -20,9 +20,9 @@ require("diffview").setup({
       folder_statuses = "only_folded", -- One of 'never', 'only_folded' or 'always'.
     },
     -- win_config = {                     -- See ':h diffview-config-win_config'
-      -- position = "bottom",
-      -- width = math.max(60, vim.fn.winwidth(0) / 5),
-      -- height = 10,
+    -- position = "bottom",
+    -- width = math.max(60, vim.fn.winwidth(0) / 5),
+    -- height = 10,
     -- },
     win_config = function()
       local c = { type = "float" }
@@ -100,7 +100,7 @@ require("diffview").setup({
       ["<C-w><C-f>"] = actions.goto_file_split,   -- Open the file in a new split
       ["<leader>e"]  = actions.focus_files,       -- Bring focus to the files panel
       ["<leader>b"]  = actions.toggle_files,      -- Toggle the files panel.
-      ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
+      -- ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
     },
     file_panel = {
       ["j"]             = actions.next_entry,   -- Bring the cursor to the next file entry
@@ -127,7 +127,7 @@ require("diffview").setup({
       ["f"]             = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
       ["<leader>e"]     = actions.focus_files,
       ["<leader>b"]     = actions.toggle_files,
-      ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
+      -- ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
     },
     file_history_panel = {
       ["g!"]            = actions.options,          -- Open the option panel
@@ -152,7 +152,7 @@ require("diffview").setup({
       ["<C-w>gf"]       = actions.goto_file_tab,
       ["<leader>e"]     = actions.focus_files,
       ["<leader>b"]     = actions.toggle_files,
-      ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
+      -- ["q"]          = "<CMD>DiffviewClose<CR>",  -- Close the files panel.
     },
     option_panel = {
       ["<tab>"] = actions.select_entry,
@@ -161,10 +161,42 @@ require("diffview").setup({
   },
 })
 
-vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true }) -- current changes
-vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true }) -- file history
-vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>DiffviewFileHistory<cr>", { noremap = true, silent = true }) -- all history
-vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
+-- Define the toggle_diffview function
+local function toggle_diffview(cmd)
+  local views = require("diffview.lib").views
+  if next(views) == nil then
+    vim.cmd(cmd)
+    -- Close the file panel immediately after opening Diffview
+    require("diffview.actions").toggle_files()
+  else
+    vim.cmd("DiffviewClose")
+  end
+end
+-- Set up key mappings using the toggle_diffview function
+vim.api.nvim_set_keymap("n", "<leader>dd", "", {
+  noremap = true,
+  silent = true,
+  callback = function() toggle_diffview("DiffviewOpen") end
+})
+vim.api.nvim_set_keymap("n", "<leader>df", "", {
+  noremap = true,
+  silent = true,
+  callback = function() toggle_diffview("DiffviewFileHistory %") end
+})
+vim.api.nvim_set_keymap("n", "<leader>dv", "", {
+  noremap = true,
+  silent = true,
+  callback = function() toggle_diffview("DiffviewFileHistory") end
+})
+vim.api.nvim_set_keymap("n", "<leader>dm", "", {
+  noremap = true,
+  silent = true,
+  callback = function() toggle_diffview("DiffviewOpen main") end
+})
+-- vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true }) -- current changes
+-- vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true }) -- file history
+-- vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>DiffviewFileHistory<cr>", { noremap = true, silent = true }) -- all history
+-- vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })
 
 -- d = {
 --     name = "DiffView",
@@ -175,3 +207,4 @@ vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, si
 --     f = { "<cmd>DiffviewFocusFiles<cr>", "Focuse files" },
 --     t = { "<cmd>DiffviewToggleFiles<cr>", "Toggle files" },
 -- }
+-- Define the toggle_diffview functionlocal function toggle_diffview(cmd)

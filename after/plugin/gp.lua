@@ -249,12 +249,15 @@ end
 
 -- -- Prompt commands
 vim.keymap.set({"n", "i"}, "<A-c>", "<cmd>%GAppend<cr>", keymapOptions("Append (after)"))
--- vim.keymap.set({"n", "i"}, "<C-g>b", "<cmd>GpPrepend<cr>", keymapOptions("Prepend (before)"))
-vim.keymap.set({"n", "i"}, "<A-c>r", "<cmd>GRewrite<cr>", keymapOptions("Inline Rewrite"))
-vim.keymap.set("v", "<A-c>r", ":<C-u>'<,'>GRewrite<cr>", keymapOptions("Visual Rewrite"))
-vim.keymap.set("v", "<A-c>", ":<C-u>'<,'>GAppend<cr>", keymapOptions("Visual Append (after)"))
+vim.keymap.set("v", "<A-c>", ":<C-u>'<,'>GAppend<cr>", keymapOptions("Append (after)"))
+
+vim.keymap.set({"n", "i"}, "<A-r>", "<cmd>GRewrite<cr>", keymapOptions("Inline Rewrite"))
+vim.keymap.set("v", "<A-r>", ":<C-u>'<,'>GRewrite<cr>", keymapOptions("Visual Rewrite"))
+
 -- vim.keymap.set("v", "<C-g>b", ":<C-u>'<,'>GpPrepend<cr>", keymapOptions("Visual Prepend (before)"))
-vim.keymap.set("v", "<A-c>i", ":<C-u>'<,'>GImplement<cr>", keymapOptions("Implement selection"))
+-- vim.keymap.set({"n", "i"}, "<C-g>b", "<cmd>GpPrepend<cr>", keymapOptions("Prepend (before)"))
+
+vim.keymap.set("v", "<A-i>", ":<C-u>'<,'>GImplement<cr>", keymapOptions("Implement selection"))
 
 -- vim.keymap.set({"n", "i"}, "<C-g>gp", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
 -- vim.keymap.set({"n", "i"}, "<C-g>ge", "<cmd>GpEnew<cr>", keymapOptions("GpEnew"))
@@ -268,8 +271,8 @@ vim.keymap.set("v", "<A-c>i", ":<C-u>'<,'>GImplement<cr>", keymapOptions("Implem
 -- vim.keymap.set("v", "<C-g>gv", ":<C-u>'<,'>GpVnew<cr>", keymapOptions("Visual GpVnew"))
 -- vim.keymap.set("v", "<C-g>gt", ":<C-u>'<,'>GpTabnew<cr>", keymapOptions("Visual GpTabnew"))
 
-vim.keymap.set({"n", "i"}, "<A-c>x", "<cmd>GContext<cr>", keymapOptions("Toggle Context"))
-vim.keymap.set("v", "<A-c>x", ":<C-u>'<,'>GContext<cr>", keymapOptions("Visual Toggle Context"))
+vim.keymap.set({"n", "i"}, "<A-x>", "<cmd>GContext<cr>", keymapOptions("Toggle Context"))
+vim.keymap.set("v", "<A-x>", ":<C-u>'<,'>GContext<cr>", keymapOptions("Visual Toggle Context"))
 
 vim.keymap.set({"n", "i", "v", "x"}, "<A-c>s", "<cmd>GpStop<cr>", keymapOptions("Stop"))
 -- vim.keymap.set({"n", "i", "v", "x"}, "<C-g>n", "<cmd>GpNextAgent<cr>", keymapOptions("Next Agent"))

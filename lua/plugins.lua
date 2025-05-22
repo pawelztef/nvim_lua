@@ -108,10 +108,8 @@ return require('lazy').setup({
     'akinsho/toggleterm.nvim',
     'tom-anders/telescope-vim-bookmarks.nvim',
     'ludovicchabant/vim-gutentags',
-    {
-      "jose-elias-alvarez/null-ls.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
-    },
+    "nvimtools/none-ls.nvim",
+    "nvim-lua/plenary.nvim",
     'stevearc/aerial.nvim',
     'f-person/git-blame.nvim',
     'sam4llis/nvim-lua-gf',

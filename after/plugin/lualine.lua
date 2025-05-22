@@ -51,7 +51,10 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = { 'mode' },
-    lualine_b = { { 'filename', path = 0 } },
+    lualine_b = { { 'filename', path = 1, cond = function()
+      return vim.fn.bufname() ~= ''
+    end
+    } },
     lualine_c = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available, fmt = trunc(150, 18, 90, false) } },
     lualine_x = { { require("noice").api.statusline.mode.get, cond = require("noice").api.statusline.mode.has, color = { fg = "#D08770" } }, 'diff', 'diagnostics' },
     lualine_y = { 'branch' },
@@ -60,7 +63,10 @@ require('lualine').setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { { 'filename', path = 0 } },
+    lualine_c = { { 'filename', path = 0, cond = function()
+      return vim.fn.bufname() ~= ''
+    end
+    } },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}

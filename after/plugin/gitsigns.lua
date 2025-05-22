@@ -23,7 +23,7 @@ require('gitsigns').setup {
     delay = 100,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter = '      <author> • <author_time:%Y-%m-%d> • <summary> • <abbrev_sha>',
+  current_line_blame_formatter = '            <author> • <author_time:%Y-%m-%d> • <summary> • <abbrev_sha>',
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -72,7 +72,7 @@ require('gitsigns').setup {
     map('n', '<M-b>', ':Gitsigns toggle_current_line_blame<CR>')
     map('n', '<M-d>', ':Gitsigns diffthis @^<CR>')
     -- map('n', '<leader>gD', function() gs.diffthis('~') end)
-    map('n', '<M-x>', gs.toggle_deleted)
+    -- map('n', '<M-x>', gs.toggle_deleted)
     -- map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
