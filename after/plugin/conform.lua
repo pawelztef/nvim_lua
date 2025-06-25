@@ -18,8 +18,8 @@ conform.setup({
 
 conform.formatters.prettier = {
   prepend_args = {
-    "--print-width 200",
-    "--tab-width", "4",
+    "--print-width 220",
+    "--tab-width", "2",
     "--use-tabs", "false",
   },
 }
