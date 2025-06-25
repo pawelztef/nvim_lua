@@ -5,19 +5,21 @@ require("mason").setup({
     height = 0.7
   }
 })
-require("mason-lspconfig").setup {
-    ensure_installed = {
-    'ts_ls',
-    'eslint',
-    'lua_ls',
-    'bashls',
-    'cssls',
-    'dockerls',
-    'emmet_ls',
-    'html',
-    'jsonls',
-    'zk',
-    'yamlls',
-    'intelephense',
-   },
-}
+-- require("mason-lspconfig").setup {
+--   automatic_enable = {
+--   },
+--   ensure_installed = {
+--     'ts_ls',
+--     'eslint',
+--     'lua_ls',
+--     'bashls',
+--     'cssls',
+--     'dockerls',
+--     'emmet_ls',
+--     'html',
+--     'jsonls',
+--     'zk',
+--     'yamlls',
+--     'intelephense',
+--   },
+-- }
