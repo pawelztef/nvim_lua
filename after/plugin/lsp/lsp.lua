@@ -35,27 +35,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.diagnostic.config({
-  virtual_text = false,
-  underline = false,
-  severity_sort = true,
-  float = {
-    source = "always",
-    border = "rounded",
-    focusable = true,
-    header = false,
-  },
+vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    vim.diagnostic.config({
+      virtual_lines = false,
+      virtual_text = false,
+      underline = false,
+      signs = true,
+      severity_sort = true,
+      float = {
+        source = "always",
+        border = "rounded",
+        focusable = true,
+        header = false,
+      },
+    })
+  end,
 })
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = false,
-  -- virtual_text = { spacing = 15 },
-  virtual_text = false,
-  severity_sort = true,
-  signs = true,
-  update_in_insert = false,
-  float = { border = "rounded" },
-})
 
 require('lspconfig').eslint.setup {
   max_length = 4000
@@ -64,3 +63,10 @@ vim.fn.sign_define("DiagnosticSignError", { text = "▪", texthl = "DiagnosticSi
 vim.fn.sign_define("DiagnosticSignWarn", { text = "▪", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = "▪", texthl = "DiagnosticSignInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "▪", texthl = "DiagnosticSignHint" })
+
+vim.keymap.set('', '<leader>bl', function()
+  vim.diagnostic.config({
+    virtual_lines = not vim.diagnostic.config().virtual_lines,
+    virtual_text = false,
+  })
+end, { desc = 'Toggle diagnostic [l]ines' })

@@ -7,7 +7,7 @@ require('lspconfig').pylsp.setup({
         pycodestyle = { enabled = false },
         pyright = { enabled = false },
         pylsp = { enabled = false },
-        black = { enabled = true },  -- Enable Black formatter
+        black = { enabled = true }, -- Enable Black formatter
       },
     },
   },
