@@ -22,7 +22,6 @@ return require('lazy').setup({
     },
     {
       'nvim-treesitter/nvim-treesitter',
-      -- version = 'v0.9.1',
       branch = 'master',
       build = ':TSUpdate'
     },
@@ -123,18 +122,23 @@ return require('lazy').setup({
         "rcarriga/nvim-notify",
       }
     },
+    {
+      'akinsho/toggleterm.nvim',
+      version = "*",
+      config = true,
+    },
     -- {
-    --   "yetone/avante.nvim",
-    --   dependencies = {
-    -- "nvim-lua/plenary.nvim",
-    -- "MunifTanjim/nui.nvim",
-    --- The below dependencies are optional,
-    -- "echasnovski/mini.pick",         -- for file_selector provider mini.pick
-    -- "ibhagwan/fzf-lua",              -- for file_selector provider fzf
-    -- "stevearc/dressing.nvim",        -- for input provider dressing
-    -- "folke/snacks.nvim",             -- for input provider snacks
-    -- "zbirenbaum/copilot.lua",      -- for providers='copilot'
+    --   "olimorris/codecompanion.nvim"
     -- },
+    -- {
+    --   "echasnovski/mini.diff",
+    --   config = function()
+    --     local diff = require("mini.diff")
+    --     diff.setup({
+    --       -- Disabled by default
+    --       source = diff.gen_source.none(),
+    --     })
+    --   end,
     -- },
   },
   install = { colorscheme = { "nord" } },

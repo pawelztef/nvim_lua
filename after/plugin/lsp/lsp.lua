@@ -8,14 +8,21 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
   lspconfig_defaults.capabilities,
   require('cmp_nvim_lsp').default_capabilities()
 )
-
 -- This is where you enable features that only work
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
     local opts = { buffer = event.buf }
-    vim.keymap.set("n", "<leader>d", vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<leader>d', function()
+      vim.lsp.buf.definition({
+        on_list = function(list)
+          local item = list.items[1]
+          vim.cmd.edit(item.filename)
+          vim.fn.setcursorcharpos(item.lnum, item.col)
+        end,
+      })
+    end)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
     vim.keymap.set("n", "<C-d>", '<cmd>lua vim.diagnostic.open_float(nil, {border="single", focus=false})<CR>', opts)
@@ -32,13 +39,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set("s", "<C-n>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
     vim.keymap.set("i", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
     vim.keymap.set("s", "<C-p>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
-  end,
-})
-
-vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function()
     vim.diagnostic.config({
       virtual_lines = false,
       virtual_text = false,
@@ -55,10 +55,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
 
 require('lspconfig').eslint.setup {
   max_length = 4000
 }
+
 vim.fn.sign_define("DiagnosticSignError", { text = "▪", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = "▪", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = "▪", texthl = "DiagnosticSignInfo" })

@@ -8,7 +8,9 @@ require("toggleterm").setup({
         end
     end,
     open_mapping = [[<c-\>]],
-    -- on_create = fun(t: Terminal), -- function to run when the terminal is first created
+    on_create = function(term)
+      term:send('gemini', true)
+    end,
     -- on_open = fun(t: Terminal), -- function to run when the terminal opens
     -- on_close = fun(t: Terminal), -- function to run when the terminal closes
     -- on_create= function(t)
@@ -22,7 +24,7 @@ require("toggleterm").setup({
     autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
     -- highlights = {
     --   -- highlights which map to a highlight group name and a table of it's values
-    --   -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+    --   -- NOTE: this is only a subset of values, thiany group placed here will be set for the terminal window split
     --   Normal = {
     --     guibg = "<VALUE-HERE>",
     --   },
@@ -42,7 +44,7 @@ require("toggleterm").setup({
     persist_size = false,
     persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
     -- direction = 'vertical' | 'horizontal' | 'tab' | 'float',
-    direction = 'horizontal',
+    direction = 'vertical',
     close_on_exit = true, -- close the terminal window when the process exits
     shell = vim.o.shell, -- change the default shell
     auto_scroll = true, -- automatically scroll to the bottom on terminal output
@@ -66,3 +68,7 @@ require("toggleterm").setup({
       end
     },
 })
+
+vim.keymap.set('n', '<space><Tab>', '<C-w>w', { noremap = true, silent = true, desc = "Switch between windows" })
+vim.keymap.set('t', '<space><Tab>', [[<C-\><C-n><C-w>w>]], { noremap = true, silent = true, desc = "Switch from terminal to other windows" })
+

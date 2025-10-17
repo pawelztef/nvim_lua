@@ -10,6 +10,7 @@ conform.setup({
     lua = { "stylua" },
     python = { "isort", "black" },
     javascript = { "eslint", "prettier", "prettierd", stop_after_first = true },
+    typescript = { "prettier", "prettierd", stop_after_first = true },
     html = { "prettier" },
     json = { "jq" },
   },
@@ -21,6 +22,7 @@ conform.formatters.prettier = {
     "--print-width 220",
     "--tab-width", "2",
     "--use-tabs", "false",
+    "--trailing-comma", "none",
   },
 }
 vim.keymap.set({ "n", "v" }, "<M-f>", function()
@@ -28,5 +30,5 @@ vim.keymap.set({ "n", "v" }, "<M-f>", function()
     lsp_fallback = true,
     async = false,
     timeout_ms = 3000,
-  })
+    })
 end, { desc = "Format file or range (in visual mode)" })

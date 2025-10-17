@@ -131,6 +131,10 @@ function Color(color)
   vim.api.nvim_set_hl(0, "@text.literal.block.markdown", { fg = "#B0C4DE" })
   vim.api.nvim_set_hl(0, "@none.markdown", { fg = "#B0C4DE" })
   vim.api.nvim_set_hl(0, "@punctuation.delimiter.markdown", { fg = "#B0C4DE" })
+  -- vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "#000000" })
+  vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "#121212" })
+  vim.api.nvim_set_hl(0, "AvantePromptInputBorder", { bg = "none", fg = "#121212" })
+
 end
 
 vim.g.nord_contrast = false

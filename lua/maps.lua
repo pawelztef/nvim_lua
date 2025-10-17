@@ -110,3 +110,47 @@ vim.keymap.set("n", "<leader>bd", ClearQuickfixList, opts)
 -- -- Map Ctrl+[ to Escape in visual mode
 -- vim.keymap.set('v', '<C-[>', '<Esc>', { noremap = true, silent = true })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end,
+})
+
+-- vim.keymap.set("n", "<space>ag", function()
+--   local total_width = vim.api.nvim_get_option("columns")
+--   local width_30_percent = math.floor(total_width * 0.3)
+--   vim.cmd.vnew()
+--   vim.cmd.term()
+--   vim.api.nvim_win_set_width(0, width_30_percent)
+-- end)
+
+local term_bufnr = nil
+vim.keymap.set("n", "<space>tg", function()
+  -- Check if the terminal buffer is already open and valid
+  if term_bufnr and vim.api.nvim_buf_is_valid(term_bufnr) then
+    -- Find the window containing the terminal buffer
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      if vim.api.nvim_win_get_buf(win) == term_bufnr then
+        -- Close the window if it's open
+        vim.api.nvim_win_close(win, true)
+        return
+      end
+    end
+    -- If the terminal buffer is valid but not visible, open it in a new vertical split
+    vim.cmd.vnew()
+    vim.api.nvim_win_set_buf(0, term_bufnr)
+    local total_width = vim.api.nvim_get_option("columns")
+    local width_30_percent = math.floor(total_width * 0.3)
+    vim.api.nvim_win_set_width(0, width_30_percent)
+  else
+    -- If the terminal buffer is not valid, create a new terminal
+    vim.cmd.vnew()
+    local total_width = vim.api.nvim_get_option("columns")
+    local width_30_percent = math.floor(total_width * 0.3)
+    vim.api.nvim_win_set_width(0, width_30_percent)
+    vim.cmd.term("gemini")
+    term_bufnr = vim.api.nvim_get_current_buf()
+  end
+end)
