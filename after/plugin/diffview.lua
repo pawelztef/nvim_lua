@@ -176,7 +176,7 @@ end
 vim.api.nvim_set_keymap("n", "<leader>dd", "", {
   noremap = true,
   silent = true,
-  callback = function() toggle_diffview("DiffviewOpen") end
+  callback = function() toggle_diffview("DiffviewOpen origin/main...HEAD") end
 })
 vim.api.nvim_set_keymap("n", "<leader>df", "", {
   noremap = true,
@@ -193,7 +193,7 @@ vim.api.nvim_set_keymap("n", "<leader>dm", "", {
   silent = true,
   callback = function() toggle_diffview("DiffviewOpen main") end
 })
--- vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true }) -- current changes
+vim.api.nvim_set_keymap("n", "<leader>di", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true }) -- current changes
 -- vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>DiffviewFileHistory %<cr>", { noremap = true, silent = true }) -- file history
 -- vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>DiffviewFileHistory<cr>", { noremap = true, silent = true }) -- all history
 -- vim.api.nvim_set_keymap("n", "q", "<cmd>DiffviewClose<cr>", { noremap = true, silent = true })

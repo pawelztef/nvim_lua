@@ -5,8 +5,8 @@ require('telescope').load_extension('project')
 require('telescope').load_extension('frecency')
 
 vim.keymap.set('n', '<leader>0', builtin.find_files, {})
-vim.keymap.set('n', '<leader>9', builtin.buffers, {})
-vim.keymap.set('n', '<leader>8', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>8', builtin.buffers, {})
+vim.keymap.set('n', '<leader>9', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>7', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>6', "<cmd>Telescope diagnostics<cr>", {})
 vim.keymap.set('n', '<leader>5', builtin.git_branches, {})
@@ -43,7 +43,7 @@ vim.keymap.set(
 -- recent files
 vim.keymap.set(
   'n',
-  '<leader>-',
+  '<leader>tf',
   "<cmd>lua require'telescope'.load_extension('frecency').frecency()<cr>",
   {}
 )
@@ -52,8 +52,9 @@ vim.keymap.set('n', '<leader>tt', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>tr', builtin.registers, {})
 vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>tk', builtin.keymaps, {})
-vim.keymap.set('n', '<leader>tb', builtin.git_branches, {})
+-- vim.keymap.set('n', '<leader>tb', builtin.git_branches, {})
 vim.keymap.set('n', '<leader>b', builtin.quickfix, {})
+vim.keymap.set('n', '<leader>bb', builtin.loclist, {})
 
 local project_actions = require("telescope._extensions.project.actions")
 
@@ -119,8 +120,15 @@ require('telescope').setup {
       i = {
         ['<C-d>'] = actions.delete_buffer,
         ['<C-[>'] = actions.close,
-        ['<C-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-        ['<C-s>'] = actions.smart_send_to_loclist + actions.open_loclist,
+        -- ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-q>'] = function(prompt_bufnr)
+          actions.smart_send_to_qflist(prompt_bufnr)
+          builtin.quickfix()
+        end,
+        ['<C-s>'] = function(prompt_bufnr)
+          actions.smart_send_to_loclist(prompt_bufnr)
+          builtin.loclist()
+        end,
         ['<C-f>'] = function(prompt_bufnr)
           action_layout.cycle_layout_next(prompt_bufnr)
         end,

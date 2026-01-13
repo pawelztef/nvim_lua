@@ -14,7 +14,6 @@ return require('lazy').setup({
     'nvim-telescope/telescope-project.nvim',
     'nvim-telescope/telescope.nvim',
     "nvim-telescope/telescope-frecency.nvim",
-    "lpoto/telescope-docker.nvim",
     'tom-anders/telescope-vim-bookmarks.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
@@ -78,12 +77,8 @@ return require('lazy').setup({
       version = 'v0.8.1'
     },
     'anuvyklack/help-vsplit.nvim',
-    'EdenEast/nightfox.nvim',
-    'lunarvim/Onedarker.nvim',
     'lewis6991/impatient.nvim',
     'brentyi/isort.vim',
-    'joshdick/onedark.vim',
-    'rebelot/kanagawa.nvim',
     'seblj/nvim-tabline',
     'mgedmin/python-imports.vim',
     'averms/black-nvim',
@@ -96,7 +91,6 @@ return require('lazy').setup({
     'stevearc/aerial.nvim',
     'f-person/git-blame.nvim',
     'sam4llis/nvim-lua-gf',
-    "rcarriga/nvim-notify",
     'stevearc/conform.nvim',
     "MunifTanjim/nui.nvim",
     "nvim-lua/plenary.nvim",
@@ -108,10 +102,8 @@ return require('lazy').setup({
       lazy = false,
     },
     'farmergreg/vim-lastplace',
-    'folke/zen-mode.nvim',
     "williamboman/mason.nvim",
     'nvim-treesitter/playground',
-    "robitx/gp.nvim",
     'rcarriga/nvim-notify',
     {
       "folke/noice.nvim",
@@ -122,24 +114,6 @@ return require('lazy').setup({
         "rcarriga/nvim-notify",
       }
     },
-    {
-      'akinsho/toggleterm.nvim',
-      version = "*",
-      config = true,
-    },
-    -- {
-    --   "olimorris/codecompanion.nvim"
-    -- },
-    -- {
-    --   "echasnovski/mini.diff",
-    --   config = function()
-    --     local diff = require("mini.diff")
-    --     diff.setup({
-    --       -- Disabled by default
-    --       source = diff.gen_source.none(),
-    --     })
-    --   end,
-    -- },
   },
   install = { colorscheme = { "nord" } },
   ui = {

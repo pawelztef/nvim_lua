@@ -94,7 +94,7 @@ local function toggle_qf()
   end
   notify("Custom Mapping", "info", { title = "Quickfix list is empty" })
 end
-vim.keymap.set("n", "<leader>bb", toggle_qf)
+-- vim.keymap.set("n", "<leader>bb", toggle_qf)
 
 local function ClearQuickfixList()
   vim.fn.setqflist({})

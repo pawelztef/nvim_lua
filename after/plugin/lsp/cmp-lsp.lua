@@ -69,21 +69,17 @@ cmp.setup({
 })
 
 cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
-  -- mapping = cmp.mapping.preset.cmdline({
-  --   ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i', 'c' }),
-  --   ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i', 'c' }),
-  --   ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  -- }),
+  mapping = cmp.mapping.preset.cmdline({
+    ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i', 'c' }),
+    ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i', 'c' }),
+  }),
   sources = { { name = 'buffer' } }
 })
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  -- mapping = cmp.mapping.preset.cmdline({
-  --   ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i', 'c' }),
-  --   ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i', 'c' }),
-  --   ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  -- }),
+  mapping = cmp.mapping.preset.cmdline({
+    ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i', 'c' }),
+    ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i', 'c' }),
+  }),
   sources = cmp.config.sources(
     { { name = 'path' } },
     { { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } } }
