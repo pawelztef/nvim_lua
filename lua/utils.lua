@@ -25,6 +25,17 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 --   end
 -- })
 
+-- Ensure line numbers are always enabled for normal files
+autocmd({ "BufWinEnter", "BufReadPost", "FileReadPost" }, {
+  pattern = "*",
+  callback = function()
+    if vim.bo.buftype == "" then
+      vim.opt_local.number = true
+      vim.opt_local.relativenumber = true
+    end
+  end,
+})
+
 -- Auto save
 autocmd({ 'InsertLeave', 'TextChanged' }, {
   pattern = '',
