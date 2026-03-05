@@ -37,6 +37,27 @@ vim.api.nvim_create_user_command("CopyRelPath", function()
 end, {}
 )
 
+local function relpath()
+  return vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
+end
+
+vim.api.nvim_create_user_command("CopyRelPathWithLine", function()
+  local path = relpath()
+  local line = vim.fn.line(".")
+  local text = path .. ":" .. line
+  vim.fn.setreg("+", text)
+  notify(text, "info", { title = "Copied relative path with line" })
+end, {})
+
+vim.api.nvim_create_user_command("CopyRelPathWithRange", function()
+  local path = relpath()
+  local line_start, col_start = vim.fn.line("'<"), vim.fn.col("'<")
+  local line_end, col_end = vim.fn.line("'>"), vim.fn.col("'>")
+  local text = string.format("%s:%d:%d-%d:%d", path, line_start, col_start, line_end, col_end)
+  vim.fn.setreg("+", text)
+  notify(text, "info", { title = "Copied relative path with line:col range" })
+end, { range = true })
+
 vim.api.nvim_create_user_command("CopyRelPathForImport", function()
   local path = vim.fn.fnamemodify(vim.fn.expand("%"), ":.")
   local modified_path = path:gsub("/", "."):gsub("%.[^%.]+$", "")
@@ -66,8 +87,11 @@ vim.api.nvim_create_user_command("CopyDirPath", function()
   notify(path, "info", { title = "Copied dir path" })
 end, {}
 )
-keymap("n", "cP", "<cmd>CopyRelPathForImport<CR>", opts)
+
 keymap("n", "cp", "<cmd>CopyRelPath<CR>", opts)
+keymap("n", "<leader>cp", "<cmd>CopyRelPathWithLine<CR>", opts)
+keymap("v", "<leader>cv", "<cmd>CopyRelPathWithRange<CR>", opts)
+keymap("n", "cP", "<cmd>CopyRelPathForImport<CR>", opts)
 keymap("n", "ca", "<cmd>CopyAbsPath<CR>", opts)
 keymap("n", "cf", "<cmd>CopyFileName<CR>", opts)
 keymap("n", "cd", "<cmd>CopyDirPath<CR>", opts)
