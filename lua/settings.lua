@@ -12,6 +12,16 @@ vim.opt.synmaxcol = 128
 vim.opt.lazyredraw = false
 vim.opt.scrolloff = 25
 vim.opt.autoread = true
+vim.api.nvim_create_augroup("autoread_external", { clear = true })
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "TermClose", "CursorHold", "CursorHoldI" }, {
+  group = "autoread_external",
+  callback = function()
+    if vim.fn.getcmdwintype() ~= "" then
+      return
+    end
+    vim.cmd.checktime()
+  end,
+})
 vim.opt.mouse = 'a'                                         -- enable mouse
 vim.opt.ruler = true                                        -- show cursor position
 vim.opt.linebreak = true
