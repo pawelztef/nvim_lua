@@ -176,6 +176,6 @@ require("chatgpt").setup(
     },
   }
 )
-vim.api.nvim_set_keymap("n", "<C-c>", "<cmd>ChatGPT<CR>", {})
+-- vim.api.nvim_set_keymap("n", "<C-c>", "<cmd>ChatGPT<CR>", {})
 vim.api.nvim_set_keymap('n', '<C-`>', '<cmd>ChatGPTEditWithInstructions<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<C-`>', '<cmd>ChatGPTEditWithInstructions<CR>', { noremap = true, silent = true })

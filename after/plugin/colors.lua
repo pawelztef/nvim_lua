@@ -69,7 +69,7 @@ function Color(color)
   vim.api.nvim_set_hl(0, "AerialVariableIcon", { bg = "none", fg = "#374457" })
   vim.api.nvim_set_hl(0, "AerialLine", { bg = "#1d242e", fg = "none" })
   vim.api.nvim_set_hl(0, "AerialLineNC", { bg = "#1d242e", fg = "none" })
-  vim.api.nvim_set_hl(0, "Cursorline", { bg = "none", fg = "red" })
+  vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" })
   vim.api.nvim_set_hl(0, "BookmarkSign", { bg = "none", fg = "red" })
 
   vim.api.nvim_set_hl(0, "NeogitDiffHeader", { bg = "none", fg = "#81a1c1" })

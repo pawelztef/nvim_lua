@@ -173,11 +173,11 @@ local function toggle_diffview(cmd)
   end
 end
 -- Set up key mappings using the toggle_diffview function
-vim.api.nvim_set_keymap("n", "<leader>dd", "", {
-  noremap = true,
-  silent = true,
-  callback = function() toggle_diffview("DiffviewOpen origin/main...HEAD") end
-})
+-- vim.api.nvim_set_keymap("n", "<leader>dd", "", {
+--   noremap = true,
+--   silent = true,
+--   callback = function() toggle_diffview("DiffviewOpen origin/main...HEAD") end
+-- })
 vim.api.nvim_set_keymap("n", "<leader>df", "", {
   noremap = true,
   silent = true,

@@ -15,49 +15,49 @@ vim.api.nvim_set_keymap('n', '<leader>k', ':FocusSplitUp<CR>', { silent = true }
 vim.api.nvim_set_keymap('n', '<leader>l', ':FocusSplitRight<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>2', ':FocusToggle<CR>', { silent = true })
 
-local ignore_filetypes = { 'neo-tree', 'toggleterm', 'packer', 'NvimTree', 'no name', 'qf', 'undotree_2', 'aerial' }
-local ignore_filename = { 'no name', ''}
-local ignore_buftypes = { 'nofile', 'prompt', 'popup', 'quickfix', 'terminal', 'help', 'nowrite', 'readonly', 'packer', 'undotree_2', 'aerial' }
+local ignore_filetypes = {
+  'neo-tree',
+  'toggleterm',
+  'packer',
+  'NvimTree',
+  'no name',
+  'qf',
+  'undotree_2',
+  'aerial',
+  'codediff-explorer',
+  'codediff-history',
+  'codediff-help',
+}
+local ignore_filename = { 'no name', '' }
+local ignore_buftypes = {
+  'nofile',
+  'prompt',
+  'popup',
+  'quickfix',
+  'terminal',
+  'help',
+  'nowrite',
+  'readonly',
+  'packer',
+  'undotree_2',
+  'aerial',
+}
 
 local augroup = vim.api.nvim_create_augroup('FocusDisable', { clear = true })
-local notify = require("notify")
 
-vim.api.nvim_create_autocmd('WinEnter', {
-  group = augroup,
-  callback = function(_)
-    if vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
-    then
-      vim.b.focus_disable = true
-    else
-      vim.b.focus_disable = false
-    end
-  end,
-  desc = 'Disable focus autoresize for BufType',
-})
+local function sync_focus_disable_for_buffer()
+  local name = vim.fn.expand('%:t')
+  local disable = vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
+    or vim.tbl_contains(ignore_filetypes, vim.bo.filetype)
+    or vim.tbl_contains(ignore_filename, name)
+    or vim.startswith(vim.api.nvim_buf_get_name(0), 'CodeDiff Explorer [')
+  vim.b.focus_disable = disable
+end
 
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufReadPost', 'WinEnter', 'FileType' }, {
   group = augroup,
-  callback = function(_)
-    if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-      vim.b.focus_disable = true
-    else
-      vim.b.focus_disable = false
-    end
-  end,
-  desc = 'Disable focus autoresize for FileType',
-})
-
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufReadPost', 'WinEnter' }, {
-  group = augroup,
-  callback = function(_)
-    if vim.tbl_contains(ignore_filename, vim.fn.expand('%:t'))
-    then
-      vim.b.focus_disable = true
-    else
-      vim.b.focus_disable = false
-    end
-  end,
-  desc = 'Disable focus autoresize for Filename',
+  callback = sync_focus_disable_for_buffer,
+  desc = 'Disable focus autoresize for excluded buffers',
 })
 
 

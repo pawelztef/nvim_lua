@@ -114,8 +114,21 @@ return require('lazy').setup({
         "rcarriga/nvim-notify",
       }
     },
+    -- {
+    --   'xTacobaco/cursor-agent.nvim',
+    --   keys = {
+    --     { "<C-c>", "<cmd>CursorAgent<CR>", mode = "n", desc = "Toggle Cursor Agent" },
+    --   },
+    --   config = function()
+    --     require("cursor-agent").setup({})
+    --   end,
+    -- },
+    -- 'ccchen007/cursor-CLI-agent.nvim'
+    {
+      "esmuellert/codediff.nvim",
+      lazy = false,
+    },
   },
-  install = { colorscheme = { "nord" } },
   ui = {
     size = { width = 0.6, height = 0.6 },
     wrap = true,
