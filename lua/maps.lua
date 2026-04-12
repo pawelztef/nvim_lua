@@ -90,7 +90,7 @@ end, {}
 
 keymap("n", "cp", "<cmd>CopyRelPath<CR>", opts)
 keymap("n", "<leader>cp", "<cmd>CopyRelPathWithLine<CR>", opts)
-keymap("v", "<leader>cv", "<cmd>CopyRelPathWithRange<CR>", opts)
+keymap("v", "<leader>cp", "<cmd>CopyRelPathWithRange<CR>", opts)
 keymap("n", "cP", "<cmd>CopyRelPathForImport<CR>", opts)
 keymap("n", "ca", "<cmd>CopyAbsPath<CR>", opts)
 keymap("n", "cf", "<cmd>CopyFileName<CR>", opts)

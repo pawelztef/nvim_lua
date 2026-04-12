@@ -1,6 +1,6 @@
 vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
 vim.g.gitblame_date_format = '%d/%m/%y'
-vim.g.gitblame_message_template = '<author> • <date> • <sha>'
+vim.g.gitblame_message_template = '<summary> • <author> • <date> • <sha>'
 local git_blame = require('gitblame')
 
 local custom_nord = require 'lualine.themes.nord'

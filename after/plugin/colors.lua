@@ -1,7 +1,79 @@
+local function apply_render_markdown_highlights()
+  local links = {
+    RenderMarkdownH1 = "LineNr",
+    RenderMarkdownH2 = "LineNr",
+    RenderMarkdownH3 = "LineNr",
+    RenderMarkdownH4 = "LineNr",
+    RenderMarkdownH5 = "LineNr",
+    RenderMarkdownH6 = "LineNr",
+    RenderMarkdownH1Bg = "LineNr",
+    RenderMarkdownH2Bg = "LineNr",
+    RenderMarkdownH3Bg = "LineNr",
+    RenderMarkdownH4Bg = "LineNr",
+    RenderMarkdownH5Bg = "LineNr",
+    RenderMarkdownH6Bg = "LineNr",
+    RenderMarkdownQuote = "Comment",
+    RenderMarkdownBullet = "LineNr",
+    RenderMarkdownSign = "Normal",
+    RenderMarkdownTableHead = "LineNr",
+    RenderMarkdownTableRow = "LineNr",
+    RenderMarkdownLink = "LineNr",
+    RenderMarkdownLinkTitle = "LineNr",
+    RenderMarkdownWikiLink = "LineNr",
+  }
+  for name, target in pairs(links) do
+    vim.api.nvim_set_hl(0, name, { link = target })
+  end
+  vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "none" })
+  vim.api.nvim_set_hl(0, "RenderMarkdownCodeBorder", { bg = "none" })
+  vim.api.nvim_set_hl(0, "RenderMarkdownCodeInline", { bg = "none" })
+  vim.api.nvim_set_hl(0, "RenderMarkdownInlineHighlight", { bg = "none" })
+  do
+    local h = vim.api.nvim_get_hl(0, { name = "@label.markdown", link = true })
+    if h and next(h) then
+      h.bg = "none"
+      h.ctermbg = nil
+      vim.api.nvim_set_hl(0, "RenderMarkdownCodeInfo", h)
+      vim.api.nvim_set_hl(0, "RenderMarkdownCodeFallback", h)
+    else
+      vim.api.nvim_set_hl(0, "RenderMarkdownCodeInfo", { link = "Comment" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownCodeFallback", { link = "Comment" })
+    end
+  end
+  for level = 1, 6 do
+    vim.api.nvim_set_hl(0, "@markup.heading." .. level .. ".markdown", { link = "LineNr" })
+  end
+  vim.api.nvim_set_hl(0, "@text.markdown", { link = "Normal" })
+  for _, g in ipairs({
+    "@markup.link",
+    "@markup.link.markdown",
+    "@markup.link.markdown_inline",
+    "@markup.link.label.markdown_inline",
+    "@markup.link.url.markdown_inline",
+  }) do
+    vim.api.nvim_set_hl(0, g, { link = "LineNr" })
+  end
+  vim.api.nvim_set_hl(0, "@markup.heading.markdown", { link = "LineNr" })
+  vim.api.nvim_set_hl(0, "@markup.table.cell.markdown", { link = "LineNr" })
+  vim.api.nvim_set_hl(0, "@markup.table.cell.markdown_inline", { link = "LineNr" })
+  vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", {
+    fg = "#FFFFFF",
+    bg = "none",
+    bold = true,
+  })
+  vim.api.nvim_set_hl(0, "@markup.italic.markdown_inline", {
+    fg = "#FFFFFF",
+    bg = "none",
+    italic = true,
+  })
+end
+
+local editor_fg = "#BEC4CF"
+
 function Color(color)
   color = color or 'nord'
   vim.cmd.colorscheme(color)
-  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = editor_fg })
   vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
   vim.api.nvim_set_hl(0, "MsgArea", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", fg = "#668099" })
@@ -32,8 +104,8 @@ function Color(color)
   vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { bg = "none", fg = "orange" })
   vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { bg = "none", fg = "gray" })
   vim.api.nvim_set_hl(0, "DiagnosticSignHint", { bg = "none", fg = "gray" })
-  vim.api.nvim_set_hl(0, "Pmenu", { bg = "#1d2633", fg = "white" })
-  vim.api.nvim_set_hl(0, "PmenuSel", { bg = "gray", fg = "white" })
+  vim.api.nvim_set_hl(0, "Pmenu", { bg = "#1d2633", fg = editor_fg })
+  vim.api.nvim_set_hl(0, "PmenuSel", { bg = "gray", fg = editor_fg })
   vim.api.nvim_set_hl(0, "AerialNormal", { bg = "none", fg = "red" })
   vim.api.nvim_set_hl(0, "AerialVariable", { bg = "none", fg = "#374457" })
   vim.api.nvim_set_hl(0, "AerialConstant", { bg = "none", fg = "#374457" })
@@ -127,14 +199,14 @@ function Color(color)
   vim.api.nvim_set_hl(0, "ChatGPTSelectedMessage", { bg = "none" })
   vim.api.nvim_set_hl(0, "ChatGPTQuestion", { link = "@property" })
   vim.api.nvim_set_hl(0, "ChatGPTPopupText", { link = "@property" })
-  vim.api.nvim_set_hl(0, "@spell.markdown", { fg = "#B0C4DE" })
-  vim.api.nvim_set_hl(0, "@text.literal.block.markdown", { fg = "#B0C4DE" })
-  vim.api.nvim_set_hl(0, "@none.markdown", { fg = "#B0C4DE" })
-  vim.api.nvim_set_hl(0, "@punctuation.delimiter.markdown", { fg = "#B0C4DE" })
+  vim.api.nvim_set_hl(0, "@spell.markdown", { link = "Normal" })
+  vim.api.nvim_set_hl(0, "@none.markdown", { link = "Normal" })
+  vim.api.nvim_set_hl(0, "@punctuation.delimiter.markdown", { link = "Normal" })
   -- vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "#000000" })
   vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none", fg = "#121212" })
   vim.api.nvim_set_hl(0, "AvantePromptInputBorder", { bg = "none", fg = "#121212" })
 
+  apply_render_markdown_highlights()
 end
 
 vim.g.nord_contrast = false
@@ -187,9 +259,10 @@ local function setup()
     { callback = color_tags }
   )
   vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*", -- Apply to all colorschemes
+    pattern = "*",
     callback = function()
-      vim.api.nvim_set_hl(0, "Normal", { bg = 'none', fg = 'red' })
+      vim.api.nvim_set_hl(0, "Normal", { bg = "none", fg = editor_fg })
+      apply_render_markdown_highlights()
     end
   })
 end
