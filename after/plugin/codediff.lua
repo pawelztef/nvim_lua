@@ -188,9 +188,6 @@ do
   end
 end
 
-vim.keymap.set("n", "<leader>dd", "<cmd>CodeDiff<CR>", { desc = "Toggle CodeDiff" })
-vim.keymap.set("n", "<leader>dh", "<cmd>CodeDiff history HEAD %<CR>", { desc = "Toggle CodeDiff history" })
-vim.keymap.set("v", "<leader>dh", "<cmd>CodeDiff history %<CR>", { desc = "Toggle CodeDiff history" })
 
 local git = require("codediff.core.git")
 local orig_apply_patch = git.apply_patch
@@ -265,3 +262,8 @@ end
 --     end)
 --   end,
 -- })
+
+vim.keymap.set("n", "<leader>d", "<cmd>CodeDiff HEAD~1<CR>", { desc = "Toggle CodeDiff" })
+vim.keymap.set("n", "<leader>dd", "<cmd>CodeDiff<CR>", { desc = "Toggle CodeDiff" })
+vim.keymap.set("n", "<leader>dh", "<cmd>CodeDiff history HEAD %<CR>", { desc = "Toggle CodeDiff history" })
+vim.keymap.set("v", "<leader>dh", "<cmd>CodeDiff history %<CR>", { desc = "Toggle CodeDiff history" })
