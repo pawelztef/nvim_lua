@@ -39,7 +39,7 @@ codediff.setup({
   },
   explorer = {
     position = "left",
-    width = 40,
+    width = 50,
     height = 15,
     indent_markers = false,
     initial_focus = "modified",
@@ -68,7 +68,7 @@ codediff.setup({
   },
   keymaps = {
     view = {
-      quit = "q",
+      quit = "<C-[>",
       toggle_explorer = "<leader>b",
       focus_explorer = "<leader>e",
       next_hunk = "cn",
@@ -78,10 +78,10 @@ codediff.setup({
       diff_get = "do",
       diff_put = "dp",
       open_in_prev_tab = "gf",
-      close_on_open_in_prev_tab = false,
+      close_on_open_in_prev_tab = true,
       toggle_stage = "s",
       stage_hunk = "y",
-      unstage_hunk = "u",
+      unstage_hunk = "x",
       discard_hunk = "x",
       hunk_textobject = "ih",
       show_help = "g?",
@@ -90,7 +90,7 @@ codediff.setup({
     },
     explorer = {
       select = "<CR>",
-      hover = "K",
+      hover = "H",
       refresh = "R",
       toggle_view_mode = "f",
       stage_all = "S",
@@ -98,27 +98,27 @@ codediff.setup({
       restore = "X",
       toggle_changes = "gu",
       toggle_staged = "gs",
-      fold_open = "zo",
-      fold_open_recursive = "zO",
-      fold_close = "zc",
-      fold_close_recursive = "zC",
-      fold_toggle = "za",
-      fold_toggle_recursive = "zA",
-      fold_open_all = "zR",
-      fold_close_all = "zM",
+      -- fold_open = "zo",
+      -- fold_open_recursive = "zO",
+      -- fold_close = "zc",
+      -- fold_close_recursive = "zC",
+      fold_toggle = "o",
+      fold_toggle_recursive = "O",
+      -- fold_open_all = "zR",
+      -- fold_close_all = "zM",
     },
     history = {
       select = "<CR>",
-      toggle_view_mode = "i",
+      toggle_view_mode = "f",
       refresh = "R",
-      fold_open = "zo",
-      fold_open_recursive = "zO",
-      fold_close = "zc",
-      fold_close_recursive = "zC",
+      -- fold_open = "zo",
+      -- fold_open_recursive = "zO",
+      -- fold_close = "zc",
+      -- fold_close_recursive = "zC",
       fold_toggle = "o",
-      fold_toggle_recursive = "o",
-      fold_open_all = "zR",
-      fold_close_all = "zM",
+      fold_toggle_recursive = "O",
+      -- fold_open_all = "zR",
+      -- fold_close_all = "zM",
     },
     conflict = {
       accept_incoming = "<leader>ct",
@@ -263,7 +263,117 @@ end
 --   end,
 -- })
 
-vim.keymap.set("n", "<leader>d", "<cmd>CodeDiff HEAD~1<CR>", { desc = "Toggle CodeDiff" })
-vim.keymap.set("n", "<leader>dd", "<cmd>CodeDiff<CR>", { desc = "Toggle CodeDiff" })
+do
+  local codediff_return_buf = nil
+  local aug = vim.api.nvim_create_augroup("codediff_quit_landing", { clear = true })
+
+  local function buf_is_usable_file(bufnr)
+    if not bufnr or bufnr < 1 or not vim.api.nvim_buf_is_valid(bufnr) then
+      return false
+    end
+    if vim.bo[bufnr].buflisted ~= true then
+      return false
+    end
+    if vim.bo[bufnr].buftype ~= "" then
+      return false
+    end
+    local name = vim.api.nvim_buf_get_name(bufnr)
+    if name == "" or name:find("CodeDiff", 1, true) then
+      return false
+    end
+    return vim.fn.filereadable(name) == 1
+  end
+
+  local function sync_marked_path(tabpage)
+    local lifecycle_ok, lifecycle = pcall(require, "codediff.ui.lifecycle")
+    if not lifecycle_ok or not lifecycle then
+      return nil
+    end
+    local sess = lifecycle.get_session(tabpage)
+    if not sess then
+      return nil
+    end
+    local panel = sess.explorer
+    if not panel then
+      return nil
+    end
+    if sess.mode == "history" and panel.current_file and panel.current_file ~= "" and sess.git_root then
+      return vim.fs.joinpath(sess.git_root, panel.current_file)
+    end
+    if sess.mode == "explorer" and panel.current_file_path and panel.current_file_path ~= "" then
+      if sess.git_root then
+        return vim.fs.joinpath(sess.git_root, panel.current_file_path)
+      end
+      if panel.dir1 then
+        return vim.fs.joinpath(panel.dir1, panel.current_file_path)
+      end
+    end
+    return nil
+  end
+
+  local function try_edit(path)
+    if not path or path == "" then
+      return
+    end
+    local cur = vim.api.nvim_buf_get_name(0)
+    if vim.fn.fnamemodify(cur, ":p") == vim.fn.fnamemodify(path, ":p") then
+      return
+    end
+    vim.cmd("edit " .. vim.fn.fnameescape(path))
+  end
+
+  local function land_after_close(marked_path)
+    if marked_path then
+      try_edit(marked_path)
+      return
+    end
+    if buf_is_usable_file(codediff_return_buf) then
+      vim.api.nvim_set_current_buf(codediff_return_buf)
+      return
+    end
+    local alt = vim.fn.bufnr("#")
+    if buf_is_usable_file(alt) then
+      vim.api.nvim_set_current_buf(alt)
+      return
+    end
+    for _, f in ipairs(vim.v.oldfiles or {}) do
+      if type(f) == "string" and f ~= "" and vim.fn.filereadable(f) == 1 and not f:find("CodeDiff", 1, true) then
+        try_edit(f)
+        return
+      end
+    end
+  end
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "CodeDiffOpen",
+    group = aug,
+    callback = function()
+      vim.schedule(function()
+        local alt = vim.fn.bufnr("#")
+        if buf_is_usable_file(alt) then
+          codediff_return_buf = alt
+        end
+      end)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "CodeDiffClose",
+    group = aug,
+    callback = function(args)
+      local data = args.data
+      if not data or not data.tabpage then
+        return
+      end
+      local marked = sync_marked_path(data.tabpage)
+      vim.schedule(function()
+        land_after_close(marked)
+      end)
+    end,
+  })
+end
+
+vim.keymap.set("n", "<leader>d", "<cmd>CodeDiff<CR>", { desc = "Toggle CodeDiff" })
+vim.keymap.set("n", "<leader>dd", "<cmd>CodeDiff main<CR>", { desc = "Toggle CodeDiff" })
 vim.keymap.set("n", "<leader>dh", "<cmd>CodeDiff history HEAD %<CR>", { desc = "Toggle CodeDiff history" })
 vim.keymap.set("v", "<leader>dh", "<cmd>CodeDiff history %<CR>", { desc = "Toggle CodeDiff history" })

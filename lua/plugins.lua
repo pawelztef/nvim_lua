@@ -114,30 +114,17 @@ return require('lazy').setup({
         "rcarriga/nvim-notify",
       }
     },
-    -- {
-    --   'xTacobaco/cursor-agent.nvim',
-    --   keys = {
-    --     { "<C-c>", "<cmd>CursorAgent<CR>", mode = "n", desc = "Toggle Cursor Agent" },
-    --   },
-    --   config = function()
-    --     require("cursor-agent").setup({})
-    --   end,
-    -- },
-    -- 'ccchen007/cursor-CLI-agent.nvim'
-    -- {
-    --   "felixcuello/neovim-cursor",
-    --   config = function()
-    --     require("neovim-cursor").setup({
-    --       split = {
-    --         position = 'right',
-    --         size = 0.35,
-    --       }
-    --     })
-    --   end,
-    -- },
-    {
+      {
       "esmuellert/codediff.nvim",
       lazy = false,
+    },
+    {
+      -- "Sarctiann/cursor-agent.nvim",
+      "pawelztef/cursor-agent.nvim",
+      branch = "dev",
+      dependencies = {
+        "folke/snacks.nvim",
+      },
     },
     {
       'MeanderingProgrammer/render-markdown.nvim',
@@ -163,7 +150,7 @@ return require('lazy').setup({
             -- Output is evaluated depending on the type.
             -- | function | `value(context)`              |
             -- | string[] | `cycle(value, context.level)` |
-            icons = { '█▌▌▏▌▕ ▎ ', '█▌▌▏▕    ', '█▌▏▎▕    ', '▌▏▎▕     ', '▏▎▕      ', '▏▎       ' },
+            icons = { '█▌▌▎▏ ', '█▌▌▎  ', '█▌▌   ',  '█▌    ', '▌▏   ', '▏▏   ',},
             -- Determines how icons fill the available space.
             -- | eol     | '#'s are concealed and icon is placed at right most column   |
             -- | right   | '#'s are concealed and icon is appended to right side        |
