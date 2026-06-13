@@ -59,7 +59,7 @@ end
 
 notify.setup({
   background_colour = "#000000",
-  fps = 120,
+  fps = 200,
   icons = {
     DEBUG = "",
     ERROR = "",

@@ -30,7 +30,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<Leader>p',
-  "<cmd>lua require'telescope'.load_extension('project').project{ layout_config = { height = 0.3, width = 0.4 } }<cr>"
+  "<cmd>lua require'telescope'.load_extension('project').project{ layout_config = { height = 0.3, width = 0.6 } }<cr>"
   ,
   {}
 )
@@ -107,13 +107,13 @@ require('telescope').setup {
     prompt_position = 'top',
     layout_config = {
       height = 0.80,
-      width = 0.75,
+      width = 0.85,
       vertical = {
         preview_height = 0.65,
         prompt_position = 'top',
       },
       horizontal = {
-        preview_width = 0.62,
+        preview_width = 0.72,
       }
     },
     mappings = {
